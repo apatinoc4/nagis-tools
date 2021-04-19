@@ -1,0 +1,11 @@
+.m-inputfields {
+  &-field {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      width: 500px;
+      height: 100px;
+    }
+  }
+}

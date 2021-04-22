@@ -4,4 +4,68 @@
     width: 210mm;
     height: 297mm;
   }
+  &-header {
+    width: 100%;
+    height: 10%;
+    background-color: greenyellow;
+    margin: 0;
+    display: flex;
+    overflow: hidden;
+
+    &--headerpic {
+      width: 50%;
+      background-color: hotpink;
+
+      img {
+        width: 100px;
+      }
+    }
+
+    &--accountinfo {
+      width: 50%;
+      background-color: orange;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .headerfield {
+      justify-content: flex-start;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  &-body {
+    background-color: purple;
+  }
+
+  &-bodyfield {
+    &--container {
+      display: flex;
+      background-color: orangered;
+      padding: 0 5%;
+
+      .maxed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: paleturquoise;
+        margin-right: 5%;
+        width: 15%;
+
+        p {
+          margin: 0;
+        }
+      }
+      .description {
+        width: 80%;
+        font-size: 14px;
+      }
+    }
+  }
 }

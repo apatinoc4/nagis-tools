@@ -4,19 +4,34 @@ import InputFields from "../../molecules/input-fields/inputFields";
 import ReportPdf from "../../molecules/report-pdf/reportPdf";
 
 const Index = () => {
-  let [accOverview, setAccOverview] = useState("");
+  let [accountInfo, setAccountInfo] = useState({
+    accName: "",
+    accLevel: 0,
+    units: "",
+    espers: "",
+    vcs: "",
+    gear: "",
+  });
+  let [maxedStats, setMaxedStats] = useState({
+    maxUnits: 0,
+    maxEspers: 0,
+    maxVcs: 0,
+    maxGear: 0,
+  });
   return (
     <div className="p-index-container">
       <p>Nagis Test Tool</p>
       <div className="p-index-mainbody">
         <div className="p-index-mainbody--inputfields">
           <InputFields
-            accOverview={accOverview}
-            setAccOverview={setAccOverview}
+            accountInfo={accountInfo}
+            maxedStats={maxedStats}
+            setAccountInfo={setAccountInfo}
+            setMaxedStats={setMaxedStats}
           />
         </div>
         <div className="p-index-mainbody--reportpreview">
-          <ReportPdf accOverview={accOverview} />
+          <ReportPdf accountInfo={accountInfo} maxedStats={maxedStats} />
         </div>
       </div>
       <button>Download</button>

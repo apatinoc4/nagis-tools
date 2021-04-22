@@ -3,9 +3,10 @@
     display: flex;
     flex-direction: column;
 
-    input {
+    textarea {
       width: 500px;
       height: 100px;
+      resize: none;
     }
   }
 }

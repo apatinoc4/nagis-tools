@@ -1,20 +1,10 @@
-import React from "react";
 import "./reportPdf.scss";
+
+import React from "react";
 import headerpic from "../../../assets/images/wotv-warrior-of-light.jpg";
 
 const ReportPdf = (props) => {
   console.log(props.maxedStats.maxUnits, typeof props.maxedStats.maxUnits);
-  let rank = (value) => {
-    if (parseInt(value) >= 10) {
-      return "Great!";
-    } else if (parseInt(value) >= 5) {
-      return "Good";
-    } else if (parseInt(value) < 5) {
-      return "Needs Work";
-    } else {
-      return "";
-    }
-  };
   return (
     <div className="m-reportpdf-container">
       <div className="m-reportpdf-header">
@@ -39,7 +29,15 @@ const ReportPdf = (props) => {
             <div className="maxed">
               <p>{props.maxedStats.maxUnits}</p>
               <p>Maxed URs</p>
-              <p>{rank(props.maxedStats.maxUnits)}</p>
+              <p>
+                {parseInt(props.maxedStats.maxUnits) > 12
+                  ? "Amazing!"
+                  : parseInt(props.maxedStats.maxUnits) >= 9
+                  ? "Good"
+                  : parseInt(props.maxedStats.maxUnits) < 9
+                  ? "Needs Work"
+                  : ""}
+              </p>
             </div>
             <div className="description">
               <p>{props.accountInfo.units}</p>
@@ -52,7 +50,15 @@ const ReportPdf = (props) => {
             <div className="maxed">
               <p>{props.maxedStats.maxEspers}</p>
               <p>Maxed</p>
-              <p>{rank(props.maxedStats.maxEspers)}</p>
+              <p>
+                {parseInt(props.maxedStats.maxEspers) > 9
+                  ? "Amazing!"
+                  : parseInt(props.maxedStats.maxEspers) >= 6
+                  ? "Good"
+                  : parseInt(props.maxedStats.maxEspers) < 6
+                  ? "Needs Work"
+                  : ""}
+              </p>
             </div>
             <div className="description">
               <p>{props.accountInfo.espers}</p>
@@ -65,7 +71,15 @@ const ReportPdf = (props) => {
             <div className="maxed">
               <p>{props.maxedStats.maxVcs}</p>
               <p>Maxed</p>
-              <p>{rank(props.maxedStats.maxVcs)}</p>
+              <p>
+                {parseInt(props.maxedStats.maxVcs) > 7
+                  ? "Amazing!"
+                  : parseInt(props.maxedStats.maxVcs) >= 4
+                  ? "Good"
+                  : parseInt(props.maxedStats.maxVcs) < 4
+                  ? "Needs Work"
+                  : ""}
+              </p>
             </div>
             <div className="description">
               <p>{props.accountInfo.vcs}</p>
@@ -78,11 +92,35 @@ const ReportPdf = (props) => {
             <div className="maxed">
               <p>{props.maxedStats.maxGear}</p>
               <p>+5 Gear</p>
-              <p>{rank(props.maxedStats.maxGear)}</p>
+              <p>
+                {parseInt(props.maxedStats.maxGear) > 12
+                  ? "Amazing!"
+                  : parseInt(props.maxedStats.maxGear) >= 8
+                  ? "Good"
+                  : parseInt(props.maxedStats.maxGear) < 8
+                  ? "Needs Work"
+                  : ""}
+              </p>
             </div>
             <div className="description">
               <p>{props.accountInfo.gear}</p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="m-reportpdf-footer">
+        <div className="m-reportpdf-overview">
+          <div className="m-reportpdf-overviewfield">
+            <p>Strengths:</p>
+            <p>Hello</p>
+          </div>
+          <div>
+            <p>Weaknesses:</p>
+            <p>Hello</p>
+          </div>
+          <div>
+            <p>Recommendations:</p>
+            <p>Hello</p>
           </div>
         </div>
       </div>

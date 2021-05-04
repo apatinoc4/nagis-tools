@@ -1,20 +1,30 @@
+@import "../../../styles/styles.scss";
+
 .m-reportpdf {
   &-container {
-    background-color: yellow;
+    background-color: #f9f9f9;
     width: 210mm;
     height: 297mm;
+    overflow: hidden;
+    position: relative;
+  }
+  &-boxbackground {
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
   }
   &-header {
     width: 100%;
     height: 10%;
-    background-color: greenyellow;
     margin: 0;
     display: flex;
     overflow: hidden;
 
     &--headerpic {
-      width: 50%;
-      background-color: hotpink;
+      width: 65%;
 
       img {
         width: 100px;
@@ -22,16 +32,18 @@
     }
 
     &--accountinfo {
-      width: 50%;
-      background-color: orange;
+      width: 35%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      z-index: 1;
     }
 
     .headerfield {
       justify-content: flex-start;
+      display: flex;
+      flex-direction: row;
 
       p {
         margin: 0;
@@ -40,32 +52,106 @@
   }
 
   &-body {
-    background-color: purple;
+    background-color: white;
   }
 
   &-bodyfield {
+    width: 100%;
+    &--title {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      font-size: 25px;
+      margin: 0;
+      padding: 5px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: blue;
+      width: 15%;
+
+      .pic-container {
+        height: 30px !important;
+        width: 40px !important;
+        display: flex;
+        justify-content: center;
+        background-color: black;
+      }
+
+      p {
+        color: black;
+      }
+
+      img {
+        height: 25px;
+      }
+      .sideBar {
+        background-color: green;
+        width: 6px;
+        height: 30px;
+      }
+    }
     &--container {
       display: flex;
-      background-color: orangered;
       padding: 0 5%;
-      height: 150px;
+      min-height: 135px;
 
-      .maxed {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: paleturquoise;
-        margin-right: 5%;
-        width: 15%;
-
-        p {
-          margin: 0;
-        }
-      }
       .description {
         width: 80%;
-        font-size: 14px;
+        display: flex;
+        align-items: center;
+
+        p {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          max-width: 100%;
+          font-size: 8px;
+          margin: 10px 0;
+          text-align: justify;
+          font-family: "Poppins", sans-serif;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &-overview {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    background-color: beige;
+    padding-bottom: 20px;
+
+    &--radarchart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+    }
+
+    &--veredict {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      justify-content: center;
+      align-items: center;
+      padding: 0 15px;
+    }
+    .overviewfield {
+      max-width: 100%;
+
+      p {
+        color: white;
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        margin: 5px 0;
+      }
+      .final-description {
+        word-wrap: break-word;
+        font-size: 8px;
+        margin: 0;
+        color: white;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
       }
     }
   }

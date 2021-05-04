@@ -42,12 +42,12 @@ const InputFields = (props) => {
       <div className="m-inputfields-field">
         <label>Units</label>
         <textarea
-          onChange={(event) =>
+          onChange={(event) => {
             props.setAccountInfo({
               ...props.accountInfo,
               units: event.target.value,
-            })
-          }
+            });
+          }}
         />
       </div>
       <div className="m-inputfields-field">
@@ -119,6 +119,40 @@ const InputFields = (props) => {
           }
         />
       </div>
+      <div className="m-inputfields-field">
+        <label>Strenghts</label>
+        <textarea
+          onChange={(event) =>
+            props.setveredictInfo({
+              ...props.veredictInfo,
+              strenghts: event.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="m-inputfields-field">
+        <label>Weaknesses</label>
+        <textarea
+          onChange={(event) =>
+            props.setveredictInfo({
+              ...props.veredictInfo,
+              weaknesses: event.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="m-inputfields-field">
+        <label>Improve ASAP</label>
+        <textarea
+          onChange={(event) =>
+            props.setveredictInfo({
+              ...props.veredictInfo,
+              improve: event.target.value,
+            })
+          }
+        />
+      </div>
+      <button>Download</button>
     </div>
   );
 };

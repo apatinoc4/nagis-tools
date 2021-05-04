@@ -1,107 +1,59 @@
 import "./reportPdf.scss";
-
 import React from "react";
-import headerpic from "../../../assets/images/wotv-warrior-of-light.jpg";
-
+import RadarChart from "../../atoms/radar-chart/radarChart";
+import SectionTitle from "../../atoms/section-title/sectionTitle";
+import MaxedStats from "../../atoms/maxed-stats/maxedStats";
 const ReportPdf = (props) => {
-  console.log(props.maxedStats.maxUnits, typeof props.maxedStats.maxUnits);
   return (
     <div className="m-reportpdf-container">
       <div className="m-reportpdf-header">
-        <div className="m-reportpdf-header--headerpic">
-          <img src={headerpic} alt="headerimage"></img>
-        </div>
+        <div className="m-reportpdf-boxbackground"></div>
+        <div className="m-reportpdf-header--headerpic"></div>
         <div className="m-reportpdf-header--accountinfo">
-          <div className="headerfield">
-            <p>Account Name</p>
-            <p>{props.accountInfo.accName}</p>
-          </div>
-          <div className="headerfield">
-            <p>Rank</p>
-            <p>{props.accountInfo.accLevel}</p>
+          <div>
+            <div className="headerfield">
+              <p>Name:</p>
+              <p>{props.accountInfo.accName}</p>
+            </div>
+            <div className="headerfield">
+              <p>Rank:</p>
+              <p>{props.accountInfo.accLevel}</p>
+            </div>
           </div>
         </div>
       </div>
       <div className="m-reportpdf-body">
         <div className="m-reportpdf-bodyfield">
-          <p>Units</p>
+          <SectionTitle iconName="units" title="UNITS" />
           <div className="m-reportpdf-bodyfield--container">
-            <div className="maxed">
-              <p>{props.maxedStats.maxUnits}</p>
-              <p>Maxed URs</p>
-              <p>
-                {parseInt(props.maxedStats.maxUnits) > 12
-                  ? "Amazing!"
-                  : parseInt(props.maxedStats.maxUnits) >= 9
-                  ? "Good"
-                  : parseInt(props.maxedStats.maxUnits) < 9
-                  ? "Needs Work"
-                  : ""}
-              </p>
-            </div>
+            <MaxedStats type="units" maxedStats={props.maxedStats} />
             <div className="description">
               <p>{props.accountInfo.units}</p>
             </div>
           </div>
         </div>
         <div className="m-reportpdf-bodyfield">
-          <p>Espers</p>
+          <SectionTitle iconName="espers" title="ESPERS" />
           <div className="m-reportpdf-bodyfield--container">
-            <div className="maxed">
-              <p>{props.maxedStats.maxEspers}</p>
-              <p>Maxed</p>
-              <p>
-                {parseInt(props.maxedStats.maxEspers) > 9
-                  ? "Amazing!"
-                  : parseInt(props.maxedStats.maxEspers) >= 6
-                  ? "Good"
-                  : parseInt(props.maxedStats.maxEspers) < 6
-                  ? "Needs Work"
-                  : ""}
-              </p>
-            </div>
+            <MaxedStats type="espers" maxedStats={props.maxedStats} />
             <div className="description">
               <p>{props.accountInfo.espers}</p>
             </div>
           </div>
         </div>
         <div className="m-reportpdf-bodyfield">
-          <p>Vision Cards</p>
+          <SectionTitle iconName="vcs" title="VISION CARDS" />
           <div className="m-reportpdf-bodyfield--container">
-            <div className="maxed">
-              <p>{props.maxedStats.maxVcs}</p>
-              <p>Maxed</p>
-              <p>
-                {parseInt(props.maxedStats.maxVcs) > 7
-                  ? "Amazing!"
-                  : parseInt(props.maxedStats.maxVcs) >= 4
-                  ? "Good"
-                  : parseInt(props.maxedStats.maxVcs) < 4
-                  ? "Needs Work"
-                  : ""}
-              </p>
-            </div>
+            <MaxedStats type="vcs" maxedStats={props.maxedStats} />
             <div className="description">
               <p>{props.accountInfo.vcs}</p>
             </div>
           </div>
         </div>
         <div className="m-reportpdf-bodyfield">
-          <p>Gear</p>
+          <SectionTitle iconName="gear" title="GEAR" />
           <div className="m-reportpdf-bodyfield--container">
-            <div className="maxed">
-              <p>{props.maxedStats.maxGear}</p>
-              <p>+5 Gear</p>
-              <p>
-                {parseInt(props.maxedStats.maxGear) > 12
-                  ? "Amazing!"
-                  : parseInt(props.maxedStats.maxGear) >= 8
-                  ? "Good"
-                  : parseInt(props.maxedStats.maxGear) < 8
-                  ? "Needs Work"
-                  : ""}
-              </p>
-            </div>
+            <MaxedStats type="gear" maxedStats={props.maxedStats} />
             <div className="description">
               <p>{props.accountInfo.gear}</p>
             </div>
@@ -110,17 +62,26 @@ const ReportPdf = (props) => {
       </div>
       <div className="m-reportpdf-footer">
         <div className="m-reportpdf-overview">
-          <div className="m-reportpdf-overviewfield">
-            <p>Strengths:</p>
-            <p>Hello</p>
+          <div className="m-reportpdf-overview--radarchart">
+            <RadarChart maxedStats={props.maxedStats} />
           </div>
-          <div>
-            <p>Weaknesses:</p>
-            <p>Hello</p>
-          </div>
-          <div>
-            <p>Recommendations:</p>
-            <p>Hello</p>
+          <div className="m-reportpdf-overview--veredict">
+            <div className="overviewfield">
+              <p>Strengths:</p>
+              <p className="final-description">
+                {props.veredictInfo.strenghts}
+              </p>
+            </div>
+            <div className="overviewfield">
+              <p>Weaknesses:</p>
+              <p className="final-description">
+                {props.veredictInfo.weaknesses}
+              </p>
+            </div>
+            <div className="overviewfield">
+              <p>Improve ASAP:</p>
+              <p className="final-description">{props.veredictInfo.improve}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -18,6 +18,11 @@ const Index = () => {
     maxVcs: 0,
     maxGear: 0,
   });
+  let [veredictInfo, setveredictInfo] = useState({
+    strenghts: "",
+    weaknesses: "",
+    improve: "",
+  });
   return (
     <div className="p-index-container">
       <p>Nagis Test Tool</p>
@@ -26,15 +31,20 @@ const Index = () => {
           <InputFields
             accountInfo={accountInfo}
             maxedStats={maxedStats}
+            veredictInfo={veredictInfo}
+            setveredictInfo={setveredictInfo}
             setAccountInfo={setAccountInfo}
             setMaxedStats={setMaxedStats}
           />
         </div>
         <div className="p-index-mainbody--reportpreview">
-          <ReportPdf accountInfo={accountInfo} maxedStats={maxedStats} />
+          <ReportPdf
+            accountInfo={accountInfo}
+            maxedStats={maxedStats}
+            veredictInfo={veredictInfo}
+          />
         </div>
       </div>
-      <button>Download</button>
     </div>
   );
 };

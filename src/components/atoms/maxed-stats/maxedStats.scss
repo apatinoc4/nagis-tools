@@ -1,0 +1,31 @@
+@import "../../../styles/styles.scss";
+
+.a-maxedstats {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: paleturquoise;
+    margin-right: 5%;
+    width: 15%;
+    p {
+      font-family: "Poppins", sans-serif;
+    }
+  }
+
+  &-amount {
+    font-weight: 800;
+    font-size: 50px;
+    margin: 0 0 -15px 0;
+  }
+  &-category {
+    font-weight: 400;
+    margin: 0;
+  }
+  &-veredict {
+    font-weight: 800;
+    margin: -5px 0 0 0;
+    font-size: 16px;
+  }
+}

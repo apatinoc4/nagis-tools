@@ -8,7 +8,7 @@ const SectionTitle = (props) => {
       <div className="a-sectiontitle-pusher"></div>
       <div className="a-sectiontitle-contents">
         <img
-          src={require(`../../../assets/images/${iconName}.svg`).default}
+          src={require(`../../../assets/images/${iconName}-white.svg`).default}
           alt="espericon"
         />
         <div className="a-sectiontitle-contents--sidebar"></div>

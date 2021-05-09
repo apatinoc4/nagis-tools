@@ -20,7 +20,8 @@ const RadarChart = (props) => {
       {
         label: "# of Votes",
         data: [maxedUnits, maxedEspers, maxedVcs, maxedGear],
-        backgroundColor: "rgba(255, 99, 132, 0.7)",
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+        color: "rgba(255, 255, 255, 1)",
         borderWidth: 1,
       },
     ],
@@ -38,6 +39,12 @@ const RadarChart = (props) => {
         },
         ticks: {
           display: false,
+        },
+        pointLabels: {
+          color: "white",
+          font: {
+            size: 10,
+          },
         },
         suggestedMin: 0,
         suggestedMax: 100,

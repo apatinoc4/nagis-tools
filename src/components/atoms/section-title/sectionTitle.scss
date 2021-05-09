@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: yellow;
     width: 100%;
   }
 
@@ -23,20 +22,21 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: yellowgreen;
     margin: 0;
 
     p {
-      color: black;
+      color: white;
       margin: 0;
     }
     img {
       height: 25px;
+      margin-right: 10px;
     }
     &--sidebar {
-      background-color: green;
+      background-color: white;
       width: 6px;
       height: 30px;
+      margin-right: 10px;
     }
   }
 }

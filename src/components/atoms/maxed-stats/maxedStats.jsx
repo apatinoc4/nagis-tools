@@ -10,7 +10,7 @@ const MaxedStats = (props) => {
     gear: 12,
   };
   let minimum = {
-    units: 9,
+    units: 8,
     espers: 6,
     vcs: 4,
     gear: 8,

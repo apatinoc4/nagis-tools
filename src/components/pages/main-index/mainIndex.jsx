@@ -25,16 +25,36 @@ const Index = () => {
     weaknesses: "",
     improve: "",
   });
+  let [activeElement, setActiveElement] = useState({
+    input: true,
+    preview: true,
+  });
   const ref = useRef(null);
+  const activeHandler = () => {
+    setActiveElement({
+      input: !activeElement.input,
+      preview: !activeElement.preview,
+    });
+  };
+
   return (
     <div className="p-index-container">
       <header className="p-index-header">
         <p className="p-index-header--title">Nagi's Account Review Tool</p>
         <p className="p-index-header--slogan">for Krispy-Kreme and Dunkin'</p>
       </header>
+      <div onClick={activeHandler} className="p-index-previewbutton">
+        <div className="p-index-previewbutton--innerdiv">
+          <p>preview</p>
+        </div>
+      </div>
       <div className="p-index-headerextender"></div>
       <div className="p-index-mainbody">
-        <div className="p-index-mainbody--inputfields">
+        <div
+          className={`p-index-mainbody--inputfields ${
+            activeElement.input === false ? "hidden" : ""
+          }`}
+        >
           <InputFields
             reviewer={reviewer}
             accountInfo={accountInfo}
@@ -54,7 +74,11 @@ const Index = () => {
             content={() => ref.current}
           />
         </div>
-        <div className="p-index-mainbody--reportpreview">
+        <div
+          className={`p-index-mainbody--reportpreview ${
+            activeElement.preview === false ? "hidden" : ""
+          }`}
+        >
           <ReportPdf
             ref={ref}
             reviewer={reviewer}
@@ -62,6 +86,14 @@ const Index = () => {
             maxedStats={maxedStats}
             veredictInfo={veredictInfo}
           />
+        </div>
+      </div>
+      <footer>
+        <p>Stay Kreamy</p>
+      </footer>
+      <div className="temporal-popup">
+        <div className="temporal-popup-body">
+          <p>Access from Desktop or Vic will sell your feet pics</p>
         </div>
       </div>
     </div>

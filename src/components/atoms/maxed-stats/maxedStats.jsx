@@ -4,16 +4,16 @@ import "./maxedStats.scss";
 const MaxedStats = (props) => {
   let { type, maxedStats } = props;
   let amazing = {
-    units: 12,
-    espers: 9,
-    vcs: 7,
-    gear: 12,
+    units: 15,
+    espers: 10,
+    vcs: 8,
+    gear: 17,
   };
   let minimum = {
-    units: 8,
+    units: 10,
     espers: 6,
-    vcs: 4,
-    gear: 8,
+    vcs: 6,
+    gear: 10,
   };
   let maxedAmount;
   let amazingStats;

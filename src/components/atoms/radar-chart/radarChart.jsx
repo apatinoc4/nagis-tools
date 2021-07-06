@@ -42,9 +42,6 @@ const RadarChart = (props) => {
         },
         pointLabels: {
           color: "white",
-          font: {
-            size: 10,
-          },
         },
         suggestedMin: 0,
         suggestedMax: 100,

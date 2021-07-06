@@ -5,19 +5,17 @@
     flex-direction: column;
     background-color: #e5e5e5;
     position: relative;
-    width: 100vw;
-    overflow-x: hidden;
+    width: 100%;
   }
 
   &-header {
-    width: 100vw;
     background-color: $dark-gray;
     color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    padding: 10px 30px;
     box-sizing: border-box;
     z-index: 1;
+    padding: 30px;
 
     p {
       margin: 0;
@@ -34,14 +32,33 @@
     }
   }
 
+  &-previewbutton {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px 5px 0 5px;
+    background: $dark-gray;
+    color: white;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
   &-headerextender {
-    width: 100vw;
     background-color: $dark-gray;
     position: absolute;
     top: 0;
     left: 0;
     height: 40%;
     z-index: 0;
+    width: 100%;
   }
 
   &-mainbody {
@@ -49,8 +66,8 @@
     flex-direction: row;
     width: 100%;
     box-sizing: border-box;
-    padding: 30px 20px;
     z-index: 1;
+    justify-content: space-evenly;
 
     &--inputfields {
       margin: 0;
@@ -61,7 +78,11 @@
       border-radius: 20px;
       width: 30%;
       flex-direction: column;
-      margin-right: 5%;
+
+      @include tablet {
+        width: 90%;
+        margin: 0;
+      }
 
       button {
         background: none;
@@ -90,5 +111,52 @@
       align-items: center;
       position: relative;
     }
+  }
+}
+
+footer {
+  width: 100%;
+  color: white;
+  background: $dark-gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  font-family: "Poppins", sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.temporal-popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $dark-gray;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-body {
+    background-color: $coconut;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    width: 55%;
+    border-radius: 2%;
+    color: $dark-gray;
+    font-family: "Poppins", sans-serif;
+    padding: 10%;
+    font-size: 40px;
+    text-align: center;
+  }
+
+  @include desktop {
+    display: none;
   }
 }

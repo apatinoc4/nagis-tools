@@ -4,7 +4,7 @@ import SectionTitle from "../../atoms/section-title/sectionTitle";
 import "./bodyField.scss";
 
 const BodyField = (props) => {
-  let { type, accountInfo, maxedStats } = props;
+  let { type, accountInfo, maxedStats, activeGuild, amazing, minimum } = props;
   let keyword;
   let title;
   let accInfo;
@@ -36,7 +36,13 @@ const BodyField = (props) => {
     <div className="m-bodyfield-container">
       <SectionTitle iconName={keyword} title={title} />
       <div className="m-bodyfield-body">
-        <MaxedStats type={keyword} maxedStats={maxedStats} />
+        <MaxedStats
+          type={keyword}
+          maxedStats={maxedStats}
+          activeGuild={activeGuild}
+          amazing={amazing}
+          minimum={minimum}
+        />
         <div className="m-bodyfield-description">
           <p>{accInfo}</p>
         </div>

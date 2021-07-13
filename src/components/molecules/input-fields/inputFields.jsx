@@ -100,7 +100,7 @@ const InputFields = (props) => {
   ];
   const veredictList = [
     {
-      title: "Strenghts",
+      title: "Strengths",
       type: "textArea",
       handler: setveredictInfo,
       target: veredictInfo,

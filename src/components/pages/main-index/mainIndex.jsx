@@ -5,6 +5,8 @@ import InputFields from "../../molecules/input-fields/inputFields";
 import ReportPdf from "../../molecules/report-pdf/reportPdf";
 
 const Index = () => {
+  let guildList = ["Krispy-Kreme", "Dunkin"];
+  let [activeGuild, setActiveGuild] = useState("Krispy-Kreme");
   let [reviewer, setReviewer] = useState({ reviwer: "" });
   let [accountInfo, setAccountInfo] = useState({
     accName: "",
@@ -30,6 +32,9 @@ const Index = () => {
     preview: true,
   });
   const ref = useRef(null);
+  const guildHandler = (event) => {
+    setActiveGuild(event.target.value);
+  };
   const activeHandler = () => {
     setActiveElement({
       input: !activeElement.input,
@@ -42,6 +47,18 @@ const Index = () => {
       <header className="p-index-header">
         <p className="p-index-header--title">Nagi's Account Review Tool</p>
         <p className="p-index-header--slogan">for Krispy-Kreme and Dunkin'</p>
+        <div className="p-index-header--guildselector">
+          <p>Select a guild: </p>
+          <select onChange={guildHandler} name="" id="">
+            {guildList.map((elem, i) => {
+              return (
+                <option value={elem} key={i}>
+                  {elem}
+                </option>
+              );
+            })}
+          </select>
+        </div>
       </header>
       <div onClick={activeHandler} className="p-index-previewbutton">
         <div className="p-index-previewbutton--innerdiv">
@@ -52,7 +69,7 @@ const Index = () => {
       <div className="p-index-mainbody">
         <div
           className={`p-index-mainbody--inputfields ${
-            activeElement.input === false ? "hidden" : ""
+            activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
           }`}
         >
           <InputFields
@@ -74,17 +91,14 @@ const Index = () => {
             content={() => ref.current}
           />
         </div>
-        <div
-          className={`p-index-mainbody--reportpreview ${
-            activeElement.preview === false ? "hidden" : ""
-          }`}
-        >
+        <div className={`p-index-mainbody--reportpreview`}>
           <ReportPdf
             ref={ref}
             reviewer={reviewer}
             accountInfo={accountInfo}
             maxedStats={maxedStats}
             veredictInfo={veredictInfo}
+            activeGuild={activeGuild}
           />
         </div>
       </div>

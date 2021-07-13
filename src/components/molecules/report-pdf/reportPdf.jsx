@@ -5,13 +5,29 @@ import BodyField from "../body-field/bodyField";
 import AccountInfo from "../account-info/accountInfo";
 import OverviewField from "../../atoms/overview-field/overviewField";
 const ReportPdf = forwardRef((props, ref) => {
-  let { reviewer, accountInfo, maxedStats, veredictInfo } = props;
+  let { reviewer, accountInfo, maxedStats, veredictInfo, activeGuild } = props;
   const categoryList = ["units", "espers", "vcs", "gear"];
   const overviewList = [
     { title: "Strengths:", description: veredictInfo.strenghts },
     { title: "Weaknesses:", description: veredictInfo.weaknesses },
     { title: "Improve ASAP:", description: veredictInfo.improve },
   ];
+
+  // Values for minimum requirements and amazing requirements
+
+  let amazing = {
+    units: activeGuild === "Krispy-Kreme" ? 15 : 6,
+    espers: activeGuild === "Krispy-Kreme" ? 10 : 5,
+    vcs: activeGuild === "Krispy-Kreme" ? 8 : 3,
+    gear: activeGuild === "Krispy-Kreme" ? 17 : 8,
+  };
+
+  let minimum = {
+    units: activeGuild === "Krispy-Kreme" ? 10 : 3,
+    espers: activeGuild === "Krispy-Kreme" ? 6 : 3,
+    vcs: activeGuild === "Krispy-Kreme" ? 6 : 1,
+    gear: activeGuild === "Krispy-Kreme" ? 10 : 4,
+  };
   return (
     <div ref={ref} className="m-reportpdf-container">
       <div className="m-reportpdf-header">
@@ -25,6 +41,9 @@ const ReportPdf = forwardRef((props, ref) => {
               type={elem}
               accountInfo={accountInfo}
               maxedStats={maxedStats}
+              activeGuild={activeGuild}
+              amazing={amazing}
+              minimum={minimum}
             />
           );
         })}
@@ -43,11 +62,15 @@ const ReportPdf = forwardRef((props, ref) => {
             })}
           </div>
           <div className="m-reportpdf-overview--radarchart">
-            <RadarChart maxedStats={maxedStats} />
+            <RadarChart maxedStats={maxedStats} amazing={amazing} />
           </div>
         </div>
       </div>
-      <div className="m-reportpdf-boxbackground"></div>
+      <div
+        className={`m-reportpdf-boxbackground ${
+          activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
+        }`}
+      ></div>
     </div>
   );
 });

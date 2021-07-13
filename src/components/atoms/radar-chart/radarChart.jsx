@@ -3,6 +3,7 @@ import { Radar } from "react-chartjs-2";
 import "./radarChart.scss";
 
 const RadarChart = (props) => {
+  let { maxedStats, amazing } = props;
   const percentageCalculator = (current, expected) => {
     if (current > expected) {
       return 100;
@@ -10,10 +11,10 @@ const RadarChart = (props) => {
       return (100 * current) / expected;
     }
   };
-  let maxedUnits = percentageCalculator(props.maxedStats.maxUnits, 12);
-  let maxedEspers = percentageCalculator(props.maxedStats.maxEspers, 7);
-  let maxedVcs = percentageCalculator(props.maxedStats.maxVcs, 12);
-  let maxedGear = percentageCalculator(props.maxedStats.maxGear, 12);
+  let maxedUnits = percentageCalculator(maxedStats.maxUnits, amazing.units);
+  let maxedEspers = percentageCalculator(maxedStats.maxEspers, amazing.espers);
+  let maxedVcs = percentageCalculator(maxedStats.maxVcs, amazing.vcs);
+  let maxedGear = percentageCalculator(maxedStats.maxGear, amazing.gear);
   const data = {
     labels: ["Units", "Espers", "Vision Cards", "Gear"],
     datasets: [

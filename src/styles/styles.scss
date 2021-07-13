@@ -6,6 +6,25 @@ $dark-gray: #292929;
 $coconut: #f9f9f9;
 $kkred: #cc083e;
 $kkgreen: #00764f;
+$dunkinorange: #f5821f;
+
+//guild-classes
+
+.kk {
+  background-color: $kkred;
+
+  button {
+    color: $kkred !important;
+  }
+}
+
+.dunkin {
+  background-color: $dunkinorange;
+
+  button {
+    color: $dunkinorange !important;
+  }
+}
 
 //breakpoints
 

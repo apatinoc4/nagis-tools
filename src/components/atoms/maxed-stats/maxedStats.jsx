@@ -2,19 +2,7 @@ import React from "react";
 import "./maxedStats.scss";
 
 const MaxedStats = (props) => {
-  let { type, maxedStats } = props;
-  let amazing = {
-    units: 15,
-    espers: 10,
-    vcs: 8,
-    gear: 17,
-  };
-  let minimum = {
-    units: 10,
-    espers: 6,
-    vcs: 6,
-    gear: 10,
-  };
+  let { type, maxedStats, activeGuild, amazing, minimum } = props;
   let maxedAmount;
   let amazingStats;
   let minimumStats;
@@ -47,7 +35,11 @@ const MaxedStats = (props) => {
     default:
   }
   return (
-    <div className="a-maxedstats-container">
+    <div
+      className={`a-maxedstats-container ${
+        activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
+      }`}
+    >
       <p className="a-maxedstats-amount">
         {maxedAmount !== "" ? maxedAmount : "-"}
       </p>

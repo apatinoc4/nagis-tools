@@ -17,7 +17,8 @@
     z-index: 1;
     padding: 30px;
 
-    p {
+    p,
+    h1 {
       margin: 0;
     }
 
@@ -169,4 +170,12 @@ footer {
   @include desktop {
     display: none;
   }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
 }

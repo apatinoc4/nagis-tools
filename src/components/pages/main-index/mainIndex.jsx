@@ -24,9 +24,7 @@ const Index = () => {
     maxGear: 0,
   });
   let [veredictInfo, setveredictInfo] = useState({
-    strenghts: "",
-    weaknesses: "",
-    improve: "",
+    conclusion: "",
   });
 
   const guildHandler = (event) => {
@@ -106,9 +104,24 @@ const Index = () => {
           </select>
         </div>
       </header>
-      <div onClick={() => activeHandler()} className="p-index-previewbutton">
+      <div
+        onClick={() => activeHandler()}
+        className={`p-index-previewbutton ${
+          activeGuild === "Krispy-Kreme" ? "kk-outline" : "dunkin-outline"
+        }`}
+      >
         <div className="p-index-previewbutton--innerdiv">
-          <p>preview</p>
+          {activeState.preview === false ? (
+            <>
+              <p>
+                Preview <span>PDF</span>
+              </p>
+            </>
+          ) : (
+            <>
+              <p>Hide Preview</p>
+            </>
+          )}
         </div>
       </div>
       <div className="p-index-headerextender"></div>
@@ -155,11 +168,6 @@ const Index = () => {
       <footer>
         <p>Stay Kreamy</p>
       </footer>
-      {/* <div className="temporal-popup">
-        <div className="temporal-popup-body">
-          <p>Access from Desktop or Vic will sell your feet pics</p>
-        </div>
-      </div> */}
     </div>
   );
 };

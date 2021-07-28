@@ -8,9 +8,7 @@ const ReportPdf = forwardRef((props, ref) => {
   let { reviewer, accountInfo, maxedStats, veredictInfo, activeGuild } = props;
   const categoryList = ["units", "espers", "vcs", "gear"];
   const overviewList = [
-    { title: "Strengths:", description: veredictInfo.strenghts },
-    { title: "Weaknesses:", description: veredictInfo.weaknesses },
-    { title: "Improve ASAP:", description: veredictInfo.improve },
+    { title: "Conclusions:", description: veredictInfo.conclusion },
   ];
 
   // Values for minimum requirements and amazing requirements

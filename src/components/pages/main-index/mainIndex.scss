@@ -24,11 +24,14 @@
 
     &--title {
       font-size: 25px;
+
+      @include mobile {
+        font-size: 5.5vw;
+      }
     }
 
     &--slogan {
       position: relative;
-      top: -5px;
       font-weight: 300;
     }
 
@@ -40,6 +43,9 @@
       select {
         width: 18%;
         margin-top: 5px;
+        @include mobile {
+          width: 100%;
+        }
       }
     }
   }
@@ -49,6 +55,8 @@
     height: 60px;
     border-radius: 5px 5px 0 5px;
     background: $dark-gray;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
     color: white;
     z-index: 20;
     display: flex;
@@ -57,9 +65,14 @@
     position: fixed;
     right: 0;
     bottom: 0;
+    text-align: center;
 
     @include desktop {
       display: none;
+    }
+
+    span {
+      font-size: 14px;
     }
   }
 
@@ -90,13 +103,16 @@
       width: 30%;
       flex-direction: column;
 
+      @include mobile {
+        padding: 5% 0 10% 0;
+      }
+
       @include tablet {
         width: 90%;
         margin: 0;
       }
 
       button {
-        background: none;
         border: none;
         padding: 0;
         font: inherit;
@@ -109,13 +125,11 @@
         font-weight: 800;
         color: $kkred;
         border-radius: 5px;
-        margin-top: 10px;
+        margin-top: 5%;
       }
     }
 
     &--reportpreview {
-      width: 216mm;
-      height: 279mm;
       margin: 0;
       display: flex;
       justify-content: center;

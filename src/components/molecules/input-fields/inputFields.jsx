@@ -100,25 +100,11 @@ const InputFields = (props) => {
   ];
   const veredictList = [
     {
-      title: "Strengths",
+      title: "Conclusions",
       type: "textArea",
       handler: setveredictInfo,
       target: veredictInfo,
-      targetfield: "strenghts",
-    },
-    {
-      title: "Weaknesses",
-      type: "textArea",
-      handler: setveredictInfo,
-      target: veredictInfo,
-      targetfield: "weaknesses",
-    },
-    {
-      title: "Improve ASAP",
-      type: "textArea",
-      handler: setveredictInfo,
-      target: veredictInfo,
-      targetfield: "improve",
+      targetfield: "conclusion",
     },
   ];
   return (

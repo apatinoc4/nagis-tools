@@ -32,6 +32,9 @@ const BodyField = (props) => {
       break;
     default:
   }
+  const dlength = accInfo.length;
+  const wlength = window.innerWidth;
+
   return (
     <div className="m-bodyfield-container">
       <SectionTitle iconName={keyword} title={title} />
@@ -44,7 +47,31 @@ const BodyField = (props) => {
           minimum={minimum}
         />
         <div className="m-bodyfield-description">
-          <p>{accInfo}</p>
+          {wlength >= 1024 ? (
+            <>
+              <p
+                style={
+                  dlength >= 990
+                    ? { fontSize: 0.7 + "vh" }
+                    : { fontSize: 0.8 + "vh" }
+                }
+              >
+                {accInfo}
+              </p>
+            </>
+          ) : (
+            <>
+              <p
+                style={
+                  dlength >= 990
+                    ? { fontSize: 0.4 + "vh" }
+                    : { fontSize: 0.5 + "vh" }
+                }
+              >
+                {accInfo}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -4,12 +4,16 @@
   &-container {
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    font-size: 25px;
+    font-size: 1.5vh;
     margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
+
+    @include desktop {
+      font-size: 2.5vh;
+    }
   }
 
   &-pusher {
@@ -29,14 +33,36 @@
       margin: 0;
     }
     img {
-      height: 25px;
-      margin-right: 10px;
+      height: 2vh;
+      margin-right: 3%;
+
+      @include desktop {
+        height: 3vh;
+      }
     }
     &--sidebar {
       background-color: white;
-      width: 6px;
-      height: 30px;
-      margin-right: 10px;
+      width: 2%;
+      height: 2vh;
+      margin-right: 3%;
+
+      @include desktop {
+        height: 3vh;
+      }
     }
+  }
+}
+
+@media print {
+  .a-sectiontitle-container {
+    font-size: 2.5vh;
+  }
+
+  .a-sectiontitle-contents img {
+    height: 3vh;
+  }
+
+  .a-sectiontitle-contents--sidebar {
+    height: 3vh;
   }
 }

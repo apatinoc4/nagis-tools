@@ -13,11 +13,18 @@
       font-family: "Poppins", sans-serif;
       font-weight: 400;
       color: white;
-      font-size: 12px;
+      font-size: 13px;
+
+      @include desktop {
+        font-size: 16px;
+      }
     }
     textarea {
-      height: 80px;
+      height: 70px;
       resize: none;
+      @include desktop {
+        height: 100px;
+      }
     }
   }
 }

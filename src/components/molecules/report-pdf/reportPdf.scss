@@ -1,13 +1,23 @@
 @import "../../../styles/styles.scss";
 
+// keeps responsive letter aspect ratio
+
+$width: 90vw;
+$heigth: 1.29 * $width;
+
 .m-reportpdf {
   &-container {
     background-color: $coconut;
-    width: 216mm;
-    height: 279mm;
+    width: $width;
+    height: $heigth;
     overflow: hidden;
     position: relative;
     z-index: 0;
+
+    @include desktop {
+      width: 216mm;
+      height: 279mm;
+    }
   }
   &-boxbackground {
     width: 35%;
@@ -19,24 +29,27 @@
   }
   &-header {
     width: 100%;
-    height: 7%;
+    height: 5%;
     margin: 0;
     display: flex;
-    overflow: hidden;
+
     z-index: 5;
-    padding-left: 100px;
+    padding-left: 2%;
     align-items: center;
   }
 
   &-body {
     position: relative;
-    bottom: 20px;
+
+    height: 75%;
   }
 
+  &-footer {
+    height: 20%;
+  }
   &-overview {
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
 
     &--radarchart {
       display: flex;
@@ -52,9 +65,14 @@
       width: 65%;
       max-width: 65%;
       justify-content: center;
-      margin-left: 25px;
-      position: relative;
-      bottom: 20px;
+      margin-left: 5%;
     }
+  }
+}
+
+@media print {
+  .m-reportpdf-container {
+    width: 216mm;
+    height: 279mm;
   }
 }

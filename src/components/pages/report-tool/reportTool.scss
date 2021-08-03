@@ -1,0 +1,149 @@
+@import "../../../styles/styles.scss";
+.p-index {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #e5e5e5;
+    position: relative;
+    width: 100%;
+    padding-bottom: 5vh;
+  }
+
+  &-header {
+    background-color: $dark-gray;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    box-sizing: border-box;
+    z-index: 1;
+    padding: 30px;
+
+    p,
+    h1 {
+      margin: 0;
+    }
+
+    &--title {
+      font-size: 25px;
+
+      @include mobile {
+        font-size: 5.5vw;
+      }
+    }
+
+    &--slogan {
+      position: relative;
+      font-weight: 300;
+    }
+
+    &--guildselector {
+      display: flex;
+      flex-direction: column;
+      color: white;
+
+      select {
+        width: 18%;
+        margin-top: 5px;
+        @include mobile {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &-previewbutton {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px 5px 0 5px;
+    background: $dark-gray;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: white;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+
+    @include desktop {
+      display: none;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  &-headerextender {
+    background-color: $dark-gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40%;
+    z-index: 0;
+    width: 100%;
+  }
+
+  &-mainbody {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    justify-content: space-evenly;
+
+    &--inputfields {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      width: 30%;
+      flex-direction: column;
+
+      @include mobile {
+        padding: 5% 0 10% 0;
+      }
+
+      @include tablet {
+        width: 90%;
+        margin: 0;
+      }
+
+      button {
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        background-color: white;
+        width: 70%;
+        height: 3%;
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        color: $kkred;
+        border-radius: 5px;
+        margin-top: 5%;
+      }
+    }
+
+    &--reportpreview {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}

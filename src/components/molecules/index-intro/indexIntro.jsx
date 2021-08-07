@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./indexIntro.scss";
-const introVid = require("../../../assets/videos/introVid3.mp4");
 const logoWhite = require("../../../assets/main-logo/mainLogoWhite.svg");
 
 const IndexIntro = () => {
@@ -17,7 +16,12 @@ const IndexIntro = () => {
   return (
     <div className="m-intro-container">
       <div className="m-intro-videoslogan">
-        <video autoPlay loop muted src={introVid.default} />
+        <video
+          autoPlay
+          loop
+          muted
+          src="https://nts-s3-introvid.s3.us-east-2.amazonaws.com/intro-vid.mp4"
+        />
         <div className="m-intro-shaderbg">
           <h1>Welcome to</h1>
           <img src={logoWhite.default} alt="logoWhite" />

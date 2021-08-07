@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ReportTool from "./components/pages/report-tool/reportTool.jsx";
+import PageContainer from "./components/pages/page-container/PageContainer.jsx";
 import "./styles/styles.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReportTool />
+    <PageContainer />
   </React.StrictMode>,
   document.getElementById("root")
 );

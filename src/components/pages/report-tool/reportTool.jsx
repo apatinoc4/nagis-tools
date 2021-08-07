@@ -87,11 +87,15 @@ const ReportTool = () => {
   };
 
   return (
-    <div className="p-index-container">
-      <header className="p-index-header">
-        <h1 className="p-index-header--title">Nagi's Account Review Tool</h1>
-        <p className="p-index-header--slogan">for Krispy-Kreme and Dunkin'</p>
-        <div className="p-index-header--guildselector">
+    <div className="p-reportTool-container">
+      <div className="p-reportTool-header">
+        <h1 className="p-reportTool-header--title">
+          Nagi's Account Review Tool
+        </h1>
+        <p className="p-reportTool-header--slogan">
+          for Krispy-Kreme and Dunkin'
+        </p>
+        <div className="p-reportTool-header--guildselector">
           <p>Select a guild: </p>
           <select onChange={guildHandler}>
             {guildList.map((elem, i) => {
@@ -103,14 +107,14 @@ const ReportTool = () => {
             })}
           </select>
         </div>
-      </header>
+      </div>
       <div
         onClick={() => activeHandler()}
-        className={`p-index-previewbutton ${
+        className={`p-reportTool-previewbutton ${
           activeGuild === "Krispy-Kreme" ? "kk-outline" : "dunkin-outline"
         }`}
       >
-        <div className="p-index-previewbutton--innerdiv">
+        <div className="p-reportTool-previewbutton--innerdiv">
           {activeState.preview === false ? (
             <>
               <p>
@@ -124,10 +128,10 @@ const ReportTool = () => {
           )}
         </div>
       </div>
-      <div className="p-index-headerextender"></div>
-      <div className="p-index-mainbody">
+      <div className="p-reportTool-headerextender"></div>
+      <div className="p-reportTool-mainbody">
         <div
-          className={`p-index-mainbody--inputfields ${
+          className={`p-reportTool-mainbody--inputfields ${
             activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
           } ${activeState.inputs === false ? "hidden" : ""}`}
         >
@@ -151,7 +155,7 @@ const ReportTool = () => {
           />
         </div>
         <div
-          className={`p-index-mainbody--reportpreview ${
+          className={`p-reportTool-mainbody--reportpreview ${
             activeState.preview === false ? "hidden" : ""
           }`}
         >

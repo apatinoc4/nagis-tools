@@ -1,0 +1,92 @@
+@import "../../../styles/styles.scss";
+
+$fbackground: $dark-gray;
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: $fbackground;
+  margin: 0;
+  position: static;
+  left: 0;
+  bottom: 0;
+  height: 150px;
+  padding: 2% 0;
+}
+
+.t-footer {
+  &-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &-contact {
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 10px;
+    margin-bottom: 10px;
+
+    p {
+      margin: 0 0 2px 0;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+      background: white;
+      font-size: 12px;
+      height: 25px;
+      font-weight: 800;
+      color: $fbackground;
+    }
+    button:hover {
+      background: $highlight;
+      height: 30px;
+      font-size: 13px;
+    }
+  }
+
+  &-copyright {
+    margin: 0;
+    width: 100%;
+    p {
+      color: white;
+      margin: 0;
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+      font-size: 11px;
+    }
+  }
+  &-socialmedia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    a {
+      text-decoration: none;
+    }
+
+    &--icon {
+      background-color: white;
+      padding: 0.8vh;
+      border-radius: 50%;
+      color: $fbackground;
+      margin: 0 5px;
+    }
+
+    &--icon:hover {
+      background: $highlight;
+      padding: 1.5vh;
+    }
+  }
+}

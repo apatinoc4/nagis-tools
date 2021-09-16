@@ -24,7 +24,7 @@
     color: white !important;
 
     @include desktop {
-      font-size: 5vh;
+      font-size: 50px;
       margin: 0 0 -1.5vh 0;
     }
   }
@@ -33,7 +33,7 @@
     margin: 0;
     font-size: 1vh;
     @include desktop {
-      font-size: 1.5vh;
+      font-size: 16px;
     }
   }
   &-veredict {
@@ -42,7 +42,7 @@
     font-size: 1vh;
     margin-bottom: 0.5vh;
     @include desktop {
-      font-size: 1.5vh;
+      font-size: 16px;
       margin-bottom: 1vh;
     }
   }

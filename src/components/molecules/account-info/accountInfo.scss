@@ -26,7 +26,7 @@
       font-size: 1vh;
 
       @include desktop {
-        font-size: 1.5vh;
+        font-size: 15px;
       }
     }
 
@@ -36,7 +36,7 @@
       font-size: 0.9vh;
 
       @include desktop {
-        font-size: 1.4vh;
+        font-size: 14px;
       }
     }
   }

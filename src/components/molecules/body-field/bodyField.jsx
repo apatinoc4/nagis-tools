@@ -52,8 +52,8 @@ const BodyField = (props) => {
               <p
                 style={
                   dlength >= 990
-                    ? { fontSize: 0.7 + "vh" }
-                    : { fontSize: 0.8 + "vh" }
+                    ? { fontSize: 6 + "px" }
+                    : { fontSize: 7 + "px" }
                 }
               >
                 {accInfo}

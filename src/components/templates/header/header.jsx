@@ -16,7 +16,7 @@ const Header = () => {
               <Link to="/">
                 <li className="t-header-navlist--li">HOME</li>
               </Link>
-              <Link to="/review-tool">
+              <Link to="/review_tool">
                 <li className="t-header-navlist--li">TOOLS</li>
               </Link>
             </ul>

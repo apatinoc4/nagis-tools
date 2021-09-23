@@ -1,0 +1,53 @@
+@import "../../../../styles/styles.scss";
+
+.m-accountinfo {
+  &-container {
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 8% 0 0 2.5%;
+    width: 55%;
+  }
+
+  &-field {
+    justify-content: flex-start;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin: 0 2%;
+    align-items: center;
+
+    &--title {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      margin-right: 5%;
+      font-size: 1vh;
+
+      @include desktop {
+        font-size: 15px;
+      }
+    }
+
+    &--info {
+      font-family: "Poppins", sans-serif;
+      font-weight: 300;
+      font-size: 0.9vh;
+
+      @include desktop {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media print {
+  .m-accountinfo-field--title {
+    font-size: 1.5vh;
+  }
+
+  .m-accountinfo-field--info {
+    font-size: 1.4vh;
+  }
+}

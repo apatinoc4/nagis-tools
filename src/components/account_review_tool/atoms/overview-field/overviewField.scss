@@ -1,0 +1,47 @@
+@import "../../../../styles/styles.scss";
+
+.a-overviewfield {
+  &-container {
+    max-width: 100%;
+    margin-top: 1.5vh;
+
+    p {
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      font-size: 1.5vh;
+      margin: 1% 0;
+      @include desktop {
+        font-size: 2vh;
+      }
+    }
+  }
+  &-description {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 88%;
+
+    p {
+      margin: 0;
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+      font-weight: 400 !important;
+      font-size: 0.5vh;
+
+      @include desktop {
+        font-size: 1vh;
+      }
+    }
+  }
+}
+
+@media print {
+  .a-overviewfield-container p {
+    font-size: 2vh;
+  }
+
+  .a-overviewfield-description p {
+    font-size: 1vh;
+  }
+}

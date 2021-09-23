@@ -1,0 +1,36 @@
+@import "../../../../styles/styles.scss";
+
+.a-inputfield {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5px 20px;
+    box-sizing: border-box;
+    width: 100%;
+
+    label {
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: white;
+      font-size: 13px;
+
+      @include desktop {
+        font-size: 16px;
+      }
+    }
+    textarea {
+      height: 70px;
+      resize: none;
+      @include desktop {
+        height: 100px;
+      }
+    }
+  }
+}
+
+.accInfoField {
+  input {
+    width: 100% !important;
+  }
+}

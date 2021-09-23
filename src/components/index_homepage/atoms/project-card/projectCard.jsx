@@ -25,7 +25,7 @@ const ProjectCard = () => {
             equipment the player has by either Krispy-Kreme or Dunkin´ guild
             standards and export it in PDF format.
           </p>
-          <Link to="/review-tool">
+          <Link to="/review_tool">
             <button>Visit</button>
           </Link>
         </div>

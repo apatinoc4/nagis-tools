@@ -134,8 +134,8 @@ const ReportTool = () => {
       <div className="p-reportTool-mainbody">
         <div
           className={`p-reportTool-mainbody--inputfields ${
-            activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
-          } ${activeState.inputs === false ? "hidden" : ""}`}
+            activeState.inputs === false ? "hidden" : ""
+          }`}
         >
           <InputFields
             reviewer={reviewer}
@@ -161,6 +161,10 @@ const ReportTool = () => {
             activeState.preview === false ? "hidden" : ""
           }`}
         >
+          <p className="p-reportTool-disclaimer">
+            Preview for mobile visualization purposes, some proportions may vary
+            slightly.
+          </p>
           <ReportPdf
             ref={ref}
             reviewer={reviewer}
@@ -168,6 +172,7 @@ const ReportTool = () => {
             maxedStats={maxedStats}
             veredictInfo={veredictInfo}
             activeGuild={activeGuild}
+            activeState={activeState}
           />
         </div>
       </div>

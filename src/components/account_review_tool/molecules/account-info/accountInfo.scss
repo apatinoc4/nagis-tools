@@ -15,16 +15,15 @@ $fieldInfo: 20px;
     justify-content: center;
     align-items: center;
     margin: 0;
-    // background-color: red;
     height: 100%;
   }
 
   &-report_title {
     width: 53%;
-    // background-color: bisque;
     height: 100%;
     display: flex;
     justify-content: center;
+    font-size: 80%;
     align-items: center;
     font-family: "Khand", sans-serif;
     font-weight: 600;
@@ -37,7 +36,6 @@ $fieldInfo: 20px;
 
   &-name_rank {
     width: 47%;
-    // background-color: blue;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -62,7 +60,7 @@ $fieldInfo: 20px;
       font-family: "Khand", sans-serif;
       font-weight: 600;
       margin-right: 0;
-      font-size: 1vh;
+      font-size: 60%;
       color: $titleBlue;
 
       @include desktop {
@@ -73,7 +71,7 @@ $fieldInfo: 20px;
     &--info {
       font-family: "Khand", sans-serif;
       font-weight: 200;
-      font-size: 0.9vh;
+      font-size: 55%;
       margin-left: 1% !important;
 
       @include desktop {

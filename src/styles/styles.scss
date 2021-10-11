@@ -10,6 +10,7 @@ $kkgreen: #00764f;
 $dunkinorange: #f5821f;
 $highlight: #a7a7a7;
 $titleBlue: #243e66;
+$containerBlue: #d5ebf5;
 
 //guild-classes
 
@@ -21,7 +22,7 @@ $titleBlue: #243e66;
   }
 
   &-outline {
-    border: 3px solid $kkred;
+    border: 3px solid $containerBlue;
   }
 }
 

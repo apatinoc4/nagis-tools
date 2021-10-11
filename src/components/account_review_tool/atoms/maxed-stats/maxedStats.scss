@@ -10,7 +10,9 @@
     margin: 0 0 0 2.5%;
     width: 17%;
     border-radius: 5px;
+    border: 1px solid $titleBlue;
     box-shadow: 0px 0px 6px 3px rgba(68, 68, 68, 0.3);
+    background-color: $containerBlue;
     p {
       font-family: "Poppins", sans-serif;
       color: $dark-gray;
@@ -19,31 +21,30 @@
 
   &-amount {
     font-weight: 800;
-    font-size: 3.2vh;
-    margin: 0 0 -0.8vh 0;
-    color: white !important;
+    font-size: 120%;
+    margin: 0 0 -10% 0;
+    color: $titleBlue !important;
 
     @include desktop {
       font-size: 50px;
-      margin: 0 0 -1.5vh 0;
     }
   }
   &-category {
-    font-weight: 400;
+    font-weight: 600;
     margin: 0;
-    font-size: 1vh;
+    font-size: 60%;
+    font-family: "Khand", sans-serif !important;
     @include desktop {
-      font-size: 16px;
+      font-size: 20px;
     }
   }
   &-veredict {
     font-weight: 800;
     margin: 0;
-    font-size: 1vh;
-    margin-bottom: 0.5vh;
+    font-size: 50%;
+    margin-top: -4%;
     @include desktop {
-      font-size: 16px;
-      margin-bottom: 1vh;
+      font-size: 19px;
     }
   }
 }
@@ -51,15 +52,13 @@
 @media print {
   .a-maxedstats-amount {
     font-size: 5vh;
-    margin: 0 0 -1.5vh 0;
   }
 
   .a-maxedstats-category {
-    font-size: 1.5vh;
+    font-size: 20px;
   }
 
   .a-maxedstats-veredict {
-    font-size: 1.5vh;
-    margin-bottom: 1vh;
+    font-size: 19px;
   }
 }

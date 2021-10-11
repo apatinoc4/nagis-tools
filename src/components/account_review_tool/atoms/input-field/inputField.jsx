@@ -13,8 +13,11 @@ const InputField = (props) => {
     >
       {type === "textInput" ? (
         <TextField
-          id="outlined-required"
+          size="small"
           label={title}
+          InputLabelProps={{
+            shrink: true,
+          }}
           onChange={(event) => {
             let newObject = { ...target };
             newObject[targetfield] = event.target.value;
@@ -23,6 +26,7 @@ const InputField = (props) => {
         />
       ) : type === "numberInput" ? (
         <TextField
+          size="small"
           id="outlined-number"
           label={title}
           type="number"
@@ -38,12 +42,16 @@ const InputField = (props) => {
       ) : type === "textArea" ? (
         <TextField
           id="filled-multiline-static"
+          margin="normal"
           onChange={(event) => {
             let newObject = { ...target };
             newObject[targetfield] = event.target.value;
             handler(newObject);
           }}
           label={title}
+          InputLabelProps={{
+            shrink: true,
+          }}
           multiline
           rows={4}
         />

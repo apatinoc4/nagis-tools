@@ -3,7 +3,7 @@ import { ReportContext } from "../../context/reportToolProvider";
 import "./maxedStats.scss";
 
 const MaxedStats = (props) => {
-  const { type, maxedStats, activeGuild } = props;
+  const { type, maxedStats } = props;
   const { amazing, minimum } = useContext(ReportContext);
   let maxedAmount;
   let amazingStats;
@@ -37,11 +37,7 @@ const MaxedStats = (props) => {
     default:
   }
   return (
-    <div
-      className={`a-maxedstats-container ${
-        activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
-      }`}
-    >
+    <div className={`a-maxedstats-container`}>
       <p className="a-maxedstats-amount">
         {maxedAmount !== "" ? maxedAmount : "-"}
       </p>

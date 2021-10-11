@@ -7,12 +7,20 @@ import OverviewField from "../../atoms/overview-field/overviewField";
 import towerBg from "../../../../assets/account_review_tool/backgrounds/report-bg.png";
 
 const ReportPdf = forwardRef((props, ref) => {
-  const { reviewer, accountInfo, maxedStats, veredictInfo, activeGuild } =
-    props;
+  const {
+    reviewer,
+    accountInfo,
+    maxedStats,
+    veredictInfo,
+    activeGuild,
+    activeState,
+  } = props;
   const categoryList = ["units", "espers", "vcs", "gear"];
   const overviewList = [
     { title: "Conclusions:", description: veredictInfo.conclusion },
   ];
+
+  const wlength = window.innerWidth;
 
   return (
     <div ref={ref}>
@@ -47,10 +55,18 @@ const ReportPdf = forwardRef((props, ref) => {
               })}
             </div>
             <div className="m-reportpdf-overview--radarchart">
-              {/* <RadarChart maxedStats={maxedStats} /> */}
+              {wlength <= 1024 && activeState.preview ? (
+                <RadarChart maxedStats={maxedStats} />
+              ) : wlength >= 1024 ? (
+                <RadarChart maxedStats={maxedStats} />
+              ) : (
+                <></>
+              )}
               <div className="m-reportpdf-reviewer">
-                <p>Reviewed by</p>
-                <p>{reviewer.reviewer}</p>
+                <p className="m-reportpdf-reviewer--title">Reviewed by:</p>
+                <p className="m-reportpdf-reviewer--info">
+                  {reviewer.reviewer}
+                </p>
               </div>
             </div>
           </div>

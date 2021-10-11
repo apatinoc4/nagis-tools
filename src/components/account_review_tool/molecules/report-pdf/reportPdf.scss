@@ -20,7 +20,7 @@ $footerHeight: 100% - $headerHeight - $bodyHeight;
 
     @include desktop {
       width: 216mm;
-      height: 279mm;
+      height: 279.4mm;
     }
   }
   &-boxbackground {
@@ -126,12 +126,29 @@ $footerHeight: 100% - $headerHeight - $bodyHeight;
   }
 
   &-reviewer {
-    // background-color: red;
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 5%;
+    right: 5%;
+    font-family: "Khand", sans-serif;
+    font-size: 50%;
+
+    @include desktop {
+      font-size: 120%;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &--title {
+      font-weight: 600;
+      color: $titleBlue;
+    }
+    &--info {
+      font-weight: 200;
+    }
   }
 }
 
@@ -139,5 +156,9 @@ $footerHeight: 100% - $headerHeight - $bodyHeight;
   .m-reportpdf-container {
     width: 216mm;
     height: 279mm;
+  }
+
+  .m-reportpdf-reviewer {
+    font-size: 120%;
   }
 }

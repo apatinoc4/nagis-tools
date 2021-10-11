@@ -2,14 +2,14 @@
 
 .a-maxedstats {
   &-container {
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-right: 5%;
-    width: 18%;
-    border-radius: 10px;
+    margin: 0 0 0 2.5%;
+    width: 17%;
+    border-radius: 5px;
     box-shadow: 0px 0px 6px 3px rgba(68, 68, 68, 0.3);
     p {
       font-family: "Poppins", sans-serif;

@@ -1,14 +1,49 @@
 @import "../../../../styles/styles.scss";
 
+//Desktop and print breakpoint
+
+$generalTitle: 32px;
+$fieldtitle: 22px;
+$fieldInfo: 20px;
+
 .m-accountinfo {
   &-container {
-    width: 35%;
+    position: absolute;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 8% 0 0 2.5%;
-    width: 55%;
+    margin: 0;
+    // background-color: red;
+    height: 100%;
+  }
+
+  &-report_title {
+    width: 53%;
+    // background-color: bisque;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Khand", sans-serif;
+    font-weight: 600;
+    color: white;
+
+    @include desktop {
+      font-size: $generalTitle;
+    }
+  }
+
+  &-name_rank {
+    width: 47%;
+    // background-color: blue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 3%;
   }
 
   &-field {
@@ -16,38 +51,48 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    margin: 0 2%;
+    margin: 0;
     align-items: center;
 
+    p {
+      margin: 0;
+    }
+
     &--title {
-      font-family: "Poppins", sans-serif;
-      font-weight: 800;
-      margin-right: 5%;
+      font-family: "Khand", sans-serif;
+      font-weight: 600;
+      margin-right: 0;
       font-size: 1vh;
+      color: $titleBlue;
 
       @include desktop {
-        font-size: 15px;
+        font-size: $fieldtitle;
       }
     }
 
     &--info {
-      font-family: "Poppins", sans-serif;
-      font-weight: 300;
+      font-family: "Khand", sans-serif;
+      font-weight: 200;
       font-size: 0.9vh;
+      margin-left: 1% !important;
 
       @include desktop {
-        font-size: 14px;
+        font-size: $fieldInfo;
       }
     }
   }
 }
 
 @media print {
+  .m-accountinfo-report_title {
+    font-size: $generalTitle;
+  }
+
   .m-accountinfo-field--title {
-    font-size: 1.5vh;
+    font-size: $fieldtitle;
   }
 
   .m-accountinfo-field--info {
-    font-size: 1.4vh;
+    font-size: $fieldInfo;
   }
 }

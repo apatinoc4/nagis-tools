@@ -4,6 +4,7 @@
   &-container {
     max-width: 100%;
     margin-top: 1.5vh;
+    z-index: 99;
 
     p {
       color: $dark-gray;

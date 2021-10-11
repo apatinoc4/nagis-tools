@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ReportContext } from "../../context/reportToolProvider";
 import { Radar } from "react-chartjs-2";
 import "./radarChart.scss";
 
 const RadarChart = (props) => {
-  let { maxedStats, amazing } = props;
+  const { maxedStats } = props;
   const percentageCalculator = (current, expected) => {
     if (current > expected) {
       return 100;
@@ -11,10 +12,14 @@ const RadarChart = (props) => {
       return (100 * current) / expected;
     }
   };
-  let maxedUnits = percentageCalculator(maxedStats.maxUnits, amazing.units);
-  let maxedEspers = percentageCalculator(maxedStats.maxEspers, amazing.espers);
-  let maxedVcs = percentageCalculator(maxedStats.maxVcs, amazing.vcs);
-  let maxedGear = percentageCalculator(maxedStats.maxGear, amazing.gear);
+  const { amazing } = useContext(ReportContext);
+  const maxedUnits = percentageCalculator(maxedStats.maxUnits, amazing.units);
+  const maxedEspers = percentageCalculator(
+    maxedStats.maxEspers,
+    amazing.espers
+  );
+  const maxedVcs = percentageCalculator(maxedStats.maxVcs, amazing.vcs);
+  const maxedGear = percentageCalculator(maxedStats.maxGear, amazing.gear);
   const data = {
     labels: ["Units", "Espers", "Vision Cards", "Gear"],
     datasets: [

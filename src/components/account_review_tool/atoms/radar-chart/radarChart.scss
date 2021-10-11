@@ -1,10 +1,10 @@
 .a-radarchart {
   &-container {
-    width: 215px;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -15px;
+    background-color: green;
   }
 }

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ReportContext } from "../../context/reportToolProvider";
 import "./maxedStats.scss";
 
 const MaxedStats = (props) => {
-  let { type, maxedStats, activeGuild, amazing, minimum } = props;
+  const { type, maxedStats, activeGuild } = props;
+  const { amazing, minimum } = useContext(ReportContext);
   let maxedAmount;
   let amazingStats;
   let minimumStats;

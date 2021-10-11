@@ -3,7 +3,7 @@ import InputField from "../../atoms/input-field/inputField";
 import "./inputFields.scss";
 
 const InputFields = (props) => {
-  let {
+  const {
     reviewer,
     accountInfo,
     maxedStats,

@@ -2,20 +2,21 @@ import React from "react";
 import "./accountInfo.scss";
 
 const AccountInfo = (props) => {
-  let { accountInfo, reviewer } = props;
+  let { accountInfo } = props;
   return (
     <div className="m-accountinfo-container">
-      <div className="m-accountinfo-field">
-        <p className="m-accountinfo-field--title">Name:</p>
-        <p className="m-accountinfo-field--info">{accountInfo.accName}</p>
+      <div className="m-accountinfo-report_title">
+        <p>KRISPYKREME ACCOUNT REVIEW</p>
       </div>
-      <div className="m-accountinfo-field">
-        <p className="m-accountinfo-field--title">Rank:</p>
-        <p className="m-accountinfo-field--info">{accountInfo.accLevel}</p>
-      </div>
-      <div className="m-accountinfo-field">
-        <p className="m-accountinfo-field--title">Reviewer:</p>
-        <p className="m-accountinfo-field--info">{reviewer.reviewer}</p>
+      <div className="m-accountinfo-name_rank">
+        <div className="m-accountinfo-field">
+          <p className="m-accountinfo-field--title">NAME:</p>
+          <p className="m-accountinfo-field--info">{accountInfo.accName}</p>
+        </div>
+        <div className="m-accountinfo-field">
+          <p className="m-accountinfo-field--title">RANK:</p>
+          <p className="m-accountinfo-field--info">{accountInfo.accLevel}</p>
+        </div>
       </div>
     </div>
   );

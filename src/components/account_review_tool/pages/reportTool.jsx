@@ -1,15 +1,17 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef, useContext } from "react";
+import { ReportContext } from "../context/reportToolProvider";
 import ReactToPrint from "react-to-print";
 import "./reportTool.scss";
 import InputFields from "../molecules/input-fields/inputFields";
 import ReportPdf from "../molecules/report-pdf/reportPdf";
+import Button from "@mui/material/Button";
 
 const ReportTool = () => {
-  let guildList = ["Krispy-Kreme", "Dunkin"];
-  let [activeGuild, setActiveGuild] = useState("Krispy-Kreme");
-  let [reviewer, setReviewer] = useState({ reviwer: "" });
+  const guildList = ["Krispy-Kreme", "Dunkin"];
+  const { activeGuild, setActiveGuild } = useContext(ReportContext);
+  const [reviewer, setReviewer] = useState({ reviwer: "" });
   const [activeState, setActiveState] = useState({});
-  let [accountInfo, setAccountInfo] = useState({
+  const [accountInfo, setAccountInfo] = useState({
     accName: "",
     accLevel: 0,
     units: "",
@@ -17,13 +19,13 @@ const ReportTool = () => {
     vcs: "",
     gear: "",
   });
-  let [maxedStats, setMaxedStats] = useState({
+  const [maxedStats, setMaxedStats] = useState({
     maxUnits: 0,
     maxEspers: 0,
     maxVcs: 0,
     maxGear: 0,
   });
-  let [veredictInfo, setveredictInfo] = useState({
+  const [veredictInfo, setveredictInfo] = useState({
     conclusion: "",
   });
 
@@ -147,9 +149,9 @@ const ReportTool = () => {
           />
           <ReactToPrint
             trigger={() => (
-              <button onClick={() => console.log(ref.current)}>
+              <Button onClick={() => console.log(ref.current)}>
                 Generate PDF
-              </button>
+              </Button>
             )}
             content={() => ref.current}
           />

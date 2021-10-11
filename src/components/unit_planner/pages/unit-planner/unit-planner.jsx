@@ -3,7 +3,7 @@ import React from "react";
 const UnitPlanner = () => {
   return (
     <div>
-      <p>Hello</p>
+      <p>Coming Soon</p>
     </div>
   );
 };

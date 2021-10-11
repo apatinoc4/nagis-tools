@@ -26,7 +26,7 @@ const ReportPdf = forwardRef((props, ref) => {
     <div ref={ref}>
       <div className="m-reportpdf-container">
         <div className="m-reportpdf-header">
-          <AccountInfo accountInfo={accountInfo} reviewer={reviewer} />
+          <AccountInfo accountInfo={accountInfo} activeGuild={activeGuild} />
         </div>
         <div className="m-reportpdf-body">
           {categoryList.map((elem, i) => {

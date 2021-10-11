@@ -2,11 +2,14 @@ import React from "react";
 import "./accountInfo.scss";
 
 const AccountInfo = (props) => {
-  let { accountInfo } = props;
+  let { accountInfo, activeGuild } = props;
   return (
     <div className="m-accountinfo-container">
       <div className="m-accountinfo-report_title">
-        <p>KRISPYKREME ACCOUNT REVIEW</p>
+        <p>
+          {activeGuild === "Krispy-Kreme" ? "KRISPYKREME" : "DUNKIN'"} ACCOUNT
+          REVIEW
+        </p>
       </div>
       <div className="m-accountinfo-name_rank">
         <div className="m-accountinfo-field">

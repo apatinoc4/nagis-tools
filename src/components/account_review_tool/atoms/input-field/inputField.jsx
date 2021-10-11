@@ -1,4 +1,5 @@
 import React from "react";
+import TextField from "@mui/material/TextField";
 import "./inputField.scss";
 
 const InputField = (props) => {
@@ -10,9 +11,13 @@ const InputField = (props) => {
         style === "accInfo" ? "accInfoField" : ""
       }`}
     >
-      <label>{title}</label>
       {type === "textInput" ? (
-        <input
+        <TextField
+          size="small"
+          label={title}
+          InputLabelProps={{
+            shrink: true,
+          }}
           onChange={(event) => {
             let newObject = { ...target };
             newObject[targetfield] = event.target.value;
@@ -20,21 +25,35 @@ const InputField = (props) => {
           }}
         />
       ) : type === "numberInput" ? (
-        <input
+        <TextField
+          size="small"
+          id="outlined-number"
+          label={title}
+          type="number"
           onChange={(event) => {
             let newObject = { ...target };
             newObject[targetfield] = event.target.value;
             handler(newObject);
           }}
-          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       ) : type === "textArea" ? (
-        <textarea
+        <TextField
+          id="filled-multiline-static"
+          margin="normal"
           onChange={(event) => {
             let newObject = { ...target };
             newObject[targetfield] = event.target.value;
             handler(newObject);
           }}
+          label={title}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          multiline
+          rows={4}
         />
       ) : (
         <> </>

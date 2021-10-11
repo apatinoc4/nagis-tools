@@ -1,10 +1,33 @@
+@import "../../../../styles/styles.scss";
+
+$fieldtitle: 22px;
+
 .a-radarchart {
   &-container {
-    width: 215px;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -15px;
+  }
+
+  &-title {
+    color: $titleBlue;
+    font-family: "Khand", sans-serif;
+    font-weight: 600;
+    font-size: 50%;
+    position: absolute;
+    right: -30%;
+    top: 8%;
+
+    @include desktop {
+      font-size: $fieldtitle;
+    }
+  }
+}
+
+@media print {
+  .a-radarchart-title {
+    font-size: $fieldtitle;
   }
 }

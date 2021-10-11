@@ -1,50 +1,61 @@
 import React from "react";
 import MaxedStats from "../../atoms/maxed-stats/maxedStats";
-import SectionTitle from "../../atoms/section-title/sectionTitle";
 import "./bodyField.scss";
+import units from "../../../../assets/account_review_tool/images/Units.png";
+import espers from "../../../../assets/account_review_tool/images/Espers.png";
+import vcs from "../../../../assets/account_review_tool/images/VisionCards.png";
+import gear from "../../../../assets/account_review_tool/images/Equipment.png";
 
 const BodyField = (props) => {
-  let { type, accountInfo, maxedStats, activeGuild, amazing, minimum } = props;
+  const { type, accountInfo, maxedStats, activeGuild } = props;
   let keyword;
-  let title;
   let accInfo;
+  let bodyIdx;
+  let imgSrc;
 
   switch (type) {
     case "units":
       keyword = "units";
-      title = "UNITS";
       accInfo = accountInfo.units;
+      bodyIdx = "first";
+      imgSrc = units;
       break;
     case "espers":
       keyword = "espers";
-      title = "ESPERS";
       accInfo = accountInfo.espers;
+      bodyIdx = "second";
+      imgSrc = espers;
       break;
     case "vcs":
       keyword = "vcs";
-      title = "VISION CARDS";
       accInfo = accountInfo.vcs;
+      bodyIdx = "third";
+      imgSrc = vcs;
       break;
     case "gear":
       keyword = "gear";
-      title = "GEAR";
       accInfo = accountInfo.gear;
+      bodyIdx = "fourth";
+      imgSrc = gear;
       break;
     default:
   }
+
   const dlength = accInfo.length;
   const wlength = window.innerWidth;
 
   return (
     <div className="m-bodyfield-container">
-      <SectionTitle iconName={keyword} title={title} />
-      <div className="m-bodyfield-body">
+      <img
+        className={`m-bodyfield-categoryimg--${keyword}`}
+        src={imgSrc}
+        alt="category"
+      />
+      <div className={`m-bodyfield-body ${bodyIdx}`}>
         <MaxedStats
           type={keyword}
           maxedStats={maxedStats}
           activeGuild={activeGuild}
-          amazing={amazing}
-          minimum={minimum}
         />
         <div className="m-bodyfield-description">
           {wlength >= 1024 ? (

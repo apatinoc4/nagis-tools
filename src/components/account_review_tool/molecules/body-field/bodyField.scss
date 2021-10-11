@@ -1,28 +1,76 @@
 @import "../../../../styles/styles.scss";
 
+$imgWidth: 10%;
+$imgX: 62.5%;
+
 .m-bodyfield {
   &-container {
     width: 100%;
     height: 25%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
+
+  &-categoryimg {
+    &--units {
+      width: $imgWidth;
+      right: $imgX;
+      position: absolute;
+      z-index: 99;
+      top: -18%;
+    }
+
+    &--espers {
+      width: $imgWidth;
+      right: $imgX;
+      position: absolute;
+      z-index: 99;
+      top: -8%;
+    }
+
+    &--vcs {
+      width: $imgWidth;
+      right: $imgX;
+      position: absolute;
+      z-index: 99;
+      top: -8%;
+    }
+
+    &--gear {
+      width: $imgWidth;
+      right: $imgX;
+      position: absolute;
+      z-index: 99;
+      top: 2%;
+    }
+  }
+
   &-body {
     display: flex;
-    padding: 0 5%;
+    padding: 0;
     flex-direction: row;
-    margin: 1.2% 0;
-    height: 70%;
-  }
-  &-description {
+    margin: 0;
     height: 100%;
     width: 100%;
-    max-width: 73%;
+    position: absolute;
+    justify-content: space-between;
+  }
+  &-description {
+    height: 80%;
+    width: 100%;
+    max-width: 65%;
     display: flex;
     align-items: center;
     background-color: white;
-    padding: 0 2.5%;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0px 0px 6px 3px rgba(68, 68, 68, 0.3);
+    border: 1px solid $titleBlue;
     box-sizing: border-box;
+    position: absolute;
+    right: 2.5%;
+    padding: 2%;
     p {
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -37,6 +85,17 @@
   }
 }
 
+.second {
+  align-items: center;
+}
+
+.third {
+  align-items: center;
+}
+
+.fourth {
+  align-items: flex-end;
+}
 @media print {
   .m-bodyfield-description {
     font-size: 0.8vh;

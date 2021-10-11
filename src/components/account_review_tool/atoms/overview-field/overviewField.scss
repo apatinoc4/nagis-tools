@@ -1,18 +1,26 @@
 @import "../../../../styles/styles.scss";
 
+$fieldtitle: 22px;
+
 .a-overviewfield {
   &-container {
-    max-width: 100%;
+    max-width: 50%;
+    width: 50%;
     margin-top: 1.5vh;
+    z-index: 99;
+    height: 65%;
+    position: absolute;
+    bottom: 0;
+    padding-left: 2%;
 
     p {
-      color: $dark-gray;
-      font-family: "Poppins", sans-serif;
-      font-weight: 800;
+      color: $titleBlue;
+      font-family: "Khand", sans-serif;
+      font-weight: 600;
       font-size: 1.5vh;
       margin: 1% 0;
       @include desktop {
-        font-size: 2vh;
+        font-size: $fieldtitle;
       }
     }
   }
@@ -38,7 +46,7 @@
 
 @media print {
   .a-overviewfield-container p {
-    font-size: 2vh;
+    font-size: $fieldtitle;
   }
 
   .a-overviewfield-description p {

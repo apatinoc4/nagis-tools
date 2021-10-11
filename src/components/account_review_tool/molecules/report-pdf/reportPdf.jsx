@@ -1,31 +1,27 @@
 import "./reportPdf.scss";
 import React, { forwardRef } from "react";
-// import RadarChart from "../../atoms/radar-chart/radarChart";
+import RadarChart from "../../atoms/radar-chart/radarChart";
 import BodyField from "../body-field/bodyField";
 import AccountInfo from "../account-info/accountInfo";
 import OverviewField from "../../atoms/overview-field/overviewField";
+import towerBg from "../../../../assets/account_review_tool/backgrounds/report-bg.png";
+
 const ReportPdf = forwardRef((props, ref) => {
-  let { reviewer, accountInfo, maxedStats, veredictInfo, activeGuild } = props;
+  const {
+    reviewer,
+    accountInfo,
+    maxedStats,
+    veredictInfo,
+    activeGuild,
+    activeState,
+  } = props;
   const categoryList = ["units", "espers", "vcs", "gear"];
   const overviewList = [
     { title: "Conclusions:", description: veredictInfo.conclusion },
   ];
 
-  // Values for minimum requirements and amazing requirements
+  const wlength = window.innerWidth;
 
-  let amazing = {
-    units: activeGuild === "Krispy-Kreme" ? 15 : 6,
-    espers: activeGuild === "Krispy-Kreme" ? 10 : 5,
-    vcs: activeGuild === "Krispy-Kreme" ? 8 : 3,
-    gear: activeGuild === "Krispy-Kreme" ? 17 : 8,
-  };
-
-  let minimum = {
-    units: activeGuild === "Krispy-Kreme" ? 10 : 3,
-    espers: activeGuild === "Krispy-Kreme" ? 6 : 3,
-    vcs: activeGuild === "Krispy-Kreme" ? 6 : 1,
-    gear: activeGuild === "Krispy-Kreme" ? 10 : 4,
-  };
   return (
     <div ref={ref}>
       <div className="m-reportpdf-container">
@@ -41,8 +37,6 @@ const ReportPdf = forwardRef((props, ref) => {
                 accountInfo={accountInfo}
                 maxedStats={maxedStats}
                 activeGuild={activeGuild}
-                amazing={amazing}
-                minimum={minimum}
               />
             );
           })}
@@ -60,16 +54,32 @@ const ReportPdf = forwardRef((props, ref) => {
                 );
               })}
             </div>
-            {/* <div className="m-reportpdf-overview--radarchart">
-              <RadarChart maxedStats={maxedStats} amazing={amazing} />
-            </div> */}
+            <div className="m-reportpdf-overview--radarchart">
+              {wlength <= 1024 && activeState.preview ? (
+                <RadarChart maxedStats={maxedStats} />
+              ) : wlength >= 1024 ? (
+                <RadarChart maxedStats={maxedStats} />
+              ) : (
+                <></>
+              )}
+              <div className="m-reportpdf-reviewer">
+                <p className="m-reportpdf-reviewer--title">Reviewed by:</p>
+                <p className="m-reportpdf-reviewer--info">
+                  {reviewer.reviewer}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <div
           className={`m-reportpdf-boxbackground ${
             activeGuild === "Krispy-Kreme" ? "kk" : "dunkin"
           }`}
-        ></div>
+        >
+          <div className="m-reportpdf-boxbackground--topgd"></div>
+          <img src={towerBg} alt="towerBG" />
+          <div className="m-reportpdf-boxbackground--bottomgd"></div>
+        </div>
       </div>
     </div>
   );

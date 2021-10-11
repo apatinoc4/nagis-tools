@@ -7,6 +7,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import MainIndex from "../../index_homepage/pages/main-index/mainIndex";
 import ReportTool from "../../account_review_tool/pages/reportTool";
 import UnitPlanner from "../../unit_planner/pages/unit-planner/unit-planner";
+import ReportProvider from "../../account_review_tool/context/reportToolProvider";
 
 library.add(fab);
 
@@ -17,7 +18,9 @@ const PageContainer = () => {
         <Header />
         <Switch>
           <Route path="/" exact component={MainIndex} />
-          <Route path="/review_tool" exact component={ReportTool} />
+          <ReportProvider>
+            <Route path="/review_tool" exact component={ReportTool} />
+          </ReportProvider>
           <Route path="/unit_planner" exact component={UnitPlanner} />
         </Switch>
         <Footer />

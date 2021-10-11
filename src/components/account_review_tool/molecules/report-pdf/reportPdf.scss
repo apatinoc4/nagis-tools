@@ -5,6 +5,10 @@
 $width: 90vw;
 $heigth: 1.29 * $width;
 
+$headerHeight: 10%;
+$bodyHeight: 65%;
+$footerHeight: 100% - $headerHeight - $bodyHeight;
+
 .m-reportpdf {
   &-container {
     background-color: $coconut;
@@ -16,32 +20,79 @@ $heigth: 1.29 * $width;
 
     @include desktop {
       width: 216mm;
-      height: 279mm;
+      height: 279.4mm;
     }
   }
   &-boxbackground {
-    width: 35%;
+    width: 53%;
     height: 100%;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     z-index: -1;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: column;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: -110%;
+      height: 100%;
+    }
+    &--topgd {
+      width: 100%;
+      background: rgba(0, 0, 0);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 48%,
+        rgba(0, 0, 0, 1) 69%,
+        rgba(99, 33, 33, 0) 100%
+      );
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      height: 10%;
+      z-index: 1;
+    }
+    &--bottomgd {
+      width: 100%;
+      background: rgb(249, 249, 249);
+      background: linear-gradient(
+        0deg,
+        rgba(249, 249, 249, 1) 78%,
+        rgba(249, 249, 249, 1) 87%,
+        rgba(99, 33, 33, 0) 100%
+      );
+      height: 10%;
+      position: absolute;
+      bottom: 0;
+      height: 18%;
+    }
   }
   &-header {
     width: 100%;
-    height: 5%;
+    height: $headerHeight;
     margin: 0;
     display: flex;
-
+    // background-color: aqua;
+    position: absolute;
+    top: 0;
     z-index: 5;
-    padding-left: 2%;
+    padding: 0;
     align-items: center;
   }
 
   &-body {
-    position: relative;
-
-    height: 75%;
+    position: absolute;
+    top: $headerHeight;
+    height: $bodyHeight;
+    width: 100%;
+    // background-color: brown;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   &-footer {
@@ -50,22 +101,53 @@ $heigth: 1.29 * $width;
   &-overview {
     display: flex;
     flex-direction: row;
+    position: absolute;
+    top: $headerHeight + $bodyHeight;
+    height: $footerHeight;
+    // background-color: yellow;
+    width: 100%;
 
     &--radarchart {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      width: 35%;
-      height: 5%;
+      width: 50%;
+      height: 100%;
+      // background-color: blue;
+      position: relative;
     }
 
     &--veredict {
       display: flex;
       flex-direction: column;
-      width: 65%;
-      max-width: 65%;
-      justify-content: center;
-      margin-left: 5%;
+      width: 50%;
+      max-width: 50%;
+    }
+  }
+
+  &-reviewer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    font-family: "Khand", sans-serif;
+    font-size: 50%;
+
+    @include desktop {
+      font-size: 120%;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &--title {
+      font-weight: 600;
+      color: $titleBlue;
+    }
+    &--info {
+      font-weight: 200;
     }
   }
 }
@@ -74,5 +156,9 @@ $heigth: 1.29 * $width;
   .m-reportpdf-container {
     width: 216mm;
     height: 279mm;
+  }
+
+  .m-reportpdf-reviewer {
+    font-size: 120%;
   }
 }

@@ -35,10 +35,10 @@ $fieldtitle: 22px;
       color: $dark-gray;
       font-family: "Poppins", sans-serif;
       font-weight: 400 !important;
-      font-size: 0.5vh;
+      font-size: clamp(4px, 1vw, 10px);
 
       @include desktop {
-        font-size: 1vh;
+        font-size: 10px;
       }
     }
   }
@@ -50,6 +50,6 @@ $fieldtitle: 22px;
   }
 
   .a-overviewfield-description p {
-    font-size: 1vh;
+    font-size: 10px;
   }
 }

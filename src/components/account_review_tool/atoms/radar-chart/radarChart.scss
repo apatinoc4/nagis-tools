@@ -15,7 +15,7 @@ $fieldtitle: 22px;
     color: $titleBlue;
     font-family: "Khand", sans-serif;
     font-weight: 600;
-    font-size: 50%;
+    font-size: clamp(8px, 2.2vw, $fieldtitle);
     position: absolute;
     right: -30%;
     top: 8%;

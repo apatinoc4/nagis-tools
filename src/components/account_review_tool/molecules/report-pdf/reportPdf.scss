@@ -132,10 +132,10 @@ $footerHeight: 100% - $headerHeight - $bodyHeight;
     bottom: 5%;
     right: 5%;
     font-family: "Khand", sans-serif;
-    font-size: 50%;
+    font-size: clamp(8px, 3vw, 22px);
 
     @include desktop {
-      font-size: 120%;
+      font-size: 22px;
     }
 
     p {
@@ -159,6 +159,6 @@ $footerHeight: 100% - $headerHeight - $bodyHeight;
   }
 
   .m-reportpdf-reviewer {
-    font-size: 120%;
+    font-size: 22px;
   }
 }

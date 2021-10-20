@@ -18,6 +18,17 @@
     z-index: 1;
     padding: 30px;
 
+    a {
+      text-decoration: none;
+      color: $highlight;
+      font-size: 18px !important;
+    }
+
+    a:hover {
+      color: $containerBlue !important;
+      font-size: 20px !important;
+    }
+
     p,
     h1 {
       margin: 0;

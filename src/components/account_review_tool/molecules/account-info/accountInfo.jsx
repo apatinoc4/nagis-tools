@@ -2,7 +2,7 @@ import React from "react";
 import "./accountInfo.scss";
 
 const AccountInfo = (props) => {
-  let { accountInfo, activeGuild } = props;
+  const { accountInfo, activeGuild } = props;
   return (
     <div className="m-accountinfo-container">
       <div className="m-accountinfo-report_title">

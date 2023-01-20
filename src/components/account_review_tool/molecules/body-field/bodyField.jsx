@@ -8,38 +8,35 @@ import gear from "../../../../assets/account_review_tool/images/Equipment.png";
 
 const BodyField = (props) => {
   const { type, accountInfo, maxedStats, activeGuild } = props;
-  let keyword;
-  let accInfo;
-  let bodyIdx;
-  let imgSrc;
 
-  switch (type) {
-    case "units":
-      keyword = "units";
-      accInfo = accountInfo.units;
-      bodyIdx = "first";
-      imgSrc = units;
-      break;
-    case "espers":
-      keyword = "espers";
-      accInfo = accountInfo.espers;
-      bodyIdx = "second";
-      imgSrc = espers;
-      break;
-    case "vcs":
-      keyword = "vcs";
-      accInfo = accountInfo.vcs;
-      bodyIdx = "third";
-      imgSrc = vcs;
-      break;
-    case "gear":
-      keyword = "gear";
-      accInfo = accountInfo.gear;
-      bodyIdx = "fourth";
-      imgSrc = gear;
-      break;
-    default:
-  }
+  const RESOURCE_INFO = {
+    units: {
+      accInfo: accountInfo.units,
+      bodyIdx: "first",
+      imgSrc: units,
+      keyword: "units",
+    },
+    espers: {
+      accInfo: accountInfo.espers,
+      bodyIdx: "second",
+      keyword: "espers",
+      imgSrc: espers,
+    },
+    vcs: {
+      keyword: "vcs",
+      accInfo: accountInfo.vcs,
+      bodyIdx: "third",
+      imgSrc: vcs,
+    },
+    gear: {
+      keyword: "gear",
+      accInfo: accountInfo.gear,
+      bodyIdx: "fourth",
+      imgSrc: gear,
+    },
+  };
+
+  const { accInfo, bodyIdx, imgSrc, keyword } = RESOURCE_INFO[type];
 
   const dlength = accInfo.length;
   const wlength = window.innerWidth;

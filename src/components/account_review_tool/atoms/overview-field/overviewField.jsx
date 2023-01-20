@@ -2,7 +2,7 @@ import React from "react";
 import "./overviewField.scss";
 
 const OverviewField = (props) => {
-  let { title, description } = props;
+  const { title, description } = props;
   return (
     <div className="a-overviewfield-container">
       <p>{title}</p>

@@ -20,8 +20,8 @@ const PageContainer = () => {
           <Route path="/" exact component={MainIndex} />
           <ReportProvider>
             <Route path="/review_tool" exact component={ReportTool} />
+            <Route path="/unit_planner" exact component={UnitPlanner} />
           </ReportProvider>
-          <Route path="/unit_planner" exact component={UnitPlanner} />
         </Switch>
         <Footer />
       </Router>

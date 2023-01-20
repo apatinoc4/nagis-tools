@@ -12,7 +12,7 @@ const SectionTitle = (props) => {
             require(`../../../../assets/account_review_tool/images/${iconName}-white.svg`)
               .default
           }
-          alt="espericon"
+          alt={iconName}
         />
         <div className="a-sectiontitle-contents--sidebar"></div>
         <p>{title}</p>

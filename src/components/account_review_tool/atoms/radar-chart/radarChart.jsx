@@ -3,24 +3,22 @@ import { ReportContext } from "../../context/reportToolProvider";
 import { Radar } from "react-chartjs-2";
 import "./radarChart.scss";
 
+const calculatePercentage = (current, expected) => {
+  if (current > expected) {
+    return 100;
+  } else {
+    return (100 * current) / expected;
+  }
+};
+
 const RadarChart = (props) => {
   const { maxedStats } = props;
-  const titleBlue = "#243e66";
-  const percentageCalculator = (current, expected) => {
-    if (current > expected) {
-      return 100;
-    } else {
-      return (100 * current) / expected;
-    }
-  };
   const { amazing } = useContext(ReportContext);
-  const maxedUnits = percentageCalculator(maxedStats.maxUnits, amazing.units);
-  const maxedEspers = percentageCalculator(
-    maxedStats.maxEspers,
-    amazing.espers
-  );
-  const maxedVcs = percentageCalculator(maxedStats.maxVcs, amazing.vcs);
-  const maxedGear = percentageCalculator(maxedStats.maxGear, amazing.gear);
+  const titleBlue = "#243e66";
+  const maxedUnits = calculatePercentage(maxedStats.maxUnits, amazing.units);
+  const maxedEspers = calculatePercentage(maxedStats.maxEspers, amazing.espers);
+  const maxedVcs = calculatePercentage(maxedStats.maxVcs, amazing.vcs);
+  const maxedGear = calculatePercentage(maxedStats.maxGear, amazing.gear);
   const wlength = window.innerWidth;
   const data = {
     labels: ["Units", "Espers", "Vision Cards", "Gear"],

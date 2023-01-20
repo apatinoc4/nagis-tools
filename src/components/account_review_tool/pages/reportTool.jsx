@@ -95,7 +95,7 @@ const ReportTool = () => {
           Nagi's Account Review Tool
         </h1>
         <p>
-          with amazing designs from{" "}
+          with amazing designs from
           <a href="https://www.linkedin.com/in/jeremy-chasey/"> @Northbank</a>
         </p>
         <p className="p-reportTool-header--slogan">

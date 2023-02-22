@@ -1,156 +1,131 @@
-import React from "react";
-import InputField from "../../atoms/input-field/inputField";
+import InputField from "../../atoms/input-field/inputField.tsx";
+
 import "./inputFields.scss";
 
-const InputFields = (props) => {
-  const {
-    reviewer,
-    accountInfo,
-    maxedStats,
-    veredictInfo,
-    setReviewer,
-    setveredictInfo,
-    setAccountInfo,
-    setMaxedStats,
-  } = props;
-
-  const accountInfoList = [
+const INPUT_FIELDS_PARAMETERS = {
+  accountInfo: [
     {
       title: "Name",
       type: "textInput",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "accName",
+      targetField: "accName",
       style: "accInfo",
     },
     {
       title: "Rank",
       type: "numberInput",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "accLevel",
+      targetField: "accLevel",
       style: "accInfo",
     },
     {
       title: "Reviewer",
       type: "textInput",
-      handler: setReviewer,
-      target: reviewer,
-      targetfield: "reviewer",
+      targetField: "reviewer",
       style: "accInfo",
     },
-  ];
-  const accountBodyList = [
+  ],
+  accountBody: [
     {
       title: "Maxed UR",
       type: "numberInput",
-      handler: setMaxedStats,
-      target: maxedStats,
-      targetfield: "maxUnits",
+      targetField: "maxUnits",
     },
     {
       title: "Units",
       type: "textArea",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "units",
+      targetField: "units",
     },
     {
       title: "Maxed Espers",
       type: "numberInput",
-      handler: setMaxedStats,
-      target: maxedStats,
-      targetfield: "maxEspers",
+      targetField: "maxEspers",
     },
     {
       title: "Espers",
       type: "textArea",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "espers",
+      targetField: "espers",
     },
     {
       title: "Maxed Vision Cards",
       type: "numberInput",
-      handler: setMaxedStats,
-      target: maxedStats,
-      targetfield: "maxVcs",
+      targetField: "maxVcs",
     },
     {
       title: "Vision Cards",
       type: "textArea",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "vcs",
+      targetField: "vcs",
     },
     {
       title: "+5 Gear",
       type: "numberInput",
-      handler: setMaxedStats,
-      target: maxedStats,
-      targetfield: "maxGear",
+      targetField: "maxGear",
     },
     {
       title: "Gear",
       type: "textArea",
-      handler: setAccountInfo,
-      target: accountInfo,
-      targetfield: "gear",
+      targetField: "gear",
     },
-  ];
-  const veredictList = [
+  ],
+  accountVeredict: [
     {
       title: "Conclusions",
       type: "textArea",
-      handler: setveredictInfo,
-      target: veredictInfo,
-      targetfield: "conclusion",
+      targetField: "conclusion",
     },
-  ];
+  ],
+};
+
+const getInputParameters = (accountParameters, parameter) => {
+  if (accountParameters[parameter]) return accountParameters[parameter];
+};
+
+const InputFields = () => {
   return (
     <div className="m-inputfields-container">
       <div className="m-inputfields-accountinfo">
-        {accountInfoList.map((elem, i) => {
-          return (
-            <InputField
-              key={i}
-              title={elem.title}
-              type={elem.type}
-              handler={elem.handler}
-              target={elem.target}
-              targetfield={elem.targetfield}
-              style={elem.style}
-            />
-          );
-        })}
+        {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountInfo").map(
+          (input, index) => {
+            const { style, targetField, title, type } = input;
+            return (
+              <InputField
+                key={index}
+                title={title}
+                type={type}
+                targetField={targetField}
+                style={style}
+              />
+            );
+          }
+        )}
       </div>
       <div className="m-inputfields-body">
-        {accountBodyList.map((elem, i) => {
-          return (
-            <InputField
-              key={i}
-              title={elem.title}
-              type={elem.type}
-              handler={elem.handler}
-              target={elem.target}
-              targetfield={elem.targetfield}
-            />
-          );
-        })}
+        {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountBody").map(
+          (input, index) => {
+            const { targetField, title, type } = input;
+            return (
+              <InputField
+                key={index}
+                title={title}
+                type={type}
+                targetField={targetField}
+              />
+            );
+          }
+        )}
       </div>
       <div className="m-inputfields-veredict">
-        {veredictList.map((elem, i) => {
-          return (
-            <InputField
-              key={i}
-              title={elem.title}
-              type={elem.type}
-              handler={elem.handler}
-              target={elem.target}
-              targetfield={elem.targetfield}
-            />
-          );
-        })}
+        {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountVeredict").map(
+          (input, index) => {
+            const { targetField, title, type } = input;
+            return (
+              <InputField
+                key={index}
+                title={title}
+                type={type}
+                targetField={targetField}
+              />
+            );
+          }
+        )}
       </div>
     </div>
   );

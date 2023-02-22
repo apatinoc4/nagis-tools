@@ -1,4 +1,3 @@
-import React from "react";
 import "./overviewField.scss";
 
 const OverviewField = (props) => {

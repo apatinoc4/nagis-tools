@@ -1,24 +1,22 @@
 import "./reportPdf.scss";
-import React, { forwardRef } from "react";
-import RadarChart from "../../atoms/radar-chart/radarChart";
-import BodyField from "../body-field/bodyField";
+import { forwardRef, useContext } from "react";
 import AccountInfo from "../account-info/accountInfo";
+import BodyField from "../body-field/bodyField";
 import OverviewField from "../../atoms/overview-field/overviewField";
+import RadarChart from "../../atoms/radar-chart/radarChart";
+import { ReportContext } from "../../context/reportToolProvider";
 import towerBg from "../../../../assets/account_review_tool/backgrounds/report-bg.png";
 
+const BODY_FIELDS = [
+  { name: "units", maxedStat: "maxUnits" },
+  { name: "espers", maxedStat: "maxEspers" },
+  { name: "vcs", maxedStat: "maxVcs" },
+  { name: "gear", maxedStat: "maxGear" },
+];
+
 const ReportPdf = forwardRef((props, ref) => {
-  const {
-    reviewer,
-    accountInfo,
-    maxedStats,
-    veredictInfo,
-    activeGuild,
-    activeState,
-  } = props;
-  const categoryList = ["units", "espers", "vcs", "gear"];
-  const overviewList = [
-    { title: "Conclusions:", description: veredictInfo.conclusion },
-  ];
+  const { maxedStats, activeGuild, activeState } = props;
+  const { reviewInfo } = useContext(ReportContext);
 
   const wlength = window.innerWidth;
 
@@ -26,16 +24,18 @@ const ReportPdf = forwardRef((props, ref) => {
     <div ref={ref}>
       <div className="m-reportpdf-container">
         <div className="m-reportpdf-header">
-          <AccountInfo accountInfo={accountInfo} activeGuild={activeGuild} />
+          <AccountInfo accountInfo={reviewInfo} activeGuild={activeGuild} />
         </div>
         <div className="m-reportpdf-body">
-          {categoryList.map((elem, i) => {
+          {BODY_FIELDS.map((category, index) => {
+            const { name, maxedStat } = category;
             return (
               <BodyField
-                key={i}
-                type={elem}
-                accountInfo={accountInfo}
-                maxedStats={maxedStats}
+                key={index}
+                text={reviewInfo[name]}
+                type={name}
+                maxedStat={reviewInfo[maxedStat]}
+                accountInfo={reviewInfo}
                 activeGuild={activeGuild}
               />
             );
@@ -44,28 +44,23 @@ const ReportPdf = forwardRef((props, ref) => {
         <div className="m-reportpdf-footer">
           <div className="m-reportpdf-overview">
             <div className="m-reportpdf-overview--veredict">
-              {overviewList.map((elem, i) => {
-                return (
-                  <OverviewField
-                    title={elem.title}
-                    description={elem.description}
-                    key={i}
-                  />
-                );
-              })}
+              <OverviewField
+                title="Conclusions:"
+                description={reviewInfo.conclusion}
+              />
             </div>
             <div className="m-reportpdf-overview--radarchart">
               {wlength <= 1024 && activeState.preview ? (
-                <RadarChart maxedStats={maxedStats} />
+                <RadarChart maxedStats={reviewInfo} />
               ) : wlength >= 1024 ? (
-                <RadarChart maxedStats={maxedStats} />
+                <RadarChart maxedStats={reviewInfo} />
               ) : (
                 <></>
               )}
               <div className="m-reportpdf-reviewer">
                 <p className="m-reportpdf-reviewer--title">Reviewed by:</p>
                 <p className="m-reportpdf-reviewer--info">
-                  {reviewer.reviewer}
+                  {reviewInfo.reviewer}
                 </p>
               </div>
             </div>

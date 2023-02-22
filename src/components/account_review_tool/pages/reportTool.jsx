@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { ReportContext } from "../context/reportToolProvider";
 import ReactToPrint from "react-to-print";
 import "./reportTool.scss";
@@ -6,28 +6,11 @@ import InputFields from "../molecules/input-fields/inputFields";
 import ReportPdf from "../molecules/report-pdf/reportPdf";
 import Button from "@mui/material/Button";
 
+const GUILD_LIST = ["Krispy-Kreme", "Dunkin"];
+
 const ReportTool = () => {
-  const guildList = ["Krispy-Kreme", "Dunkin"];
   const { activeGuild, setActiveGuild } = useContext(ReportContext);
-  const [reviewer, setReviewer] = useState({ reviwer: "" });
   const [activeState, setActiveState] = useState({});
-  const [accountInfo, setAccountInfo] = useState({
-    accName: "",
-    accLevel: 0,
-    units: "",
-    espers: "",
-    vcs: "",
-    gear: "",
-  });
-  const [maxedStats, setMaxedStats] = useState({
-    maxUnits: 0,
-    maxEspers: 0,
-    maxVcs: 0,
-    maxGear: 0,
-  });
-  const [veredictInfo, setveredictInfo] = useState({
-    conclusion: "",
-  });
 
   const guildHandler = (event) => {
     setActiveGuild(event.target.value);
@@ -104,7 +87,7 @@ const ReportTool = () => {
         <div className="p-reportTool-header--guildselector">
           <p>Select a guild: </p>
           <select onChange={guildHandler}>
-            {guildList.map((elem, i) => {
+            {GUILD_LIST.map((elem, i) => {
               return (
                 <option value={elem} key={i}>
                   {elem}
@@ -121,7 +104,7 @@ const ReportTool = () => {
         }`}
       >
         <div className="p-reportTool-previewbutton--innerdiv">
-          {activeState.preview === false ? (
+          {!activeState.preview ? (
             <>
               <p>
                 Preview <span>PDF</span>
@@ -141,16 +124,7 @@ const ReportTool = () => {
             activeState.inputs === false ? "hidden" : ""
           }`}
         >
-          <InputFields
-            reviewer={reviewer}
-            accountInfo={accountInfo}
-            maxedStats={maxedStats}
-            veredictInfo={veredictInfo}
-            setReviewer={setReviewer}
-            setveredictInfo={setveredictInfo}
-            setAccountInfo={setAccountInfo}
-            setMaxedStats={setMaxedStats}
-          />
+          <InputFields />
           <ReactToPrint
             trigger={() => (
               <Button onClick={() => console.log(ref.current)}>
@@ -170,13 +144,9 @@ const ReportTool = () => {
             slightly.
           </p>
           <ReportPdf
-            ref={ref}
-            reviewer={reviewer}
-            accountInfo={accountInfo}
-            maxedStats={maxedStats}
-            veredictInfo={veredictInfo}
             activeGuild={activeGuild}
             activeState={activeState}
+            ref={ref}
           />
         </div>
       </div>

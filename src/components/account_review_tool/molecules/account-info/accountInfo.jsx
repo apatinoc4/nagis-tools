@@ -1,4 +1,3 @@
-import React from "react";
 import "./accountInfo.scss";
 
 const AccountInfo = (props) => {

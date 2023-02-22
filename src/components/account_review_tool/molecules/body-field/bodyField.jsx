@@ -1,4 +1,3 @@
-import React from "react";
 import MaxedStats from "../../atoms/maxed-stats/maxedStats";
 import "./bodyField.scss";
 import units from "../../../../assets/account_review_tool/images/Units.png";
@@ -6,39 +5,34 @@ import espers from "../../../../assets/account_review_tool/images/Espers.png";
 import vcs from "../../../../assets/account_review_tool/images/VisionCards.png";
 import gear from "../../../../assets/account_review_tool/images/Equipment.png";
 
+const RESOURCE_INFO = {
+  units: {
+    bodyIdx: "first",
+    imgSrc: units,
+    keyword: "units",
+  },
+  espers: {
+    bodyIdx: "second",
+    keyword: "espers",
+    imgSrc: espers,
+  },
+  vcs: {
+    keyword: "vcs",
+    bodyIdx: "third",
+    imgSrc: vcs,
+  },
+  gear: {
+    keyword: "gear",
+    bodyIdx: "fourth",
+    imgSrc: gear,
+  },
+};
+
 const BodyField = (props) => {
-  const { type, accountInfo, maxedStats, activeGuild } = props;
+  const { type, maxedStat, activeGuild, text } = props;
+  const { bodyIdx, imgSrc, keyword } = RESOURCE_INFO[type];
 
-  const RESOURCE_INFO = {
-    units: {
-      accInfo: accountInfo.units,
-      bodyIdx: "first",
-      imgSrc: units,
-      keyword: "units",
-    },
-    espers: {
-      accInfo: accountInfo.espers,
-      bodyIdx: "second",
-      keyword: "espers",
-      imgSrc: espers,
-    },
-    vcs: {
-      keyword: "vcs",
-      accInfo: accountInfo.vcs,
-      bodyIdx: "third",
-      imgSrc: vcs,
-    },
-    gear: {
-      keyword: "gear",
-      accInfo: accountInfo.gear,
-      bodyIdx: "fourth",
-      imgSrc: gear,
-    },
-  };
-
-  const { accInfo, bodyIdx, imgSrc, keyword } = RESOURCE_INFO[type];
-
-  const dlength = accInfo.length;
+  const dlength = text ? text.length : 0;
   const wlength = window.innerWidth;
 
   return (
@@ -51,7 +45,7 @@ const BodyField = (props) => {
       <div className={`m-bodyfield-body ${bodyIdx}`}>
         <MaxedStats
           type={keyword}
-          maxedStats={maxedStats}
+          maxedStat={maxedStat}
           activeGuild={activeGuild}
         />
         <div className="m-bodyfield-description">
@@ -64,7 +58,7 @@ const BodyField = (props) => {
                     : { fontSize: 7 + "px" }
                 }
               >
-                {accInfo}
+                {text}
               </p>
             </>
           ) : (
@@ -76,7 +70,7 @@ const BodyField = (props) => {
                     : { fontSize: 0.5 + "vh" }
                 }
               >
-                {accInfo}
+                {text}
               </p>
             </>
           )}

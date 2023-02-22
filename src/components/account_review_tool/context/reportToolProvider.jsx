@@ -4,6 +4,20 @@ export const ReportContext = createContext();
 
 const ReportProvider = ({ children }) => {
   const [activeGuild, setActiveGuild] = useState("Krispy-Kreme");
+  const [reviewInfo, setReviewInfo] = useState({
+    reviwer: "",
+    accName: "",
+    accLevel: 0,
+    maxUnits: 0,
+    maxEspers: 0,
+    maxVcs: 0,
+    maxGear: 0,
+    units: "",
+    espers: "",
+    vcs: "",
+    gear: "",
+    conclusion: "",
+  });
 
   // Values for minimum requirements and amazing requirements
 
@@ -22,7 +36,14 @@ const ReportProvider = ({ children }) => {
   };
   return (
     <ReportContext.Provider
-      value={{ activeGuild, setActiveGuild, amazing, minimum }}
+      value={{
+        activeGuild,
+        amazing,
+        minimum,
+        reviewInfo,
+        setActiveGuild,
+        setReviewInfo,
+      }}
     >
       {children}
     </ReportContext.Provider>

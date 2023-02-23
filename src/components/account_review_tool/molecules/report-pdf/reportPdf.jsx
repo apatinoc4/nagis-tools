@@ -15,7 +15,7 @@ const BODY_FIELDS = [
 ];
 
 const ReportPdf = forwardRef((props, ref) => {
-  const { maxedStats, activeGuild, activeState } = props;
+  const { activeGuild, activeState } = props;
   const { reviewInfo } = useContext(ReportContext);
 
   const wlength = window.innerWidth;

@@ -2,34 +2,51 @@ import React, { useContext } from "react";
 import { ReportContext } from "../../context/reportToolProvider";
 import "./maxedStats.scss";
 
-const MaxedStats = (props) => {
+interface MaxedStatsProps {
+  maxedStat: number;
+  type: string;
+}
+
+type RatingInfo = {
+  [key: string]: {
+    amazingStats: number;
+    category: string;
+    minimumStats: number;
+  };
+};
+
+const MaxedStats = (props: MaxedStatsProps) => {
   const { maxedStat, type } = props;
   const { amazing, minimum } = useContext(ReportContext);
 
   const RATING_INFO = {
     units: {
       amazingStats: amazing.units,
-      minimumStats: minimum.units,
       category: "Ex Units",
+      minimumStats: minimum.units,
     },
     espers: {
       amazingStats: amazing.espers,
-      minimumStats: minimum.espers,
       category: "Maxed",
+      minimumStats: minimum.espers,
     },
     vcs: {
       amazingStats: amazing.vcs,
-      minimumStats: minimum.vcs,
       category: "Maxed",
+      minimumStats: minimum.vcs,
     },
     gear: {
       amazingStats: amazing.gear,
-      minimumStats: minimum.gear,
       category: "+5 Gear",
+      minimumStats: minimum.gear,
     },
   };
 
-  const rateMaxedResources = (maxedStat, ratingInfo, resourceType) => {
+  const rateMaxedResources = (
+    maxedStat: number,
+    ratingInfo: RatingInfo,
+    resourceType: string
+  ) => {
     const { category, amazingStats, minimumStats } = ratingInfo[resourceType];
     const ratingVeredict =
       maxedStat > amazingStats
@@ -50,7 +67,7 @@ const MaxedStats = (props) => {
   );
 
   return (
-    <div className={`a-maxedstats-container`}>
+    <div className="a-maxedstats-container">
       <p className="a-maxedstats-amount">{maxedStat}</p>
       <p className="a-maxedstats-category">{category}</p>
       <p className="a-maxedstats-veredict">{ratingVeredict}</p>

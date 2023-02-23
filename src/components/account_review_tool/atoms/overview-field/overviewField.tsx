@@ -1,6 +1,11 @@
 import "./overviewField.scss";
 
-const OverviewField = (props) => {
+interface OverviewFieldProps {
+  description: string;
+  title: string;
+}
+
+const OverviewField = (props: OverviewFieldProps) => {
   const { title, description } = props;
   return (
     <div className="a-overviewfield-container">

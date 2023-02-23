@@ -1,7 +1,11 @@
-import React from "react";
 import "./sectionTitle.scss";
 
-const SectionTitle = (props) => {
+interface SectionTitleProps {
+  iconName: string;
+  title: string;
+}
+
+const SectionTitle = (props: SectionTitleProps) => {
   let { iconName, title } = props;
   return (
     <div className="a-sectiontitle-container">
@@ -14,7 +18,6 @@ const SectionTitle = (props) => {
           }
           alt={iconName}
         />
-        <div className="a-sectiontitle-contents--sidebar"></div>
         <p>{title}</p>
       </div>
     </div>

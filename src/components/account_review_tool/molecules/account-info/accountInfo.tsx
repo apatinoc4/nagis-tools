@@ -1,6 +1,26 @@
 import "./accountInfo.scss";
 
-const AccountInfo = (props) => {
+type ReviewInfo = {
+  reviwer: string;
+  accName: string;
+  accLevel: number;
+  maxUnits: number;
+  maxEspers: number;
+  maxVcs: number;
+  maxGear: number;
+  units: string;
+  espers: string;
+  vcs: string;
+  gear: string;
+  conclusion: string;
+};
+
+interface AccountInfoProps {
+  accountInfo: ReviewInfo;
+  activeGuild: string;
+}
+
+const AccountInfo = (props: AccountInfoProps) => {
   const { accountInfo, activeGuild } = props;
   return (
     <div className="m-accountinfo-container">

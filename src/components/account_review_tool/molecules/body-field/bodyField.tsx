@@ -5,7 +5,20 @@ import espers from "../../../../assets/account_review_tool/images/Espers.png";
 import vcs from "../../../../assets/account_review_tool/images/VisionCards.png";
 import gear from "../../../../assets/account_review_tool/images/Equipment.png";
 
-const RESOURCE_INFO = {
+type Resource = {
+  bodyIdx: string;
+  imgSrc: string;
+  keyword: string;
+};
+interface BodyFieldProps {
+  type: string;
+  maxedStat: number;
+  text: string;
+}
+
+const RESOURCE_INFO: {
+  [key: string]: Resource;
+} = {
   units: {
     bodyIdx: "first",
     imgSrc: units,
@@ -28,8 +41,8 @@ const RESOURCE_INFO = {
   },
 };
 
-const BodyField = (props) => {
-  const { type, maxedStat, activeGuild, text } = props;
+const BodyField = (props: BodyFieldProps) => {
+  const { maxedStat, text, type } = props;
   const { bodyIdx, imgSrc, keyword } = RESOURCE_INFO[type];
 
   const dlength = text ? text.length : 0;
@@ -43,11 +56,7 @@ const BodyField = (props) => {
         alt="category"
       />
       <div className={`m-bodyfield-body ${bodyIdx}`}>
-        <MaxedStats
-          type={keyword}
-          maxedStat={maxedStat}
-          activeGuild={activeGuild}
-        />
+        <MaxedStats type={keyword} maxedStat={maxedStat} />
         <div className="m-bodyfield-description">
           {wlength >= 1024 ? (
             <>

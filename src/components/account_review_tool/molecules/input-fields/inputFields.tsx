@@ -1,81 +1,97 @@
-import InputField from "../../atoms/input-field/inputField.tsx";
+import InputField from "../../atoms/input-field/inputField";
 
 import "./inputFields.scss";
 
-const INPUT_FIELDS_PARAMETERS = {
+type InputFieldParameters = {
+  [key: string]: {
+    targetField: string;
+    title: string;
+    type: "numberInput" | "textArea" | "textInput";
+    style?: string;
+  }[];
+};
+
+const INPUT_FIELDS_PARAMETERS: InputFieldParameters = {
   accountInfo: [
     {
+      targetField: "accName",
       title: "Name",
       type: "textInput",
-      targetField: "accName",
       style: "accInfo",
     },
     {
+      targetField: "accLevel",
       title: "Rank",
       type: "numberInput",
-      targetField: "accLevel",
       style: "accInfo",
     },
     {
+      targetField: "reviewer",
       title: "Reviewer",
       type: "textInput",
-      targetField: "reviewer",
       style: "accInfo",
     },
   ],
   accountBody: [
     {
+      targetField: "maxUnits",
       title: "Maxed UR",
       type: "numberInput",
-      targetField: "maxUnits",
     },
     {
+      targetField: "units",
       title: "Units",
       type: "textArea",
-      targetField: "units",
     },
     {
+      targetField: "maxEspers",
       title: "Maxed Espers",
       type: "numberInput",
-      targetField: "maxEspers",
     },
     {
+      targetField: "espers",
       title: "Espers",
       type: "textArea",
-      targetField: "espers",
     },
     {
+      targetField: "maxVcs",
       title: "Maxed Vision Cards",
       type: "numberInput",
-      targetField: "maxVcs",
     },
     {
+      targetField: "vcs",
       title: "Vision Cards",
       type: "textArea",
-      targetField: "vcs",
     },
     {
+      targetField: "maxGear",
       title: "+5 Gear",
       type: "numberInput",
-      targetField: "maxGear",
     },
     {
+      targetField: "gear",
       title: "Gear",
       type: "textArea",
-      targetField: "gear",
     },
   ],
   accountVeredict: [
     {
+      targetField: "conclusion",
       title: "Conclusions",
       type: "textArea",
-      targetField: "conclusion",
     },
   ],
 };
 
-const getInputParameters = (accountParameters, parameter) => {
-  if (accountParameters[parameter]) return accountParameters[parameter];
+const getInputParameters = (
+  accountParameters: InputFieldParameters,
+  parameter: string
+) => {
+  const parameters = accountParameters[parameter];
+  if (parameters !== undefined) {
+    return parameters;
+  }
+  return [];
 };
 
 const InputFields = () => {

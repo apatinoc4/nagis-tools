@@ -1,19 +1,5 @@
 import "./accountInfo.scss";
-
-type ReviewInfo = {
-  reviwer: string;
-  accName: string;
-  accLevel: number;
-  maxUnits: number;
-  maxEspers: number;
-  maxVcs: number;
-  maxGear: number;
-  units: string;
-  espers: string;
-  vcs: string;
-  gear: string;
-  conclusion: string;
-};
+import { ReviewInfo } from "../../types/types";
 
 interface AccountInfoProps {
   accountInfo: ReviewInfo;

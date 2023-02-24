@@ -1,10 +1,11 @@
 import { ChangeEvent, useContext } from "react";
 import TextField from "@mui/material/TextField";
 import { ReportContext } from "../../context/reportToolProvider";
+import { ReviewInfo } from "../../types/types";
 import "./inputField.scss";
 
 interface InputFieldProps {
-  targetField: string;
+  targetField: keyof ReviewInfo;
   title: string;
   type: "numberInput" | "textArea" | "textInput";
   style?: string;
@@ -14,14 +15,24 @@ const InputField = (props: InputFieldProps) => {
   const { title, type, targetField, style } = props;
   const { reviewInfo, setReviewInfo } = useContext(ReportContext);
 
-  const settargetField = (event: ChangeEvent<HTMLInputElement>) => {
+  const setTargetField = (event: ChangeEvent<HTMLInputElement>) => {
     const accountInfo = { ...reviewInfo };
     accountInfo[targetField] = event.target.value;
     setReviewInfo(accountInfo);
   };
 
-  console.log(reviewInfo, "HOLI");
-
+  // | "reviewer"
+  // | "accName"
+  // | "accLevel"
+  // | "maxUnits"
+  // | "maxEspers"
+  // | "maxVcs"
+  // | "maxGear"
+  // | "units"
+  // | "espers"
+  // | "vcs"
+  // | "gear"
+  // | "conclusion";
   const TEXT_FIELDS = {
     numberInput: (
       <TextField
@@ -29,7 +40,7 @@ const InputField = (props: InputFieldProps) => {
         id="outlined-number"
         label={title}
         type="number"
-        onChange={settargetField}
+        onChange={setTargetField}
         InputLabelProps={{
           shrink: true,
         }}
@@ -39,7 +50,7 @@ const InputField = (props: InputFieldProps) => {
       <TextField
         id="filled-multiline-static"
         margin="normal"
-        onChange={settargetField}
+        onChange={setTargetField}
         label={title}
         InputLabelProps={{
           shrink: true,
@@ -55,7 +66,7 @@ const InputField = (props: InputFieldProps) => {
         InputLabelProps={{
           shrink: true,
         }}
-        onChange={settargetField}
+        onChange={setTargetField}
       />
     ),
   };

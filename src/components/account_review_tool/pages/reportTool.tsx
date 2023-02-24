@@ -1,18 +1,19 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { ChangeEvent, useState, useEffect, useRef, useContext } from "react";
 import { ReportContext } from "../context/reportToolProvider";
 import ReactToPrint from "react-to-print";
 import "./reportTool.scss";
 import InputFields from "../molecules/input-fields/inputFields";
 import ReportPdf from "../molecules/report-pdf/reportPdf";
 import Button from "@mui/material/Button";
+import { ActiveState } from "../types/types";
 
-const GUILD_LIST = ["Krispy-Kreme", "Dunkin"];
+const GUILD_LIST: string[] = ["Krispy-Kreme", "Dunkin"];
 
 const ReportTool = () => {
   const { activeGuild, setActiveGuild } = useContext(ReportContext);
-  const [activeState, setActiveState] = useState({});
+  const [activeState, setActiveState] = useState<ActiveState>({});
 
-  const guildHandler = (event) => {
+  const guildHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setActiveGuild(event.target.value);
   };
 
@@ -66,9 +67,13 @@ const ReportTool = () => {
   // visibility toggle function for both input and preview when preview button is clicked
 
   const activeHandler = () => {
-    let obj = { ...activeState };
-    Object.keys(obj).forEach((keyElem) => (obj[keyElem] = !obj[keyElem]));
-    setActiveState(obj);
+    let state = { ...activeState };
+    Object.keys(state).forEach(
+      (keyElem) =>
+        (state[keyElem as keyof ActiveState] =
+          !state[keyElem as keyof ActiveState])
+    );
+    setActiveState(state);
   };
 
   return (

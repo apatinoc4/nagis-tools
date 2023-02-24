@@ -1,21 +1,18 @@
 import "./reportPdf.scss";
 import { forwardRef, ForwardedRef, useContext } from "react";
 import AccountInfo from "../account-info/accountInfo";
+import { ActiveState } from "../../types/types";
 import BodyField from "../body-field/bodyField";
 import OverviewField from "../../atoms/overview-field/overviewField";
 import RadarChart from "../../atoms/radar-chart/radarChart";
 import { ReportContext } from "../../context/reportToolProvider";
 import towerBg from "../../../../assets/account_review_tool/backgrounds/report-bg.png";
+import { ReviewInfo } from "../../types/types";
 
 type BodyFields = {
-  name: string;
-  maxedStat: string;
+  name: keyof ReviewInfo;
+  maxedStat: keyof ReviewInfo;
 }[];
-
-type ActiveState = {
-  inputs?: boolean;
-  preview?: boolean;
-};
 
 interface ReportPdfProps {
   activeGuild: string;
@@ -48,9 +45,9 @@ const ReportPdf = forwardRef<HTMLDivElement, ReportPdfProps>(
               return (
                 <BodyField
                   key={index}
-                  text={reviewInfo[name]}
-                  type={name}
-                  maxedStat={reviewInfo[maxedStat]}
+                  text={reviewInfo[name] as string}
+                  type={name as string}
+                  maxedStat={reviewInfo[maxedStat] as number}
                 />
               );
             })}

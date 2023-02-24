@@ -1,10 +1,11 @@
 import InputField from "../../atoms/input-field/inputField";
+import { ReviewInfo } from "../../types/types";
 
 import "./inputFields.scss";
 
 type InputFieldParameters = {
   [key: string]: {
-    targetField: string;
+    targetField: keyof ReviewInfo;
     title: string;
     type: "numberInput" | "textArea" | "textInput";
     style?: string;

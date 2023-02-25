@@ -21,18 +21,6 @@ const InputField = (props: InputFieldProps) => {
     setReviewInfo(accountInfo);
   };
 
-  // | "reviewer"
-  // | "accName"
-  // | "accLevel"
-  // | "maxUnits"
-  // | "maxEspers"
-  // | "maxVcs"
-  // | "maxGear"
-  // | "units"
-  // | "espers"
-  // | "vcs"
-  // | "gear"
-  // | "conclusion";
   const TEXT_FIELDS = {
     numberInput: (
       <TextField
@@ -41,6 +29,12 @@ const InputField = (props: InputFieldProps) => {
         label={title}
         type="number"
         onChange={setTargetField}
+        InputProps={{
+          inputProps: {
+            min: 0,
+            max: 100,
+          },
+        }}
         InputLabelProps={{
           shrink: true,
         }}
@@ -52,6 +46,7 @@ const InputField = (props: InputFieldProps) => {
         margin="normal"
         onChange={setTargetField}
         label={title}
+        inputProps={{ maxLength: 944 }}
         InputLabelProps={{
           shrink: true,
         }}
@@ -63,6 +58,7 @@ const InputField = (props: InputFieldProps) => {
       <TextField
         size="small"
         label={title}
+        inputProps={{ maxLength: 20 }}
         InputLabelProps={{
           shrink: true,
         }}

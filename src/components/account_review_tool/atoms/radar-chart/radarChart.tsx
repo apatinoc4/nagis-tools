@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ReportContext } from "../../context/reportToolProvider";
 import { Radar } from "react-chartjs-2";
 import "./radarChart.scss";
+import { ReviewInfo } from "../../types/types";
 
-const calculatePercentage = (current, expected) => {
+interface RadarChartProps {
+  maxedStats: ReviewInfo;
+}
+
+const calculatePercentage = (current: number, expected: number) => {
   if (current > expected) {
     return 100;
   } else {
@@ -11,7 +16,7 @@ const calculatePercentage = (current, expected) => {
   }
 };
 
-const RadarChart = (props) => {
+const RadarChart = (props: RadarChartProps) => {
   const { maxedStats } = props;
   const { amazing } = useContext(ReportContext);
   const titleBlue = "#243e66";

@@ -1,4 +1,3 @@
-import React from "react";
 import "./projectCard.scss";
 import { Link } from "react-router-dom";
 

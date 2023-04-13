@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ReportContext } from "../../context/reportToolProvider";
 import { Radar } from "react-chartjs-2";
+import type { ChartOptions } from "chart.js";
 import "./radarChart.scss";
 import { ReviewInfo } from "../../types/types";
 
@@ -37,7 +38,7 @@ const RadarChart = (props: RadarChartProps) => {
       },
     ],
   };
-  var options = {
+  const options: ChartOptions<"radar"> = {
     plugins: {
       legend: {
         display: false,
@@ -54,7 +55,7 @@ const RadarChart = (props: RadarChartProps) => {
         pointLabels: {
           color: titleBlue,
           font: {
-            size: wlength >= 1024 ? "10%" : "5%",
+            size: wlength >= 1024 ? 10 : 5,
           },
         },
         suggestedMin: 0,

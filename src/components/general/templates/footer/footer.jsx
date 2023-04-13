@@ -1,6 +1,7 @@
-import React from "react";
 import "./footer.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const Footer = () => {
   const getCurrentYear = () => {
@@ -19,25 +20,13 @@ const Footer = () => {
         <div className="t-footer-body">
           <div className="t-footer-socialmedia">
             <a href="https://www.instagram.com/apatinoc4/">
-              <FontAwesomeIcon
-                className="t-footer-socialmedia--icon"
-                icon={["fab", "instagram"]}
-                size="lg"
-              />
+              <InstagramIcon />
             </a>
             <a href="https://www.linkedin.com/in/andrespatino1993/">
-              <FontAwesomeIcon
-                className="t-footer-socialmedia--icon"
-                icon={["fab", "linkedin"]}
-                size="lg"
-              />
+              <LinkedInIcon />
             </a>
             <a href="https://github.com/apatinoc4">
-              <FontAwesomeIcon
-                className="t-footer-socialmedia--icon"
-                icon={["fab", "github"]}
-                size="lg"
-              />
+              <GitHubIcon />
             </a>
           </div>
         </div>

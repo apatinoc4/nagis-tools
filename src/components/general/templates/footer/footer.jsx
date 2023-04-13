@@ -1,4 +1,5 @@
 import "./footer.scss";
+import IconButton from "@mui/material/IconButton";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -19,15 +20,21 @@ const Footer = () => {
         </div>
         <div className="t-footer-body">
           <div className="t-footer-socialmedia">
-            <a href="https://www.instagram.com/apatinoc4/">
-              <InstagramIcon />
-            </a>
-            <a href="https://www.linkedin.com/in/andrespatino1993/">
+            <IconButton
+              target="_blank"
+              href="https://www.instagram.com/apatinoc4/"
+            >
+              <InstagramIcon fontSize="medium" />
+            </IconButton>
+            <IconButton
+              target="_blank"
+              href="https://www.linkedin.com/in/andrespatino1993/"
+            >
               <LinkedInIcon />
-            </a>
-            <a href="https://github.com/apatinoc4">
+            </IconButton>
+            <IconButton target="_blank" href="https://github.com/apatinoc4">
               <GitHubIcon />
-            </a>
+            </IconButton>
           </div>
         </div>
         <div className="t-footer-copyright">

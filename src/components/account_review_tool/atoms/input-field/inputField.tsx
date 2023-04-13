@@ -24,11 +24,8 @@ const InputField = (props: InputFieldProps) => {
   const TEXT_FIELDS = {
     numberInput: (
       <TextField
-        size="small"
+        className="report-tool-account-input"
         id="outlined-number"
-        label={title}
-        type="number"
-        onChange={setTargetField}
         InputProps={{
           inputProps: {
             min: 0,
@@ -36,33 +33,42 @@ const InputField = (props: InputFieldProps) => {
           },
         }}
         InputLabelProps={{
+          className: "report-tool-label",
           shrink: true,
         }}
+        label={title}
+        onChange={setTargetField}
+        size="small"
+        type="number"
       />
     ),
     textArea: (
       <TextField
+        className="report-tool-account-input"
         id="filled-multiline-static"
         margin="normal"
-        onChange={setTargetField}
-        label={title}
         inputProps={{ maxLength: 944 }}
         InputLabelProps={{
+          className: "report-tool-label",
           shrink: true,
         }}
+        label={title}
         multiline
+        onChange={setTargetField}
         rows={4}
       />
     ),
     textInput: (
       <TextField
-        size="small"
-        label={title}
+        className="report-tool-account-input"
         inputProps={{ maxLength: 20 }}
         InputLabelProps={{
+          className: "report-tool-label",
           shrink: true,
         }}
+        label={title}
         onChange={setTargetField}
+        size="small"
       />
     ),
   };

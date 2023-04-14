@@ -36,7 +36,7 @@ const INPUT_FIELDS_PARAMETERS: InputFieldParameters = {
   accountBody: [
     {
       targetField: "maxUnits",
-      title: "Maxed UR",
+      title: "Ex Units",
       type: "numberInput",
     },
     {

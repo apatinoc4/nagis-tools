@@ -6,6 +6,7 @@ import InputFields from "../molecules/input-fields/inputFields";
 import ReportPdf from "../molecules/report-pdf/reportPdf";
 import Button from "@mui/material/Button";
 import { ActiveState } from "../types/types";
+const ffLogo = require("../../../assets/account_review_tool/backgrounds/ff-logo.png");
 
 const GUILD_LIST: string[] = ["Krispy-Kreme", "Dunkin"];
 
@@ -79,6 +80,11 @@ const ReportTool = () => {
   return (
     <div className="p-reportTool-container">
       <div className="p-reportTool-header">
+        <img
+          className="p-reportTool-header--fflogo"
+          src={ffLogo}
+          alt="fflogo"
+        />
         <h1 className="p-reportTool-header--title">
           Nagi's Account Review Tool
         </h1>

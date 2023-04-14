@@ -1,26 +1,28 @@
 @import "../../../styles/styles.scss";
 .p-reportTool {
   &-container {
+    background-color: #e5e5e5;
     display: flex;
     flex-direction: column;
-    background-color: #e5e5e5;
+    padding-bottom: 5vh;
     position: relative;
     width: 100%;
-    padding-bottom: 5vh;
   }
 
   &-header {
     background-color: $dark-gray;
+    box-sizing: border-box;
     color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 80px 30px 0 30px;
+    position: relative;
     z-index: 1;
-    padding: 30px;
 
     a {
-      text-decoration: none;
       color: $highlight;
+      text-decoration: none;
       font-size: 18px !important;
     }
 
@@ -34,50 +36,64 @@
       margin: 0;
     }
 
+    &--fflogo {
+      height: 600px;
+      position: absolute;
+      right: 30px;
+      top: 0px;
+
+      @include mobile {
+        opacity: 0.2;
+      }
+    }
+
     &--title {
       font-size: 25px;
 
       @include mobile {
         font-size: 5.5vw;
+        z-index: 5;
       }
     }
 
     &--slogan {
-      position: relative;
       font-weight: 300;
+      position: relative;
     }
 
     &--guildselector {
+      color: white;
       display: flex;
       flex-direction: column;
-      color: white;
 
       select {
-        width: 18%;
         margin-top: 5px;
+        width: 18%;
         @include mobile {
           width: 100%;
+          z-index: 5;
         }
       }
     }
   }
 
   &-previewbutton {
-    width: 60px;
-    height: 60px;
-    border-radius: 5px 5px 0 5px;
+    align-items: center;
     background: $dark-gray;
+    border: 2px solid $containerBlue;
+    border-radius: 5px 5px 0 5px;
+    bottom: 0;
+    color: white;
+    display: flex;
+    height: 60px;
     font-family: "Poppins", sans-serif;
     font-size: 12px;
-    color: white;
-    z-index: 20;
-    display: flex;
     justify-content: center;
-    align-items: center;
     position: fixed;
     right: 0;
-    bottom: 0;
     text-align: center;
+    width: 60px;
+    z-index: 20;
 
     @include desktop {
       display: none;
@@ -90,55 +106,55 @@
 
   &-headerextender {
     background-color: $dark-gray;
+    height: 40%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
-    height: 40%;
-    z-index: 0;
     width: 100%;
+    z-index: 0;
   }
 
   &-mainbody {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1;
     justify-content: space-evenly;
+    width: 100%;
+    z-index: 1;
 
     &--inputfields {
-      margin: 0;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      border-radius: 20px;
-      width: 25%;
-      flex-direction: column;
       background-color: $titleBlue;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0;
+      width: 25%;
 
       @include mobile {
         padding: 5% 0 10% 0;
       }
 
       @include tablet {
-        width: 90%;
         margin: 0;
+        width: 90%;
       }
 
       button {
-        position: relative;
-        border: none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
         background-color: white;
-        width: 50%;
-        height: 40px;
+        border: none;
+        border-radius: 5px;
         border: 1px solid $titleBlue;
+        cursor: pointer;
+        font: inherit;
         font-family: "Poppins", sans-serif;
         font-weight: 800;
-        border-radius: 5px;
+        height: 40px;
+        outline: inherit;
+        padding: 0;
+        position: relative;
+        width: 50%;
       }
       button:hover {
         background: white;
@@ -146,21 +162,21 @@
     }
 
     &--reportpreview {
-      margin: 0;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      display: flex;
       flex-direction: column;
+      justify-content: center;
+      margin: 0;
+      position: relative;
     }
   }
 
   &-disclaimer {
     color: white;
-    width: 100%;
-    text-align: center;
     font-family: "Poppins", sans-serif;
     font-size: 30%;
+    text-align: center;
+    width: 100%;
 
     @include desktop {
       display: none;

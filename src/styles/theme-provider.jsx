@@ -1,7 +1,30 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const darkGray = "#292929";
+
 const theme = createTheme({
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          background: `${darkGray}`,
+          borderBottom: "2px solid white",
+          ".MuiContainer-root": {
+            margin: 0,
+            width: "100%",
+          },
+          ".MuiStack-root": {
+            marginLeft: 20,
+          },
+          ".MuiStack-root > a": {
+            color: "white",
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 800,
+            textDecoration: "none",
+          },
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {

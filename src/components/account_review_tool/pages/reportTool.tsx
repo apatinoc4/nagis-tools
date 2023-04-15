@@ -98,9 +98,9 @@ const ReportTool = () => {
         <div className="p-reportTool-header--guildselector">
           <p>Select a guild: </p>
           <select onChange={guildHandler}>
-            {GUILD_LIST.map((elem, i) => {
+            {GUILD_LIST.map((elem, index) => {
               return (
-                <option value={elem} key={i}>
+                <option value={elem} key={index}>
                   {elem}
                 </option>
               );

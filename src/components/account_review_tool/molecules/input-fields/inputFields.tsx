@@ -100,48 +100,39 @@ const InputFields = () => {
     <div className="m-inputfields-container">
       <div className="m-inputfields-accountinfo">
         {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountInfo").map(
-          (input, index) => {
-            const { style, targetField, title, type } = input;
-            return (
-              <InputField
-                key={index}
-                title={title}
-                type={type}
-                targetField={targetField}
-                style={style}
-              />
-            );
-          }
+          ({ style, targetField, title, type }, index) => (
+            <InputField
+              key={index}
+              title={title}
+              type={type}
+              targetField={targetField}
+              style={style}
+            />
+          )
         )}
       </div>
       <div className="m-inputfields-body">
         {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountBody").map(
-          (input, index) => {
-            const { targetField, title, type } = input;
-            return (
-              <InputField
-                key={index}
-                title={title}
-                type={type}
-                targetField={targetField}
-              />
-            );
-          }
+          ({ targetField, title, type }, index) => (
+            <InputField
+              key={index}
+              title={title}
+              type={type}
+              targetField={targetField}
+            />
+          )
         )}
       </div>
       <div className="m-inputfields-veredict">
         {getInputParameters(INPUT_FIELDS_PARAMETERS, "accountVeredict").map(
-          (input, index) => {
-            const { targetField, title, type } = input;
-            return (
-              <InputField
-                key={index}
-                title={title}
-                type={type}
-                targetField={targetField}
-              />
-            );
-          }
+          ({ targetField, title, type }, index) => (
+            <InputField
+              key={index}
+              title={title}
+              type={type}
+              targetField={targetField}
+            />
+          )
         )}
       </div>
     </div>

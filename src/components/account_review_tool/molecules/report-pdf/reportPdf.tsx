@@ -40,17 +40,14 @@ const ReportPdf = forwardRef<HTMLDivElement, ReportPdfProps>(
             <AccountInfo accountInfo={reviewInfo} activeGuild={activeGuild} />
           </div>
           <div className="m-reportpdf-body">
-            {BODY_FIELDS.map((category, index) => {
-              const { name, maxedStat } = category;
-              return (
-                <BodyField
-                  key={index}
-                  text={reviewInfo[name] as string}
-                  type={name as string}
-                  maxedStat={reviewInfo[maxedStat] as number}
-                />
-              );
-            })}
+            {BODY_FIELDS.map(({ name, maxedStat }, index) => (
+              <BodyField
+                key={index}
+                text={reviewInfo[name] as string}
+                type={name as string}
+                maxedStat={reviewInfo[maxedStat] as number}
+              />
+            ))}
           </div>
           <div className="m-reportpdf-footer">
             <div className="m-reportpdf-overview">

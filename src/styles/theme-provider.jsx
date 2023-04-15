@@ -25,6 +25,30 @@ const theme = createTheme({
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          ".MuiTypography-root": {
+            "&.projectCard-tittle": {
+              color: `${darkGray}`,
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 800,
+            },
+          },
+          ".MuiCardActions-root": {
+            "&.projectCard-actions": {
+              background: `${darkGray}`,
+              ".MuiButtonBase-root > a": {
+                color: "white",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 800,
+                textDecoration: "none",
+              },
+            },
+          },
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {

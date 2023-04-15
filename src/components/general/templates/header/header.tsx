@@ -21,8 +21,10 @@ const Header = () => (
           <img src={logoWhite.default} alt="logoWhite" />
         </div>
         <Stack direction="row" spacing={2}>
-          {HEADER_LINKS.map(({ label, linkTo }) => (
-            <Link to={linkTo}>{label}</Link>
+          {HEADER_LINKS.map(({ label, linkTo }, index) => (
+            <Link key={index} to={linkTo}>
+              {label}
+            </Link>
           ))}
         </Stack>
       </Toolbar>

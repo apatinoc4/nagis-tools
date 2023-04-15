@@ -1,35 +1,50 @@
 import "./projectCard.scss";
 import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { Button, CardActions } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
-const ProjectCard = () => {
+interface ProjectCardProps {
+  image: string;
+  index: number;
+  projectName: string;
+  projectDescription: string;
+  url: string;
+}
+
+const ProjectCard = (props: ProjectCardProps) => {
+  const { image, index, projectName, projectDescription, url } = props;
+
   return (
-    <div className="a-projectcard-container">
-      <p className="a-projectcard-projectname">01. WOTV Account Review Tool</p>
-      <div className="a-projectcard-card">
-        <img
-          src={
-            require("../../../../assets/index_homepage/backgrounds/01bg.jpg")
-              .default
-          }
-          alt="01bg"
-        />
-        <div className="a-projectcard-bg"></div>
-        <div className="a-projectcard-projectno">
-          <p>01</p>
-        </div>
-        <div className="a-projectcard-description">
-          <p>
-            Account review tool for WAR OF THE VISIONS FINAL FANTASY BRAVE
-            EXVIUS,evaluate how many units, espers, vision cards and +5
-            equipment the player has by either Krispy-Kreme or Dunkin´ guild
-            standards and export it in PDF format.
-          </p>
-          <Link to="/review_tool">
-            <button>Visit</button>
-          </Link>
-        </div>
-      </div>
-    </div>
+    <Card sx={{ maxWidth: 400 }}>
+      <CardMedia
+        component="img"
+        height="140"
+        src={require(`../../../../assets/index_homepage/backgrounds/${image}`)}
+        alt="alt"
+      />
+      <CardContent>
+        <Typography
+          className="projectCard-tittle"
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
+          {index + 1}. {projectName}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {projectDescription}
+        </Typography>
+      </CardContent>
+
+      <CardActions className="projectCard-actions">
+        <Button size="small" color="primary">
+          <Link to={url}>Let's go!</Link>
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 

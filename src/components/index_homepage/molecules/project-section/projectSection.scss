@@ -4,11 +4,13 @@
   &-container {
     align-items: center;
     background-color: $coconut;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height: 55vh;
+    min-height: 55vh;
     justify-content: center;
     margin: 0;
+    padding-bottom: 40px;
     width: 100%;
   }
   &-title {

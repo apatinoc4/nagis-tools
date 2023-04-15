@@ -43,6 +43,9 @@
       top: 0px;
 
       @include mobile {
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
         opacity: 0.2;
       }
     }

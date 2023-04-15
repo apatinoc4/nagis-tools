@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import "./header.scss";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -10,7 +10,7 @@ const logoWhite = require("../../../../assets/general/main-logo/mainLogoWhite.sv
 
 const HEADER_LINKS = [
   { label: "HOME", linkTo: "/" },
-  { label: "TOOLS", linkTo: "/review_tool" },
+  { label: "TOOLS", linkTo: "/#project-section" },
 ];
 
 const Header = () => (
@@ -22,9 +22,9 @@ const Header = () => (
         </div>
         <Stack direction="row" spacing={2}>
           {HEADER_LINKS.map(({ label, linkTo }, index) => (
-            <Link key={index} to={linkTo}>
+            <HashLink key={index} to={linkTo}>
               {label}
-            </Link>
+            </HashLink>
           ))}
         </Stack>
       </Toolbar>

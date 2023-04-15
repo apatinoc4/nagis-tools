@@ -2,39 +2,47 @@
 
 .m-intro {
   &-container {
-    width: 100%;
-    position: relative;
     margin: 0;
-    overflow-x: hidden;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
 
     &-videoslogan {
       display: flex;
       position: relative;
     }
 
+    @include desktop {
+      height: 100vh;
+    }
+
     video {
       width: 150%;
       @include desktop {
-        width: 100%;
+        object-fit: fill;
       }
     }
   }
   &-shaderbg {
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
+    color: white;
     display: flex;
     flex-direction: column;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    color: white;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+
+    @include desktop {
+      height: 100vh;
+    }
+
     img {
       width: 50%;
     }
@@ -42,8 +50,8 @@
     h1 {
       font-size: 15px;
       @include desktop {
-        margin: 0;
         font-size: 30px;
+        margin: 0;
       }
     }
 

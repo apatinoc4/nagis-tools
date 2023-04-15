@@ -14,7 +14,7 @@ const PROJECTS = [
 
 const ProjectSection = () => {
   return (
-    <div className="m-projects-container">
+    <div className="m-projects-container" id="project-section">
       <div className="m-projects-title">
         <p>Current Tools</p>
       </div>

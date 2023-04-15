@@ -14,15 +14,21 @@ const PageContainer = () => {
     <div>
       <PageThemeProvider>
         <Router>
-          <ReportProvider>
-            <Header />
-            <Routes>
-              <Route path="/" exact element={<MainIndex />} />
-              <Route path="/review_tool" exact element={<ReportTool />} />
-              <Route path="/unit_planner" exact element={<UnitPlanner />} />
-            </Routes>
-            <Footer />
-          </ReportProvider>
+          <Header />
+          <Routes>
+            <Route
+              path="/review_tool"
+              exact
+              element={
+                <ReportProvider>
+                  <ReportTool />
+                </ReportProvider>
+              }
+            />
+            <Route path="/unit_planner" exact element={<UnitPlanner />} />
+            <Route path="/" exact element={<MainIndex />} />
+          </Routes>
+          <Footer />
         </Router>
       </PageThemeProvider>
     </div>

@@ -51,9 +51,15 @@ const calculateHoursNeeded = (
   return hoursNeeded;
 };
 
-// function addHoursToDate(date: any, hours: number) {
-//   date.setHours(date.getHours + hours);
-// }
+const currentDate = new Date();
+
+function addHoursToDate(date: any, hours: any) {
+  const dateCopy = new Date(date);
+
+  dateCopy.setTime(dateCopy.getTime() + hours * 60 * 60 * 1000);
+
+  return dateCopy.toDateString();
+}
 
 const UnitPlanner = () => {
   const [unitAvailability, setUnitAvailability] = useState<string>("regular");
@@ -86,17 +92,23 @@ const UnitPlanner = () => {
       const selectedMilestone = MILESTONE_SHARDS.filter(
         (milestone) => milestone.shardsNeeded === shardsNeeded
       )[0];
+
       if (startingShards && hoursNeeded) {
+        const estimatedMilestoneDate = addHoursToDate(
+          currentDate,
+          hoursNeeded[selectedMilestone.milestoneKey]
+        );
+
         if (startingShards < 0) {
           return;
         } else if (startingShards >= shardsNeeded) {
-          return `Congrats!, your unit can already reach ${selectedMilestone.milestoneName}`;
+          return `Congrats!, your unit can reach ${selectedMilestone.milestoneName} already`;
         } else {
           return `Your unit can reach ${
             selectedMilestone.milestoneName
           } in approximately ${
             hoursNeeded[selectedMilestone.milestoneKey]
-          } hours`;
+          } hours, in ${estimatedMilestoneDate}`;
         }
       }
     },
@@ -104,8 +116,6 @@ const UnitPlanner = () => {
   );
 
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
-
-  const currentDate = new Date();
 
   // if (startingShards && hoursNeeded) {
   //   const newDate = addHoursToDate(currentDate, hoursNeeded.level140);
@@ -124,8 +134,6 @@ const UnitPlanner = () => {
           setStartingShards(Number(event.target.value));
         }}
       />
-      {/* <label htmlFor="starting-shards">Starting Shards</label>
-      <input type="date" name="starting-date" id="starting-date" /> */}
       <FormControl>
         <FormLabel id="unit-availability">Is unit limited?</FormLabel>
         <RadioGroup

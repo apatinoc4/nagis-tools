@@ -1,9 +1,12 @@
+@import "../../../../styles/styles.scss";
+
 .p-unitPlanner {
   &-container {
-    height: 100vh;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    background-color: $coconut;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
   }
 }

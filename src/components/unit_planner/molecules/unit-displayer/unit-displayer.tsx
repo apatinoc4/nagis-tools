@@ -2,7 +2,6 @@ import { ChangeEvent, useCallback, useEffect, useState, useMemo } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import Paper from "@mui/material/Paper";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import TextField from "@mui/material/TextField";
@@ -18,6 +17,10 @@ type MilestoneShards = {
 type hoursNeededMilestone = {
   [key: string]: number;
 };
+
+interface UnitDisplayerProps {
+  unitNumber: number;
+}
 
 const MILESTONE_SHARDS = [
   {
@@ -55,7 +58,7 @@ const calculateHoursNeeded = (
 
 const currentDate = new Date();
 
-function addHoursToDate(date: any, hours: any) {
+function addHoursToDate(date: Date, hours: number) {
   const dateCopy = new Date(date);
 
   dateCopy.setTime(dateCopy.getTime() + hours * 60 * 60 * 1000);
@@ -63,12 +66,15 @@ function addHoursToDate(date: any, hours: any) {
   return dateCopy.toDateString();
 }
 
-const UnitDisplayer = () => {
+const UnitDisplayer = (props: UnitDisplayerProps) => {
+  const { unitNumber } = props;
   const [unitAvailability, setUnitAvailability] = useState<string>("regular");
   const [startingShards, setStartingShards] = useState<number | null>(null);
   const [hoursNeeded, setHoursNeeded] = useState<hoursNeededMilestone | null>(
     null
   );
+
+  const renderEstimatedDates = startingShards && hoursNeeded;
 
   const shardsPerHour = useMemo(() => {
     const regular = 4 / 24;
@@ -110,19 +116,22 @@ const UnitDisplayer = () => {
 
   return (
     <div className="m-unitDisplayer-container">
+      <h2 className="m-unitDisplayer-unitNumber">UNIT {unitNumber + 1}</h2>
       <TextField
+        className="unit-displayer-input"
+        fullWidth
         id="starting-shards"
-        inputProps={{ min: 0, max: 1120 }}
         label="Starting Shards"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setStartingShards(Number(event.target.value));
         }}
-        type="number"
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         value={startingShards || ""}
       />
-      <FormControl>
+      <FormControl fullWidth>
         <FormLabel id="unit-availability">Unit Pool</FormLabel>
         <RadioGroup
+          aria-labelledby="unit-availability"
           name="controlled-radio-buttons-group"
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUnitAvailability(event.target.value);
@@ -143,27 +152,22 @@ const UnitDisplayer = () => {
         </RadioGroup>
       </FormControl>
 
-      {hoursNeeded && (
+      {!!renderEstimatedDates && (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h2>Milestones</h2>
           {MILESTONE_SHARDS.map((milestone, idx) => (
-            <div key={idx}>
+            <div className="m-unitDisplayer-estimatedTimes" key={idx}>
               <h3>{milestone.milestoneName}</h3>
-              <div>
-                <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
-                <h4>Estimated Date:</h4>
-                <p>
-                  {addHoursToDate(
-                    currentDate,
-                    hoursNeeded[milestone.milestoneKey]
-                  )}
-                </p>
-              </div>
+              <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
+              <h4>Estimated Date:</h4>
+              <p>
+                {addHoursToDate(
+                  currentDate,
+                  hoursNeeded[milestone.milestoneKey]
+                )}
+              </p>
             </div>
           ))}
-          {/* <p>{estimatedTimeMessage(MILESTONE_SHARDS[0].shardsNeeded)}</p>
-            <p>{estimatedTimeMessage(MILESTONE_SHARDS[1].shardsNeeded)}</p>
-            <p>{estimatedTimeMessage(MILESTONE_SHARDS[2].shardsNeeded)}</p> */}
         </div>
       )}
     </div>

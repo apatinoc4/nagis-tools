@@ -90,6 +90,9 @@ const theme = createTheme({
               left: "-2px",
             },
           },
+          "&.unit-displayer-input": {
+            marginBottom: 20,
+          },
         },
       },
     },

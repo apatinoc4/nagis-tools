@@ -29,7 +29,7 @@ const UnitPlanner = () => {
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         {[...Array(unitCount)].map((e, idx) => (
-          <UnitDisplayer key={idx} />
+          <UnitDisplayer key={idx} unitNumber={idx} />
         ))}
       </div>
     </div>

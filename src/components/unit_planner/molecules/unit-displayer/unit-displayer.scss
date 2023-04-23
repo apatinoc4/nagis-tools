@@ -1,13 +1,78 @@
+@import "../../../../styles/styles.scss";
+
+$cardWidth: 320px;
+
 .m-unitDisplayer {
   &-container {
-    background-color: white;
-    display: flex;
     align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -5px 5px 19px 0px #dddddd;
+    box-sizing: border-box;
+    display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
-    width: 250px;
-    max-width: 250px;
     margin: 0 10px;
+    max-width: $cardWidth;
+    padding: 20px;
+    position: relative;
+    width: $cardWidth;
+
+    //this was done for specificity sake
+    .m-unitDisplayer-unitNumber {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    h4 {
+      margin-top: 0px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+    }
+
+    h2,
+    h3,
+    h4 {
+      font-weight: 800;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  &-estimatedTimes {
+    position: relative;
+    white-space: pre-wrap;
+    ::before {
+      background-color: $titleBlue;
+      content: "";
+      height: 110px;
+      left: -15px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+    }
   }
 }

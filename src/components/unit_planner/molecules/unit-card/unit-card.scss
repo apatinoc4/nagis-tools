@@ -1,0 +1,107 @@
+@import "../../../../styles/styles.scss";
+
+$cardWidth: 320px;
+$cardHeight: 540px;
+$milestoneNamePosition: 15px;
+
+.m-unitCard {
+  &-container {
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -5px 5px 19px 0px #dddddd;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: $cardHeight;
+    flex-direction: row;
+    margin: 0 10px;
+    min-width: $cardWidth;
+    padding: 20px;
+    position: relative;
+
+    &--coloredstripe {
+      background-color: $titleBlue;
+      border-radius: 10px 0 0 10px;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 10px;
+    }
+
+    //this was done for specificity sake
+    .m-unitCard-unitNumber {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .m-unitCard-milestoneName {
+      position: relative;
+      left: $milestoneNamePosition;
+
+      ::before {
+        background-color: $titleBlue;
+        content: "";
+        height: 50%;
+        left: -$milestoneNamePosition;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 7px;
+      }
+    }
+
+    //
+
+    h2 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    h4 {
+      margin-top: 0px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+    }
+
+    h2,
+    h3,
+    h4 {
+      font-weight: 800;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  &-inputs {
+    box-sizing: border-box;
+    width: $cardWidth;
+    padding: 0 20px;
+  }
+
+  &-milestones {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+  }
+}

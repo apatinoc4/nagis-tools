@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./unit-planner.scss";
-import UnitDisplayer from "../../molecules/unit-displayer/unit-displayer";
+import UnitCard from "../../molecules/unit-card/unit-card";
 import Button from "@mui/material/Button";
 
 const currentDate = new Date();
@@ -29,7 +29,7 @@ const UnitPlanner = () => {
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         {[...Array(unitCount)].map((e, idx) => (
-          <UnitDisplayer key={idx} unitNumber={idx} />
+          <UnitCard key={idx} unitNumber={idx} />
         ))}
       </div>
     </div>

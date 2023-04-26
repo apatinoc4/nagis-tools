@@ -9,4 +9,22 @@
     justify-content: center;
     min-height: 100vh;
   }
+
+  &-body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100vw;
+
+    &--cards {
+      display: flex;
+      justify-content: center;
+      background-color: red;
+      width: 50%;
+      max-width: 50%;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
 }

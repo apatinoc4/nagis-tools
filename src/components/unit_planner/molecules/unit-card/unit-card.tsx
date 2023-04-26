@@ -5,8 +5,12 @@ import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import TextField from "@mui/material/TextField";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
-import "./unit-displayer.scss";
+import "./unit-card.scss";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -18,7 +22,7 @@ type hoursNeededMilestone = {
   [key: string]: number;
 };
 
-interface UnitDisplayerProps {
+interface unitCardProps {
   unitNumber: number;
 }
 
@@ -66,7 +70,7 @@ function addHoursToDate(date: Date, hours: number) {
   return dateCopy.toDateString();
 }
 
-const UnitDisplayer = (props: UnitDisplayerProps) => {
+const UnitCard = (props: unitCardProps) => {
   const { unitNumber } = props;
   const [unitAvailability, setUnitAvailability] = useState<string>("regular");
   const [startingShards, setStartingShards] = useState<number | null>(null);
@@ -115,63 +119,73 @@ const UnitDisplayer = (props: UnitDisplayerProps) => {
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
 
   return (
-    <div className="m-unitDisplayer-container">
-      <h2 className="m-unitDisplayer-unitNumber">UNIT {unitNumber + 1}</h2>
-      <TextField
-        className="unit-displayer-input"
-        fullWidth
-        id="starting-shards"
-        label="Starting Shards"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setStartingShards(Number(event.target.value));
-        }}
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-        value={startingShards || ""}
-      />
-      <FormControl fullWidth>
-        <FormLabel id="unit-availability">Unit Pool</FormLabel>
-        <RadioGroup
-          aria-labelledby="unit-availability"
-          name="controlled-radio-buttons-group"
+    <div className="m-unitCard-container">
+      <div className="m-unitCard-inputs">
+        <div className="m-unitCard-container--coloredstripe"></div>
+        <h2 className="m-unitCard-unitNumber">UNIT {unitNumber + 1}</h2>
+        <TextField
+          className="unit-displayer-input"
+          fullWidth
+          id="starting-shards"
+          label="Starting Shards"
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setUnitAvailability(event.target.value);
+            setStartingShards(Number(event.target.value));
           }}
-          row
-          value={unitAvailability}
-        >
-          <FormControlLabel
-            control={<Radio />}
-            label="Regular"
-            value="regular"
-          />
-          <FormControlLabel
-            control={<Radio />}
-            label="Limited"
-            value="limited"
-          />
-        </RadioGroup>
-      </FormControl>
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          value={startingShards || ""}
+        />
+        <FormControl fullWidth>
+          <FormLabel id="unit-availability">Unit Pool</FormLabel>
+          <RadioGroup
+            aria-labelledby="unit-availability"
+            name="controlled-radio-buttons-group"
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setUnitAvailability(event.target.value);
+            }}
+            row
+            value={unitAvailability}
+          >
+            <FormControlLabel
+              control={<Radio />}
+              label="Regular"
+              value="regular"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label="Limited"
+              value="limited"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
 
       {!!renderEstimatedDates && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h2>Milestones</h2>
-          {MILESTONE_SHARDS.map((milestone, idx) => (
-            <div className="m-unitDisplayer-estimatedTimes" key={idx}>
-              <h3>{milestone.milestoneName}</h3>
-              <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
-              <h4>Estimated Date:</h4>
-              <p>
-                {addHoursToDate(
-                  currentDate,
-                  hoursNeeded[milestone.milestoneKey]
-                )}
-              </p>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="m-unitCard-milestones">
+            <h2>Milestones</h2>
+            {MILESTONE_SHARDS.map((milestone, idx) => (
+              <div key={idx}>
+                <div className="m-unitCard-milestoneName">
+                  <h3>{milestone.milestoneName}</h3>
+                </div>
+                <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
+                <h4>Estimated Date:</h4>
+                <p>
+                  {addHoursToDate(
+                    currentDate,
+                    hoursNeeded[milestone.milestoneKey]
+                  )}
+                </p>
+              </div>
+            ))}
+          </div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar defaultValue={dayjs("2022-04-17")} readOnly />
+          </LocalizationProvider>
+        </>
       )}
     </div>
   );
 };
 
-export default UnitDisplayer;
+export default UnitCard;

@@ -49,6 +49,17 @@ const theme = createTheme({
         },
       },
     },
+    MuiDateCalendar: {
+      styleOverrides: {
+        root: {
+          ".MuiPickersCalendarHeader-root": {
+            ".MuiButtonBase-root > .MuiSvgIcon-root": {
+              color: `${darkGray}`,
+            },
+          },
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {

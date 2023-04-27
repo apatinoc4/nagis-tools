@@ -27,7 +27,7 @@ const UnitPlanner = () => {
           Remove Unit
         </Button>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         {[...Array(unitCount)].map((e, idx) => (
           <UnitCard key={idx} unitNumber={idx} />
         ))}

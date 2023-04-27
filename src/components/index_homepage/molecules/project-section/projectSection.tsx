@@ -7,8 +7,15 @@ const PROJECTS = [
     image: "01bg.jpg",
     projectName: "WOTV Account Review Tool",
     projectDescription:
-      "The Account Review Tool for WAR OF THE VISIONS FINAL FANTASY BRAVE EXVIUS evaluates the number of units, espers, vision cards, and +5 equipment that a player has based on either Krispy-Kreme or Dunkin' guild standards and exports the results in PDF format.",
+      "Account Review Tool for WAR OF THE VISIONS FINAL FANTASY BRAVE EXVIUS evaluates the number of units, espers, vision cards, and +5 equipment that a player has based on either Krispy-Kreme or Dunkin' guild standards and exports the results in PDF format.",
     url: "/review_tool",
+  },
+  {
+    image: "01bg.jpg",
+    projectName: "WOTV Unit Planner",
+    projectDescription:
+      "Calculates when your unit will be ready to awaken based on your current unit shards.",
+    url: "/unit_planner",
   },
 ];
 

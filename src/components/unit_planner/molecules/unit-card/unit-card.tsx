@@ -5,12 +5,9 @@ import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import TextField from "@mui/material/TextField";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import "./unit-card.scss";
+import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -67,8 +64,10 @@ function addHoursToDate(date: Date, hours: number) {
 
   dateCopy.setTime(dateCopy.getTime() + hours * 60 * 60 * 1000);
 
-  return dateCopy.toDateString();
+  return dateCopy;
 }
+
+const formatDatetoString = (date: Date) => date.toISOString().substring(0, 10);
 
 const UnitCard = (props: unitCardProps) => {
   const { unitNumber } = props;
@@ -174,14 +173,17 @@ const UnitCard = (props: unitCardProps) => {
                   {addHoursToDate(
                     currentDate,
                     hoursNeeded[milestone.milestoneKey]
-                  )}
+                  ).toDateString()}
                 </p>
               </div>
             ))}
           </div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateCalendar defaultValue={dayjs("2022-04-17")} readOnly />
-          </LocalizationProvider>
+          <MilestoneCalendar
+            currentDate={formatDatetoString(currentDate)}
+            lastMilestoneDate={formatDatetoString(
+              addHoursToDate(currentDate, hoursNeeded["level140"])
+            )}
+          />
         </>
       )}
     </div>

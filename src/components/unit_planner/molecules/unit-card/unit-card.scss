@@ -1,6 +1,6 @@
 @import "../../../../styles/styles.scss";
 
-$cardWidth: 320px;
+$collapsedCardWidth: 320px;
 $cardHeight: 540px;
 $milestoneNamePosition: 15px;
 
@@ -15,10 +15,19 @@ $milestoneNamePosition: 15px;
     justify-content: center;
     height: $cardHeight;
     flex-direction: row;
-    margin: 0 10px;
-    min-width: $cardWidth;
+    margin: 20px;
+    min-width: $collapsedCardWidth;
     padding: 20px;
     position: relative;
+    transition: width 0.3s ease-in-out;
+
+    &.collapsed {
+      width: $collapsedCardWidth;
+    }
+
+    &.expanded {
+      width: 1050px;
+    }
 
     &--coloredstripe {
       background-color: $titleBlue;
@@ -94,7 +103,7 @@ $milestoneNamePosition: 15px;
 
   &-inputs {
     box-sizing: border-box;
-    width: $cardWidth;
+    width: $collapsedCardWidth;
     padding: 0 20px;
   }
 
@@ -104,5 +113,6 @@ $milestoneNamePosition: 15px;
     flex-direction: column;
     margin-right: 50px;
     padding-left: 15px;
+    min-width: 260px;
   }
 }

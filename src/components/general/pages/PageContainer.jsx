@@ -8,13 +8,14 @@ import ReportTool from "../../account_review_tool/pages/reportTool";
 import UnitPlanner from "../../unit_planner/pages/unit-planner/unit-planner";
 import ReportProvider from "../../account_review_tool/context/reportToolProvider";
 import PageThemeProvider from "../../../styles/theme-provider";
+import "./PageContainer.scss";
 
 const PageContainer = () => {
   return (
-    <div>
-      <PageThemeProvider>
-        <Router>
-          <Header />
+    <PageThemeProvider>
+      <Router>
+        <Header />
+        <div className="p-index">
           <Routes>
             <Route
               path="/review_tool"
@@ -28,10 +29,10 @@ const PageContainer = () => {
             <Route path="/unit_planner" exact element={<UnitPlanner />} />
             <Route path="/" exact element={<MainIndex />} />
           </Routes>
-          <Footer />
-        </Router>
-      </PageThemeProvider>
-    </div>
+        </div>
+        <Footer />
+      </Router>
+    </PageThemeProvider>
   );
 };
 

@@ -9,6 +9,7 @@ const theme = createTheme({
         root: {
           background: `${darkGray}`,
           borderBottom: "2px solid white",
+          height: 64,
           ".MuiContainer-root": {
             margin: 0,
             width: "100%",

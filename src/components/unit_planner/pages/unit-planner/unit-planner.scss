@@ -2,29 +2,45 @@
 
 .p-unitPlanner {
   &-container {
-    align-items: center;
+    align-items: flex-start;
     background-color: $coconut;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
+    padding-left: 30px;
+    position: relative;
+  }
+
+  &-currentDate {
+    color: $dark-gray;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+
+    :first-child,
+    :nth-child(2) {
+      margin: 0;
+    }
+
+    :nth-child(2) {
+      font-size: 50px;
+      position: relative;
+      top: -10px;
+
+      span {
+        color: $sunset3;
+      }
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    flex-direction: column;
   }
 
   &-body {
-    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    max-width: 100vw;
-
-    &--cards {
-      display: flex;
-      justify-content: center;
-      background-color: red;
-      width: 50%;
-      max-width: 50%;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
+    flex-direction: column;
   }
 }

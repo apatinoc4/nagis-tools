@@ -76,6 +76,7 @@ const UnitCard = (props: unitCardProps) => {
   const [hoursNeeded, setHoursNeeded] = useState<hoursNeededMilestone | null>(
     null
   );
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const renderEstimatedDates = startingShards && hoursNeeded;
 
@@ -93,6 +94,13 @@ const UnitCard = (props: unitCardProps) => {
       );
     }
   }, [shardsPerHour, startingShards]);
+
+  const handleChangeStartingShards = (event: ChangeEvent<HTMLInputElement>) => {
+    if (Number(event.target.value) <= 1120) {
+      setStartingShards(Number(event.target.value));
+    }
+    setIsExpanded(!!event.target.value);
+  };
 
   const estimatedTimeMessage = useCallback(
     (shardsNeeded: number) => {
@@ -118,7 +126,11 @@ const UnitCard = (props: unitCardProps) => {
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
 
   return (
-    <div className="m-unitCard-container">
+    <div
+      className={`m-unitCard-container ${
+        isExpanded ? "expanded" : "collapsed"
+      }`}
+    >
       <div className="m-unitCard-inputs">
         <div className="m-unitCard-container--coloredstripe"></div>
         <h2 className="m-unitCard-unitNumber">UNIT {unitNumber + 1}</h2>
@@ -127,9 +139,7 @@ const UnitCard = (props: unitCardProps) => {
           fullWidth
           id="starting-shards"
           label="Starting Shards"
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setStartingShards(Number(event.target.value));
-          }}
+          onChange={handleChangeStartingShards}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           value={startingShards || ""}
         />

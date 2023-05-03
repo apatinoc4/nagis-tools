@@ -52,6 +52,13 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
+          "&.projectCard": {
+            margin: 10,
+            maxWidth: 400,
+            ".MuiCardContent-root": {
+              minHeight: 175,
+            },
+          },
           ".MuiTypography-root": {
             "&.projectCard-tittle": {
               color: `${darkGray}`,

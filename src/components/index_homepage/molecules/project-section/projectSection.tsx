@@ -11,7 +11,7 @@ const PROJECTS = [
     url: "/review_tool",
   },
   {
-    image: "01bg.jpg",
+    image: "02bg.jpeg",
     projectName: "WOTV Unit Planner",
     projectDescription:
       "Calculates when your unit will be ready to awaken based on your current unit shards.",

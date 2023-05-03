@@ -18,7 +18,7 @@ const ProjectCard = (props: ProjectCardProps) => {
   const { image, index, projectName, projectDescription, url } = props;
 
   return (
-    <Card sx={{ maxWidth: 400 }}>
+    <Card className="projectCard" sx={{ maxWidth: 400 }}>
       <CardMedia
         component="img"
         height="140"

@@ -9,7 +9,7 @@ interface MilestoneCalendarProps {
 const MilestoneCalendar = (props: MilestoneCalendarProps) => {
   const { currentDate, lastMilestoneDate } = props;
 
-  return <Calendar className="test" value={[currentDate, lastMilestoneDate]} />;
+  return <Calendar value={[currentDate, lastMilestoneDate]} />;
 };
 
 export default MilestoneCalendar;

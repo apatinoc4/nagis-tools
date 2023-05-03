@@ -30,7 +30,7 @@ $milestoneNamePosition: 15px;
     }
 
     &--coloredstripe {
-      background-color: $titleBlue;
+      background-color: $sunset4;
       border-radius: 10px 0 0 10px;
       height: 100%;
       left: 0;
@@ -51,7 +51,7 @@ $milestoneNamePosition: 15px;
       left: $milestoneNamePosition;
 
       ::before {
-        background-color: $titleBlue;
+        background-color: $sunset3;
         content: "";
         height: 50%;
         left: -$milestoneNamePosition;

@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./unit-planner.scss";
 import UnitCard from "../../molecules/unit-card/unit-card";
 import Button from "@mui/material/Button";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import PersonRemoveAlt1Icon from "@mui/icons-material/PersonRemoveAlt1";
 
 const currentDate = new Date();
 const formatDate = (date: Date) => ({
@@ -34,26 +36,30 @@ const UnitPlanner = () => {
           <span>{day}</span> {monthYear}
         </p>
       </div>
+      <div className="p-unitPlanner-unitCards">
+        {[...Array(unitCount)].map((e, idx) => (
+          <UnitCard key={idx} unitNumber={idx} />
+        ))}
+      </div>
       <div className="p-unitPlanner-buttons">
         <Button
+          className="add-unit unitPlanner-button"
           disabled={unitCount === 5}
           onClick={() => setUnitCount(unitCount + 1)}
+          startIcon={<PersonAddAlt1Icon />}
           variant="contained"
         >
           Add Unit
         </Button>
         <Button
+          className="remove-unit unitPlanner-button"
           disabled={unitCount === 1}
           onClick={() => setUnitCount(unitCount - 1)}
+          startIcon={<PersonRemoveAlt1Icon />}
           variant="contained"
         >
           Remove Unit
         </Button>
-      </div>
-      <div className="p-unitPlanner-unitCards">
-        {[...Array(unitCount)].map((e, idx) => (
-          <UnitCard key={idx} unitNumber={idx} />
-        ))}
       </div>
     </div>
   );

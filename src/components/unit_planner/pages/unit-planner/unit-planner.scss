@@ -17,6 +17,7 @@
     color: $dark-gray;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
+    margin-top: 20px;
 
     :first-child,
     :nth-child(2) {
@@ -35,8 +36,15 @@
   }
 
   &-buttons {
+    align-items: flex-end;
+    bottom: 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    position: -webkit-sticky;
+    width: 100%;
+    z-index: 99;
   }
 
   &-body {

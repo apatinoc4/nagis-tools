@@ -135,7 +135,7 @@ const UnitCard = (props: unitCardProps) => {
         <div className="m-unitCard-container--coloredstripe"></div>
         <h2 className="m-unitCard-unitNumber">UNIT {unitNumber + 1}</h2>
         <TextField
-          className="unit-displayer-input"
+          className="unit-card-input"
           fullWidth
           id="starting-shards"
           label="Starting Shards"
@@ -144,9 +144,12 @@ const UnitCard = (props: unitCardProps) => {
           value={startingShards || ""}
         />
         <FormControl fullWidth>
-          <FormLabel id="unit-availability">Unit Pool</FormLabel>
+          <FormLabel className="unit-availability" id="unit-availability">
+            Unit Pool
+          </FormLabel>
           <RadioGroup
             aria-labelledby="unit-availability"
+            className="unit-availability"
             name="controlled-radio-buttons-group"
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               setUnitAvailability(event.target.value);
@@ -171,10 +174,14 @@ const UnitCard = (props: unitCardProps) => {
       {!!renderEstimatedDates && (
         <>
           <div className="m-unitCard-milestones">
-            <h2>Milestones</h2>
+            <h2>MILESTONES</h2>
             {MILESTONE_SHARDS.map((milestone, idx) => (
               <div key={idx}>
-                <div className="m-unitCard-milestoneName">
+                <div
+                  className={`m-unitCard-milestoneName sunset-${
+                    unitNumber + 1
+                  }`}
+                >
                   <h3>{milestone.milestoneName}</h3>
                 </div>
                 <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>

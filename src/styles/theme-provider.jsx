@@ -2,6 +2,12 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const darkGray = "#292929";
 
+const sunset1 = "#ffc300";
+const sunset2 = "#ff5733";
+const sunset3 = "#c70039";
+const sunset4 = "#900c3f";
+const sunset5 = "#581845";
+
 const theme = createTheme({
   components: {
     MuiAppBar: {
@@ -22,6 +28,23 @@ const theme = createTheme({
             fontFamily: "Poppins, sans-serif",
             fontWeight: 800,
             textDecoration: "none",
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          "&.unitPlanner-button": {
+            margin: "5px 0",
+            width: 180,
+
+            "&.add-unit:not(.Mui-disabled)": {
+              backgroundColor: `${sunset2}`,
+            },
+            "&.remove-unit:not(.Mui-disabled)": {
+              backgroundColor: `${sunset4}`,
+            },
           },
         },
       },
@@ -70,6 +93,26 @@ const theme = createTheme({
         },
       },
     },
+    MuiFormGroup: {
+      styleOverrides: {
+        root: {
+          "&.unit-availability": {
+            ".MuiRadio-root.Mui-checked": {
+              color: `${sunset3}`,
+            },
+          },
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused": {
+            color: `${darkGray}`,
+          },
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -102,8 +145,19 @@ const theme = createTheme({
               left: "-2px",
             },
           },
-          "&.unit-displayer-input": {
+          "&.unit-card-input": {
             marginBottom: 20,
+            ".MuiOutlinedInput-root": {
+              "&.Mui-focused fieldset": {
+                borderColor: `${darkGray}`,
+              },
+            },
+            ".Mui-focused": {
+              color: `${darkGray}`,
+            },
+            ".MuiInputBase-input": {
+              color: `${darkGray}`,
+            },
           },
         },
       },

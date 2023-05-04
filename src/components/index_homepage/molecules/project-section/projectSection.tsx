@@ -1,5 +1,8 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 import ProjectCard from "../../atoms/project-card/projectCard";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./projectSection.scss";
 
 const PROJECTS = [
@@ -14,12 +17,24 @@ const PROJECTS = [
     image: "02bg.jpeg",
     projectName: "WOTV Unit Planner",
     projectDescription:
-      "Calculates when your unit will be ready to awaken based on your current unit shards.",
+      "Tool designed for WAR OF THE VISIONS FINAL FANTASY BRAVE EXVIUS players - the Unit Milestone Calculator. This tool helps you easily track the progress of your units and predicts when they will reach important milestones such as level 99, level 120, and level 140 based on your initial unit shards. ",
     url: "/unit_planner",
   },
 ];
 
 const ProjectSection = () => {
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
   return (
     <div className="m-projects-container" id="project-section">
       <div className="m-projects-title">
@@ -27,17 +42,37 @@ const ProjectSection = () => {
       </div>
       <div className="m-projects-list">
         <div className=" m-projects-projectcards">
-          {PROJECTS.map(
-            ({ image, projectName, projectDescription, url }, index) => (
-              <ProjectCard
-                image={image}
-                key={index}
-                index={index}
-                projectName={projectName}
-                projectDescription={projectDescription}
-                url={url}
-              />
-            )
+          {!isMobile ? (
+            <>
+              {PROJECTS.map(
+                ({ image, projectName, projectDescription, url }, index) => (
+                  <ProjectCard
+                    image={image}
+                    key={index}
+                    index={index}
+                    projectName={projectName}
+                    projectDescription={projectDescription}
+                    url={url}
+                  />
+                )
+              )}
+            </>
+          ) : (
+            <Carousel>
+              {PROJECTS.map(
+                ({ image, projectName, projectDescription, url }, index) => (
+                  <Carousel.Item key={index}>
+                    <ProjectCard
+                      image={image}
+                      index={index}
+                      projectName={projectName}
+                      projectDescription={projectDescription}
+                      url={url}
+                    />
+                  </Carousel.Item>
+                )
+              )}
+            </Carousel>
           )}
         </div>
       </div>

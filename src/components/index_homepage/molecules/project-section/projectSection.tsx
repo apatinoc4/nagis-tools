@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import ProjectCard from "../../atoms/project-card/projectCard";
 import { ViewportContext } from "../../../general/context/viewPortProvider";

@@ -1,4 +1,11 @@
-import { ChangeEvent, useCallback, useEffect, useState, useMemo } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
@@ -7,10 +14,11 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TextField from "@mui/material/TextField";
-
-import "./unit-card.scss";
 import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
 import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
+
+import "./unit-card.scss";
+import { ViewportContext } from "../../../general/context/viewPortProvider";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -81,24 +89,13 @@ const UnitCard = (props: unitCardProps) => {
   );
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
+  const viewport = useContext(ViewportContext);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const isMobile = viewport === "mobile";
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
-  const [width, setWidth] = useState<number>(window.innerWidth);
-
-  const handleWindowSizeChange = useCallback(() => {
-    setWidth(window.innerWidth);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, [handleWindowSizeChange]);
-
-  const isMobile = width <= 768;
 
   const renderEstimatedDates = startingShards && hoursNeeded;
 
@@ -199,7 +196,7 @@ const UnitCard = (props: unitCardProps) => {
             <Tabs
               className="unit-card-tabs"
               value={activeTab}
-              onChange={handleChange}
+              onChange={handleTabChange}
             >
               <Tab label="Milestones" />
               <Tab label="Calendar" />

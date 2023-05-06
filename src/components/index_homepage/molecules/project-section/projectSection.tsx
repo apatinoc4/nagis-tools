@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import ProjectCard from "../../atoms/project-card/projectCard";
+import { ViewportContext } from "../../../general/context/viewPortProvider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./projectSection.scss";
@@ -23,18 +24,8 @@ const PROJECTS = [
 ];
 
 const ProjectSection = () => {
-  const [width, setWidth] = useState<number>(window.innerWidth);
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  };
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 768;
+  const viewport = useContext(ViewportContext);
+  const isMobile = viewport === "mobile";
 
   return (
     <div className="m-projects-container" id="project-section">

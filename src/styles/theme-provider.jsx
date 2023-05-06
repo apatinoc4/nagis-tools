@@ -59,7 +59,7 @@ const theme = createTheme({
               minHeight: 175,
               height: 195,
               "&.mobile": {
-                height: 240,
+                height: 280,
               },
             },
           },

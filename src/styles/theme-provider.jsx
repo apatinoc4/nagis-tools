@@ -2,11 +2,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const darkGray = "#292929";
 
-const sunset1 = "#ffc300";
+// const sunset1 = "#ffc300";
 const sunset2 = "#ff5733";
 const sunset3 = "#c70039";
 const sunset4 = "#900c3f";
-const sunset5 = "#581845";
+// const sunset5 = "#581845";
 
 const theme = createTheme({
   components: {
@@ -78,6 +78,9 @@ const theme = createTheme({
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 800,
                 textDecoration: "none",
+                "&:hover": {
+                  fontSize: 15,
+                },
               },
             },
           },

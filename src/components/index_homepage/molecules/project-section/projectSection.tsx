@@ -35,6 +35,7 @@ const ProjectSection = () => {
   }, []);
 
   const isMobile = width <= 768;
+
   return (
     <div className="m-projects-container" id="project-section">
       <div className="m-projects-title">
@@ -65,6 +66,7 @@ const ProjectSection = () => {
                     <ProjectCard
                       image={image}
                       index={index}
+                      mobile={isMobile}
                       projectName={projectName}
                       projectDescription={projectDescription}
                       url={url}

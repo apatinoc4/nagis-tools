@@ -9,13 +9,14 @@ import Typography from "@mui/material/Typography";
 interface ProjectCardProps {
   image: string;
   index: number;
+  mobile?: boolean;
   projectName: string;
   projectDescription: string;
   url: string;
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
-  const { image, index, projectName, projectDescription, url } = props;
+  const { image, index, mobile, projectName, projectDescription, url } = props;
 
   return (
     <Card className="projectCard" sx={{ maxWidth: 400 }}>
@@ -25,7 +26,7 @@ const ProjectCard = (props: ProjectCardProps) => {
         src={require(`../../../../assets/index_homepage/backgrounds/${image}`)}
         alt="alt"
       />
-      <CardContent>
+      <CardContent className={`${mobile && "mobile"}`}>
         <Typography
           className="projectCard-tittle"
           gutterBottom

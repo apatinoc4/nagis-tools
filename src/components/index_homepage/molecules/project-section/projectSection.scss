@@ -13,6 +13,16 @@
     padding-bottom: 40px;
     width: 100%;
 
+    .carousel {
+      height: 500px;
+      .carousel-indicators {
+        button {
+          background-color: $dark-gray;
+          height: 10px;
+        }
+      }
+    }
+
     @include mobile {
       min-height: 50vh;
     }

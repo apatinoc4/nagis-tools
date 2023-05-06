@@ -1,4 +1,4 @@
-interface CarouselWrapperProps {
+interface ConditionalWrapperProps {
   condition: boolean;
   wrapper: any;
   children: any;
@@ -7,6 +7,6 @@ const ConditionalWrapper = ({
   condition,
   wrapper,
   children,
-}: CarouselWrapperProps) => (condition ? wrapper(children) : children);
+}: ConditionalWrapperProps) => (condition ? wrapper(children) : children);
 
 export default ConditionalWrapper;

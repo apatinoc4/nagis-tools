@@ -99,6 +99,17 @@ $milestoneNamePosition: 15px;
     p {
       margin-top: 0;
     }
+
+    @include mobile {
+      flex-direction: column;
+      width: $collapsedCardWidth;
+
+      &.expanded {
+        width: 320px;
+        height: 850px;
+        margin: 0;
+      }
+    }
   }
 
   &-inputs {
@@ -115,4 +126,13 @@ $milestoneNamePosition: 15px;
     padding-left: 15px;
     min-width: 260px;
   }
+  &-tabsContainer {
+    display: flex;
+    align-items: center;
+    min-height: 448px;
+  }
+}
+
+.hidden {
+  display: none;
 }

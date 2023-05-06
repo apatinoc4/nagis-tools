@@ -4,10 +4,13 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import TextField from "@mui/material/TextField";
 
 import "./unit-card.scss";
 import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
+import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -77,6 +80,25 @@ const UnitCard = (props: unitCardProps) => {
     null
   );
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<number>(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  const handleWindowSizeChange = useCallback(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, [handleWindowSizeChange]);
+
+  const isMobile = width <= 768;
 
   const renderEstimatedDates = startingShards && hoursNeeded;
 
@@ -173,34 +195,71 @@ const UnitCard = (props: unitCardProps) => {
 
       {!!renderEstimatedDates && (
         <>
-          <div className="m-unitCard-milestones">
-            <h2>MILESTONES</h2>
-            {MILESTONE_SHARDS.map((milestone, idx) => (
-              <div key={idx}>
-                <div
-                  className={`m-unitCard-milestoneName sunset-${
-                    unitNumber + 1
-                  }`}
-                >
-                  <h3>{milestone.milestoneName}</h3>
+          {isMobile && (
+            <Tabs
+              className="unit-card-tabs"
+              value={activeTab}
+              onChange={handleChange}
+            >
+              <Tab label="Milestones" />
+              <Tab label="Calendar" />
+            </Tabs>
+          )}
+          <>
+            <ConditionalWrapper
+              condition={isMobile}
+              wrapper={(children: any) => (
+                <div className="m-unitCard-tabsContainer">{children}</div>
+              )}
+            >
+              <ConditionalWrapper
+                condition={isMobile}
+                wrapper={(children: any) => (
+                  <div className={`${activeTab === 1 ? "hidden" : ""}`}>
+                    {children}
+                  </div>
+                )}
+              >
+                <div className="m-unitCard-milestones">
+                  {!isMobile && <h2>MILESTONES</h2>}
+                  {MILESTONE_SHARDS.map((milestone, idx) => (
+                    <div key={idx}>
+                      <div
+                        className={`m-unitCard-milestoneName sunset-${
+                          unitNumber + 1
+                        }`}
+                      >
+                        <h3>{milestone.milestoneName}</h3>
+                      </div>
+                      <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
+                      <h4>Estimated Date:</h4>
+                      <p>
+                        {addHoursToDate(
+                          currentDate,
+                          hoursNeeded[milestone.milestoneKey]
+                        ).toDateString()}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
-                <h4>Estimated Date:</h4>
-                <p>
-                  {addHoursToDate(
-                    currentDate,
-                    hoursNeeded[milestone.milestoneKey]
-                  ).toDateString()}
-                </p>
-              </div>
-            ))}
-          </div>
-          <MilestoneCalendar
-            currentDate={formatDatetoString(currentDate)}
-            lastMilestoneDate={formatDatetoString(
-              addHoursToDate(currentDate, hoursNeeded["level140"])
-            )}
-          />
+              </ConditionalWrapper>
+              <ConditionalWrapper
+                condition={isMobile}
+                wrapper={(children: any) => (
+                  <div className={`${activeTab === 0 ? "hidden" : ""}`}>
+                    {children}
+                  </div>
+                )}
+              >
+                <MilestoneCalendar
+                  currentDate={formatDatetoString(currentDate)}
+                  lastMilestoneDate={formatDatetoString(
+                    addHoursToDate(currentDate, hoursNeeded["level140"])
+                  )}
+                />
+              </ConditionalWrapper>
+            </ConditionalWrapper>
+          </>
         </>
       )}
     </div>

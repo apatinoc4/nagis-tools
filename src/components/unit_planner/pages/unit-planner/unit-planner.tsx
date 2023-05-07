@@ -9,23 +9,29 @@ import { ViewportContext } from "../../../general/context/viewPortProvider";
 
 const currentDate = new Date();
 const formatDate = (date: Date) => ({
-  day: date
+  dayName: date
     .toLocaleDateString("en-US", {
       weekday: "long",
     })
     .replace(",", "")
     .toUpperCase(),
-  monthYear: date
+  dayMonth: date
     .toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
+    })
+    .replace(",", "")
+    .toUpperCase(),
+  year: date
+    .toLocaleDateString("en-US", {
       year: "numeric",
     })
     .replace(",", "")
     .toUpperCase(),
 });
 
-const { day, monthYear } = formatDate(currentDate);
+const { dayName, dayMonth, year } = formatDate(currentDate);
+const todaysDate = [dayName, dayMonth, year];
 
 const UnitPlanner = () => {
   const [unitCount, setUnitCount] = useState<number>(1);
@@ -38,7 +44,9 @@ const UnitPlanner = () => {
       <div className="p-unitPlanner-currentDate">
         <p>TODAYS DATE</p>
         <p>
-          <span>{day}</span> {monthYear}
+          {todaysDate.map((datePart, idx) => (
+            <span key={idx}>{datePart}&nbsp;</span>
+          ))}
         </p>
       </div>
       <div className="p-unitPlanner-unitCards">

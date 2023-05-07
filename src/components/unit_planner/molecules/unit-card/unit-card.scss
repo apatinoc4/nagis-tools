@@ -40,9 +40,9 @@ $milestoneNamePosition: 15px;
     }
 
     //this was done for specificity sake
-    .m-unitCard-unitNumber {
-      font-size: 36px;
-      margin-bottom: 20px;
+
+    .m-unitCard-calendarDescription {
+      margin-bottom: 40px;
       text-align: center;
     }
 
@@ -60,6 +60,12 @@ $milestoneNamePosition: 15px;
         transform: translateY(-50%);
         width: 7px;
       }
+    }
+
+    .m-unitCard-unitNumber {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     //

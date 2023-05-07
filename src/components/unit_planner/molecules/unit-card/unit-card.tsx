@@ -221,11 +221,7 @@ const UnitCard = (props: unitCardProps) => {
                   {!isMobile && <h2>MILESTONES</h2>}
                   {MILESTONE_SHARDS.map((milestone, idx) => (
                     <div key={idx}>
-                      <div
-                        className={`m-unitCard-milestoneName sunset-${
-                          unitNumber + 1
-                        }`}
-                      >
+                      <div className="m-unitCard-milestoneName">
                         <h3>{milestone.milestoneName}</h3>
                       </div>
                       <p>{estimatedTimeMessage(milestone.shardsNeeded)}</p>
@@ -248,6 +244,12 @@ const UnitCard = (props: unitCardProps) => {
                   </div>
                 )}
               >
+                {isMobile && (
+                  <p className="m-unitCard-calendarDescription">
+                    Date range between today and when the last milestone will be
+                    achieved.
+                  </p>
+                )}
                 <MilestoneCalendar
                   currentDate={formatDatetoString(currentDate)}
                   lastMilestoneDate={formatDatetoString(

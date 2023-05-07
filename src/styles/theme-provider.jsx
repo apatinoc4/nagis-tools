@@ -29,6 +29,14 @@ const theme = createTheme({
             fontWeight: 800,
             textDecoration: "none",
           },
+          ".MuiToolbar-root": {
+            "&.mobile": {
+              justifyContent: "space-between",
+              ".MuiButtonBase-root > .MuiSvgIcon-root": {
+                transform: "scale(1.5)",
+              },
+            },
+          },
         },
       },
     },
@@ -123,6 +131,26 @@ const theme = createTheme({
         root: {
           "&.Mui-focused": {
             color: darkGray,
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          "&.mobile-header-menu": {
+            a: {
+              color: darkGray,
+              fontFamily: "Poppins, sans-serif",
+              textDecoration: "none",
+            },
+            ".general-link": {
+              fontWeight: 800,
+              fontSize: 20,
+            },
+            ".tool-link": {
+              transform: "scale(0.5),",
+            },
           },
         },
       },

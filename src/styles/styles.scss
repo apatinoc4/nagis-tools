@@ -1,16 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
 
-//colors
+//base colors
 
-$dark-gray: #292929;
 $coconut: #f9f9f9;
-$kkred: #cc083e;
-$kkgreen: #00764f;
+$containerBlue: #d5ebf5;
+$dark-gray: #292929;
 $dunkinorange: #f5821f;
 $highlight: #a7a7a7;
+$kkgreen: #00764f;
+$kkred: #cc083e;
+$magenta: #ff00ff;
 $titleBlue: #243e66;
-$containerBlue: #d5ebf5;
+
+//sunset color palette
+
+$sunset1: #ffc300;
+$sunset2: #ff5733;
+$sunset3: #c70039;
+$sunset4: #900c3f;
+$sunset5: #581845;
 
 //breakpoints
 

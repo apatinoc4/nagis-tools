@@ -1,0 +1,71 @@
+@import "../../../../styles/styles.scss";
+
+.p-unitPlanner {
+  &-container {
+    align-items: flex-start;
+    background-color: $coconut;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding-left: 30px;
+    position: relative;
+
+    @include mobile {
+      padding: 0;
+    }
+  }
+
+  &-currentDate {
+    color: $dark-gray;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    margin-top: 20px;
+
+    :first-child,
+    :nth-child(2) {
+      margin: 0;
+    }
+
+    :nth-child(2) {
+      font-size: 50px;
+      position: relative;
+      top: -10px;
+
+      span {
+        color: $sunset3;
+      }
+    }
+
+    @include mobile {
+      box-sizing: border-box;
+      padding: 0 5%;
+    }
+  }
+
+  &-buttons {
+    align-items: flex-end;
+    bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    position: -webkit-sticky;
+    width: 100%;
+    z-index: 99;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-unitCards {
+    @include mobile {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}

@@ -1,35 +1,50 @@
-import React from "react";
-import { HashLink } from "react-router-hash-link";
-import "./header.scss";
 import AppBar from "@mui/material/AppBar";
+import BurgerMenu from "./components/burgerMenu";
 import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
-
+import { GENERAL_LINKS, TOOLS_LINKS } from "./constants/headerLinks";
+import { useContext } from "react";
+import { HashLink } from "react-router-hash-link";
 import Toolbar from "@mui/material/Toolbar";
+import Stack from "@mui/material/Stack";
+import { ViewportContext } from "../../context/viewPortProvider";
+
+import "./header.scss";
 const logoWhite = require("../../../../assets/general/main-logo/mainLogoWhite.svg");
 
-const HEADER_LINKS = [
-  { label: "HOME", linkTo: "/" },
-  { label: "TOOLS", linkTo: "/#project-section" },
-];
+const Header = () => {
+  const viewport = useContext(ViewportContext);
+  const isMobile = viewport === "mobile";
 
-const Header = () => (
-  <AppBar>
-    <Container>
-      <Toolbar>
-        <div className="header-logo">
-          <img src={logoWhite.default} alt="logoWhite" />
-        </div>
-        <Stack direction="row" spacing={2}>
-          {HEADER_LINKS.map(({ label, linkTo }, index) => (
-            <HashLink key={index} to={linkTo}>
-              {label}
-            </HashLink>
-          ))}
-        </Stack>
-      </Toolbar>
-    </Container>
-  </AppBar>
-);
+  return (
+    <AppBar>
+      <Container>
+        <Toolbar className={`${isMobile ? "mobile" : ""}`}>
+          <div className="header-logo">
+            <img src={logoWhite.default} alt="logoWhite" />
+          </div>
+          {isMobile ? (
+            <>
+              <BurgerMenu />
+            </>
+          ) : (
+            <Stack direction="row" spacing={2}>
+              {GENERAL_LINKS.map(({ label, linkTo }, index) => (
+                <HashLink key={index} to={linkTo}>
+                  {label}
+                </HashLink>
+              ))}
+              <span>|</span>
+              {TOOLS_LINKS.map(({ label, linkTo }, index) => (
+                <HashLink key={index} to={linkTo}>
+                  {label}
+                </HashLink>
+              ))}
+            </Stack>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
 
 export default Header;

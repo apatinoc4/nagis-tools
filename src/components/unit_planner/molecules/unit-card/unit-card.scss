@@ -1,0 +1,138 @@
+@import "../../../../styles/styles.scss";
+
+$collapsedCardWidth: 320px;
+$cardHeight: 540px;
+$milestoneNamePosition: 15px;
+
+.m-unitCard {
+  &-container {
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -5px 5px 19px 0px #dddddd;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: $cardHeight;
+    flex-direction: row;
+    margin: 20px;
+    min-width: $collapsedCardWidth;
+    padding: 20px;
+    position: relative;
+    transition: width 0.3s ease-in-out;
+
+    &.collapsed {
+      width: $collapsedCardWidth;
+    }
+
+    &.expanded {
+      width: 1050px;
+    }
+
+    &--coloredstripe {
+      background-color: $sunset4;
+      border-radius: 10px 0 0 10px;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 10px;
+    }
+
+    //this was done for specificity sake
+    .m-unitCard-unitNumber {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .m-unitCard-milestoneName {
+      position: relative;
+      left: $milestoneNamePosition;
+
+      ::before {
+        background-color: $sunset3;
+        content: "";
+        height: 50%;
+        left: -$milestoneNamePosition;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 7px;
+      }
+    }
+
+    //
+
+    h2 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    h4 {
+      margin-top: 0px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+      color: $dark-gray;
+      font-family: "Poppins", sans-serif;
+    }
+
+    h2,
+    h3,
+    h4 {
+      font-weight: 800;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      width: $collapsedCardWidth;
+
+      &.expanded {
+        width: 320px;
+        height: 850px;
+        margin: 0;
+      }
+    }
+  }
+
+  &-inputs {
+    box-sizing: border-box;
+    width: $collapsedCardWidth;
+    padding: 0 20px;
+  }
+
+  &-milestones {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    padding-left: 15px;
+    min-width: 260px;
+  }
+  &-tabsContainer {
+    display: flex;
+    align-items: center;
+    min-height: 448px;
+  }
+}
+
+.hidden {
+  display: none;
+}

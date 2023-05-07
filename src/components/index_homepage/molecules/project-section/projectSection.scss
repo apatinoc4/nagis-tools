@@ -7,11 +7,25 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 55vh;
+    min-height: 100vh;
     justify-content: center;
     margin: 0;
     padding-bottom: 40px;
     width: 100%;
+
+    .carousel {
+      height: 550px;
+      .carousel-indicators {
+        button {
+          background-color: $dark-gray;
+          height: 10px;
+        }
+      }
+    }
+
+    @include mobile {
+      min-height: 50vh;
+    }
   }
   &-title {
     align-items: center;
@@ -31,6 +45,7 @@
       height: 10%;
       justify-content: center;
       margin-top: 20px;
+      padding: 0;
     }
   }
 

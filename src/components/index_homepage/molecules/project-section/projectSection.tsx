@@ -37,7 +37,9 @@ const ProjectSection = () => {
           JavaScript. These tools were created by me as a way to learn
           programming concepts and to apply my skills to practical projects.
         </p>
-        <p>I'm always working a projects to add to this list.</p>
+        <p>
+          I'm always working on or looking for projects to add to this list.
+        </p>
       </div>
       <div className="m-projects-list">
         <div className=" m-projects-projectcards">

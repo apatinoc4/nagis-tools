@@ -15,7 +15,7 @@ const PROJECTS = [
     url: "/review_tool",
   },
   {
-    image: "02bg.jpeg",
+    image: "02bg.jpg",
     projectName: "WOTV Unit Planner",
     projectDescription:
       "Tool designed for WAR OF THE VISIONS FINAL FANTASY BRAVE EXVIUS players - the Unit Milestone Calculator. This tool helps you easily track the progress of your units and predicts when they will reach important milestones such as level 99, level 120, and level 140 based on your initial unit shards. ",

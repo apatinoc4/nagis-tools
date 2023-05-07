@@ -159,7 +159,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           ".MuiTabs-indicator": {
-            backgroundColor: sunset4,
+            backgroundColor: sunset3,
           },
           "&.unit-card-tabs": {
             margin: "15px 0",
@@ -167,7 +167,7 @@ const theme = createTheme({
               fontFamily: "Poppins, sans-serif",
               fontWeight: 800,
               "&.Mui-selected": {
-                color: sunset4,
+                color: sunset3,
               },
             },
           },

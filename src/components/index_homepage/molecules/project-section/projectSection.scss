@@ -28,24 +28,41 @@
     }
   }
   &-title {
-    align-items: center;
+    align-items: flex-start;
     box-sizing: border-box;
     color: $dark-gray;
     display: flex;
+    flex-direction: column;
     font-family: "Poppins", sans-serif;
-    font-size: 50px;
-    font-weight: 800;
     justify-content: flex-start;
-    padding-left: 30px;
+    padding: 0 30px;
     position: relative;
     width: 100%;
 
+    h2 {
+      font-size: 50px;
+      font-weight: 800;
+    }
+
+    p {
+      text-justify: inter-word;
+      width: 50%;
+    }
+
     @include mobile {
-      font-size: 8vw;
+      align-items: center;
       height: 10%;
       justify-content: center;
       margin-top: 20px;
-      padding: 0;
+      padding: 0 5%;
+
+      h2 {
+        font-size: 8vw;
+      }
+
+      p {
+        width: 100%;
+      }
     }
   }
 

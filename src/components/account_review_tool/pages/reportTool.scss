@@ -81,30 +81,15 @@
   }
 
   &-previewbutton {
-    align-items: center;
-    background: $dark-gray;
-    border: 2px solid $containerBlue;
-    border-radius: 5px 5px 0 5px;
-    bottom: 0;
-    color: white;
+    bottom: 50px;
+    box-sizing: border-box;
     display: flex;
-    height: 60px;
-    font-family: "Poppins", sans-serif;
-    font-size: 12px;
-    justify-content: center;
-    position: fixed;
-    right: 0;
-    text-align: center;
-    width: 60px;
-    z-index: 20;
-
-    @include desktop {
-      display: none;
-    }
-
-    span {
-      font-size: 14px;
-    }
+    justify-content: flex-end;
+    padding-right: 10px;
+    position: sticky;
+    position: -webkit-sticky;
+    width: 100%;
+    z-index: 99;
   }
 
   &-headerextender {
@@ -125,6 +110,11 @@
     width: 100%;
     z-index: 1;
 
+    &--mobileInputs {
+      display: flex;
+      justify-content: center;
+    }
+
     &--inputfields {
       align-items: center;
       background-color: $titleBlue;
@@ -136,7 +126,7 @@
       width: 25%;
 
       @include mobile {
-        padding: 5% 0 10% 0;
+        padding: 0;
       }
 
       @include tablet {

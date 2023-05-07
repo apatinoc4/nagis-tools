@@ -1,81 +1,29 @@
-import { ChangeEvent, useState, useEffect, useRef, useContext } from "react";
+import { ChangeEvent, useState, useRef, useContext } from "react";
 import { ReportContext } from "../context/reportToolProvider";
 import ReactToPrint from "react-to-print";
 import "./reportTool.scss";
 import InputFields from "../molecules/input-fields/inputFields";
 import ReportPdf from "../molecules/report-pdf/reportPdf";
 import Button from "@mui/material/Button";
-import { ActiveState } from "../types/types";
+import { ViewportContext } from "../../general/context/viewPortProvider";
+import ConditionalWrapper from "../../general/molecules/conditional-wrapper/conditionalWrapper";
 const ffLogo = require("../../../assets/account_review_tool/backgrounds/ff-logo.png");
 
 const GUILD_LIST: string[] = ["Krispy-Kreme", "Dunkin"];
 
 const ReportTool = () => {
   const { activeGuild, setActiveGuild } = useContext(ReportContext);
-  const [activeState, setActiveState] = useState<ActiveState>({});
+  const [previewView, setPreviewView] = useState<boolean>(false);
+  const viewport = useContext(ViewportContext);
+
+  const isMobile = viewport === "mobile";
 
   const guildHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setActiveGuild(event.target.value);
   };
 
   //ref used for pdf-print
-
   const ref = useRef(null);
-
-  //manages visibility state of both inputs and preview based on window size and resizing
-
-  const useWindowSize = () => {
-    // detects initial device when rendering and sets visibility state accordingly
-
-    useEffect(() => {
-      if (window.innerWidth > 1024) {
-        setActiveState({
-          inputs: true,
-          preview: true,
-        });
-      } else {
-        setActiveState({
-          inputs: true,
-          preview: false,
-        });
-      }
-    }, []);
-
-    // sets visibility states on manual resize
-
-    useEffect(() => {
-      function handleResize() {
-        if (window.innerWidth > 1024) {
-          setActiveState({
-            inputs: true,
-            preview: true,
-          });
-        } else if (window.innerWidth < 1024) {
-          setActiveState({
-            inputs: true,
-            preview: false,
-          });
-        }
-      }
-
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-  };
-
-  useWindowSize();
-
-  // visibility toggle function for both input and preview when preview button is clicked
-
-  const activeHandler = () => {
-    let state = { ...activeState };
-    Object.keys(state).forEach(
-      (keyElem) =>
-        (state[keyElem as keyof ActiveState] =
-          !state[keyElem as keyof ActiveState])
-    );
-    setActiveState(state);
-  };
 
   return (
     <div className="p-reportTool-container">
@@ -108,59 +56,73 @@ const ReportTool = () => {
           </select>
         </div>
       </div>
-      <div
-        onClick={() => activeHandler()}
-        className={`p-reportTool-previewbutton ${
-          activeGuild === "Krispy-Kreme" ? "kk-outline" : "dunkin-outline"
-        }`}
-      >
-        <div className="p-reportTool-previewbutton--innerdiv">
-          {!activeState.preview ? (
-            <>
+      <div className="p-reportTool-headerextender"></div>
+      <div className="p-reportTool-mainbody">
+        <ConditionalWrapper
+          condition={isMobile}
+          wrapper={(children: any) => (
+            <div
+              className={`p-reportTool-mainbody--mobileInputs ${
+                previewView ? "hidden" : ""
+              }`}
+            >
+              {children}
+            </div>
+          )}
+        >
+          <div className="p-reportTool-mainbody--inputfields">
+            <InputFields />
+            <ReactToPrint
+              trigger={() => (
+                <Button onClick={() => console.log(ref.current)}>
+                  Generate PDF
+                </Button>
+              )}
+              content={() => ref.current}
+            />
+          </div>
+        </ConditionalWrapper>
+        <ConditionalWrapper
+          condition={isMobile}
+          wrapper={(children: any) => (
+            <div className={`${!previewView ? "hidden" : ""}`}>{children}</div>
+          )}
+        >
+          <div className={"p-reportTool-mainbody--reportpreview"}>
+            {isMobile && (
+              <p className="p-reportTool-disclaimer">
+                Preview for mobile visualization purposes, some proportions may
+                vary slightly.
+              </p>
+            )}
+            <ReportPdf
+              activeGuild={activeGuild}
+              previewView={previewView}
+              ref={ref}
+            />
+          </div>
+        </ConditionalWrapper>
+      </div>
+      {isMobile && (
+        <div
+          className={`p-reportTool-previewbutton ${
+            activeGuild === "Krispy-Kreme" ? "kk-outline" : "dunkin-outline"
+          }`}
+        >
+          <Button
+            className="report-tool-preview-button"
+            onClick={() => setPreviewView(!previewView)}
+          >
+            {!previewView ? (
               <p>
                 Preview <span>PDF</span>
               </p>
-            </>
-          ) : (
-            <>
+            ) : (
               <p>Hide Preview</p>
-            </>
-          )}
-        </div>
-      </div>
-      <div className="p-reportTool-headerextender"></div>
-      <div className="p-reportTool-mainbody">
-        <div
-          className={`p-reportTool-mainbody--inputfields ${
-            activeState.inputs === false ? "hidden" : ""
-          }`}
-        >
-          <InputFields />
-          <ReactToPrint
-            trigger={() => (
-              <Button onClick={() => console.log(ref.current)}>
-                Generate PDF
-              </Button>
             )}
-            content={() => ref.current}
-          />
+          </Button>
         </div>
-        <div
-          className={`p-reportTool-mainbody--reportpreview ${
-            activeState.preview === false ? "hidden" : ""
-          }`}
-        >
-          <p className="p-reportTool-disclaimer">
-            Preview for mobile visualization purposes, some proportions may vary
-            slightly.
-          </p>
-          <ReportPdf
-            activeGuild={activeGuild}
-            activeState={activeState}
-            ref={ref}
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

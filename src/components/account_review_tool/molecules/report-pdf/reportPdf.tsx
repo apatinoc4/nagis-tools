@@ -1,7 +1,6 @@
 import "./reportPdf.scss";
 import { forwardRef, ForwardedRef, useContext } from "react";
 import AccountInfo from "../account-info/accountInfo";
-import { ActiveState } from "../../types/types";
 import BodyField from "../body-field/bodyField";
 import OverviewField from "../../atoms/overview-field/overviewField";
 import RadarChart from "../../atoms/radar-chart/radarChart";
@@ -16,7 +15,7 @@ type BodyFields = {
 
 interface ReportPdfProps {
   activeGuild: string;
-  activeState: ActiveState;
+  previewView: boolean;
 }
 
 const BODY_FIELDS: BodyFields = [
@@ -28,7 +27,7 @@ const BODY_FIELDS: BodyFields = [
 
 const ReportPdf = forwardRef<HTMLDivElement, ReportPdfProps>(
   (props: ReportPdfProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { activeGuild, activeState } = props;
+    const { activeGuild, previewView } = props;
     const { reviewInfo } = useContext(ReportContext);
 
     const windowLength = window.innerWidth;
@@ -59,7 +58,7 @@ const ReportPdf = forwardRef<HTMLDivElement, ReportPdfProps>(
               </div>
               <div className="m-reportpdf-overview--radarchart">
                 {windowLength >= 1024 ||
-                (windowLength <= 1024 && activeState.preview) ? (
+                (windowLength <= 1024 && previewView) ? (
                   <RadarChart maxedStats={reviewInfo} />
                 ) : (
                   <></>

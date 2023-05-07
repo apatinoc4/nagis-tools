@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const containerBlue = "#d5ebf5";
 const darkGray = "#292929";
 
 // const sunset1 = "#ffc300";
@@ -52,6 +53,23 @@ const theme = createTheme({
             },
             "&.remove-unit:not(.Mui-disabled)": {
               backgroundColor: sunset4,
+            },
+          },
+          "&.report-tool-preview-button": {
+            backgroundColor: darkGray,
+            border: `3px solid ${containerBlue}`,
+            color: "White",
+            fontFamily: "Poppins, sans-serif",
+            fontSize: 10,
+            height: 60,
+            paddingTop: 5,
+            transform: "translateY(35px)",
+            width: 60,
+            p: {
+              margin: 0,
+              span: {
+                fontSize: 12,
+              },
             },
           },
         },

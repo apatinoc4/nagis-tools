@@ -1,8 +1,3 @@
-export type ActiveState = {
-  inputs?: boolean;
-  preview?: boolean;
-};
-
 export type ReviewInfo = {
   reviewer: string;
   accName: string;

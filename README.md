@@ -14,7 +14,7 @@ Unit Planner is a tool designed for [WAR OF THE VISIONS FINAL FANTASY BRAVE EXVI
 
 To run these projects locally, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/your-repo.git`
+1. Clone this repository: `git clone https://github.com/apatinoc4/nagis-tools.git`
 2. Install the necessary dependencies: `npm install`
 3. Start the development server: `npm start`
 

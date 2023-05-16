@@ -173,6 +173,17 @@ const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.searchBar": {
+            ".MuiButtonBase-root > .MuiSvgIcon-root": {
+              color: darkGray,
+            },
+          },
+        },
+      },
+    },
     MuiTabs: {
       styleOverrides: {
         root: {

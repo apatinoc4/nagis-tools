@@ -19,6 +19,7 @@ import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/c
 
 import "./unit-card.scss";
 import { ViewportContext } from "../../../general/context/viewPortProvider";
+import UnitSearch from "../unit-search/unitSearch";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -162,6 +163,10 @@ const UnitCard = (props: unitCardProps) => {
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           value={startingShards || ""}
         />
+        <div>
+          <p>Have a unit in mind? Search for them</p>
+        </div>
+        <UnitSearch />
         <FormControl fullWidth>
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool

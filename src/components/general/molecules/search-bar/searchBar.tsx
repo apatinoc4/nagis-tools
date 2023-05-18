@@ -5,13 +5,17 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import CloseIcon from "@mui/icons-material/Close";
 import { debounce } from "lodash";
 
-const SearchBar = () => {
+interface SearchBarProps {
+  setSearchTerm: (searchTerm: string) => void;
+}
+
+const SearchBar = (props: SearchBarProps) => {
+  const { setSearchTerm } = props;
   const [value, setValue] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
 
   useEffect(() => {
     const debounceUpdateDebouncedValue = debounce(() => {
-      setDebouncedValue(value);
+      setSearchTerm(value);
     }, 500);
 
     debounceUpdateDebouncedValue();
@@ -19,7 +23,7 @@ const SearchBar = () => {
     return () => {
       debounceUpdateDebouncedValue.cancel();
     };
-  }, [value]);
+  }, [setSearchTerm, value]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -28,7 +32,7 @@ const SearchBar = () => {
 
   const handleClear = () => {
     setValue("");
-    setDebouncedValue("");
+    setSearchTerm("");
   };
 
   return (

@@ -20,6 +20,7 @@ import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/c
 import "./unit-card.scss";
 import { ViewportContext } from "../../../general/context/viewPortProvider";
 import UnitSearch from "../unit-search/unitSearch";
+import useGetUnitByKey from "../../hooks/useGetUnitByKey";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -91,6 +92,11 @@ const UnitCard = (props: unitCardProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
   const viewport = useContext(ViewportContext);
+  const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
+
+  const unit = useGetUnitByKey("UN_LW_P_STRN");
+
+  console.log(unit);
 
   const isMobile = viewport === "mobile";
 
@@ -143,6 +149,8 @@ const UnitCard = (props: unitCardProps) => {
     [hoursNeeded, startingShards]
   );
 
+  const unitName = unit ? unit.name : `UNIT ${unitNumber + 1}`;
+
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
 
   return (
@@ -153,7 +161,12 @@ const UnitCard = (props: unitCardProps) => {
     >
       <div className="m-unitCard-inputs">
         <div className="m-unitCard-container--coloredstripe"></div>
-        <h2 className="m-unitCard-unitNumber">UNIT {unitNumber + 1}</h2>
+        {unit && (
+          <div className="m-unitCard-unitImage--container">
+            <img alt="unit" src={unit.image} />
+          </div>
+        )}
+        <h2 className="m-unitCard-unitNumber">{unitName}</h2>
         <TextField
           className="unit-card-input"
           fullWidth
@@ -166,7 +179,10 @@ const UnitCard = (props: unitCardProps) => {
         <div>
           <p>Have a unit in mind? Search for them</p>
         </div>
-        <UnitSearch />
+        <UnitSearch
+          selectedUnitKey={selectedUnitKey}
+          setSelectedUnitKey={setSelectedUnitKey}
+        />
         <FormControl fullWidth>
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool

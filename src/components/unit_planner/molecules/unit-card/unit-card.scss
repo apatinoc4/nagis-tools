@@ -46,6 +46,20 @@ $milestoneNamePosition: 15px;
       text-align: center;
     }
 
+    .m-unitCard-unitImage {
+      &--container {
+        align-items: center;
+        display: flex;
+        height: 150px;
+        width: 300px;
+
+        img {
+          pointer-events: none;
+          width: 100%;
+        }
+      }
+    }
+
     .m-unitCard-milestoneName {
       position: relative;
       left: $milestoneNamePosition;

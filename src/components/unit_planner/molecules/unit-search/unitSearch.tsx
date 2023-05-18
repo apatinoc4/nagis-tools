@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SearchBar from "../../../general/molecules/search-bar/searchBar";
+import useGetUnitsBySearchTerm from "../../hooks/useGetUnitsBySearchTerm";
 
 type UnitOptions = {
   key: string;
@@ -28,17 +29,25 @@ const MOCK_UNITS = [
   },
 ];
 
-const UnitSearch = () => {
-  const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
+interface UnitSearchProps {
+  setSelectedUnitKey: (unitKey: string) => void;
+  selectedUnitKey: string;
+}
 
-  console.log(selectedUnitKey);
+const UnitSearch = (props: UnitSearchProps) => {
+  const { selectedUnitKey, setSelectedUnitKey } = props;
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const searchResults = useGetUnitsBySearchTerm(searchTerm);
+
+  console.log(searchResults);
 
   return (
     <Dialog open>
       <DialogTitle>Unit Search</DialogTitle>
-      <SearchBar />
+      <SearchBar setSearchTerm={setSearchTerm} />
       <List>
-        {MOCK_UNITS.map(({ key, value }: UnitOptions, idx: number) => (
+        {searchResults.map(({ key, value }: UnitOptions, idx: number) => (
           <ListItemButton
             key={idx}
             selected={selectedUnitKey === key}

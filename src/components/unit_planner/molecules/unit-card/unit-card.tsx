@@ -6,21 +6,22 @@ import {
   useState,
   useMemo,
 } from "react";
+import Button from "@mui/material/Button";
+import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TextField from "@mui/material/TextField";
-import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
-import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
-
-import "./unit-card.scss";
-import { ViewportContext } from "../../../general/context/viewPortProvider";
 import UnitSearch from "../unit-search/unitSearch";
 import useGetUnitByKey from "../../hooks/useGetUnitByKey";
+import { ViewportContext } from "../../../general/context/viewPortProvider";
+
+import "./unit-card.scss";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -91,12 +92,11 @@ const UnitCard = (props: unitCardProps) => {
   );
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const viewport = useContext(ViewportContext);
   const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
+  const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
+  const viewport = useContext(ViewportContext);
 
-  const unit = useGetUnitByKey("UN_LW_P_STRN");
-
-  console.log(unit);
+  const unit = useGetUnitByKey(selectedUnitKey);
 
   const isMobile = viewport === "mobile";
 
@@ -149,9 +149,16 @@ const UnitCard = (props: unitCardProps) => {
     [hoursNeeded, startingShards]
   );
 
+  const getFetchedUnitAvailability = useCallback(() => {
+    setUnitAvailability(unit?.limited ? "limited" : "regular");
+  }, [unit]);
+
   const unitName = unit ? unit.name : `UNIT ${unitNumber + 1}`;
 
+  console.log(unit);
+
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
+  useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
 
   return (
     <div
@@ -166,24 +173,36 @@ const UnitCard = (props: unitCardProps) => {
             <img alt="unit" src={unit.image} />
           </div>
         )}
-        <h2 className="m-unitCard-unitNumber">{unitName}</h2>
+        <h2 className={`m-unitCard-unitName ${unit ? "unit" : "generic"}`}>
+          {unitName}
+        </h2>
         <TextField
           className="unit-card-input"
           fullWidth
           id="starting-shards"
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           label="Starting Shards"
           onChange={handleChangeStartingShards}
-          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          size="small"
           value={startingShards || ""}
         />
-        <div>
-          <p>Have a unit in mind? Search for them</p>
+        <div className="m-unitCard-searchCall">
+          <p>Have a specific unit in mind?</p>
+          <Button
+            className="unitCard-search"
+            onClick={() => setSearchOpen(true)}
+            variant="contained"
+          >
+            Unit Search
+          </Button>
         </div>
         <UnitSearch
+          isSearchOpen={isSearchOpen}
+          setSearchOpen={setSearchOpen}
           selectedUnitKey={selectedUnitKey}
           setSelectedUnitKey={setSelectedUnitKey}
         />
-        <FormControl fullWidth>
+        <FormControl disabled={!!unit ?? false} fullWidth>
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool
           </FormLabel>

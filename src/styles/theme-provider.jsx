@@ -8,6 +8,7 @@ const sunset2 = "#ff5733";
 const sunset3 = "#c70039";
 const sunset4 = "#900c3f";
 // const sunset5 = "#581845";
+const fadedSunset = "#fff2f6";
 
 const theme = createTheme({
   components: {
@@ -44,21 +45,11 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          "&.unitPlanner-button": {
-            margin: "5px 0",
-            width: 180,
-
-            "&.add-unit:not(.Mui-disabled)": {
-              backgroundColor: sunset2,
-            },
-            "&.remove-unit:not(.Mui-disabled)": {
-              backgroundColor: sunset4,
-            },
-          },
           "&.report-tool-preview-button": {
             backgroundColor: darkGray,
             border: `3px solid ${containerBlue}`,
             color: "White",
+
             fontFamily: "Poppins, sans-serif",
             fontSize: 10,
             height: 60,
@@ -71,6 +62,23 @@ const theme = createTheme({
                 fontSize: 12,
               },
             },
+          },
+          "&.unitPlanner-button": {
+            margin: "5px 0",
+            width: 180,
+
+            "&.add-unit:not(.Mui-disabled)": {
+              backgroundColor: sunset2,
+            },
+            "&.remove-unit:not(.Mui-disabled)": {
+              backgroundColor: sunset4,
+            },
+          },
+          "&.unitCard-search": {
+            backgroundColor: sunset3,
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 800,
+            width: "100%",
           },
         },
       },
@@ -113,17 +121,34 @@ const theme = createTheme({
         },
       },
     },
-    MuiDateCalendar: {
+    MuiDialog: {
       styleOverrides: {
         root: {
-          ".MuiPickersCalendarHeader-root": {
-            ".MuiButtonBase-root > .MuiSvgIcon-root": {
-              color: darkGray,
+          "&.unitCard-search": {
+            ".MuiPaper-root": {
+              padding: 30,
+              ".MuiDialogTitle-root": {
+                color: darkGray,
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 800,
+                fontSize: 34,
+              },
+
+              ".MuiList-root": {
+                marginTop: 20,
+                maxHeight: 500,
+                overflow: "auto",
+
+                ".MuiListItemButton-root.Mui-selected": {
+                  backgroundColor: fadedSunset,
+                },
+              },
             },
           },
         },
       },
     },
+
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -139,6 +164,10 @@ const theme = createTheme({
           "&.unit-availability": {
             ".MuiRadio-root.Mui-checked": {
               color: sunset3,
+
+              "&.Mui-disabled": {
+                color: "gray",
+              },
             },
           },
         },
@@ -147,6 +176,10 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          "&.unit-availability": {
+            color: darkGray,
+            fontFamily: "Poppins, sans-serif",
+          },
           "&.Mui-focused": {
             color: darkGray,
           },

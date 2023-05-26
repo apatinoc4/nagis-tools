@@ -97,6 +97,9 @@ function addHoursToDate(date: Date, hours: number) {
 
 const formatDatetoString = (date: Date) => date.toISOString().substring(0, 10);
 
+const formatUnitElementToClassName = (unitElement: string) =>
+  `wotv${unitElement.charAt(0).toUpperCase()}${unitElement.slice(1)}`;
+
 const UnitCard = (props: unitCardProps) => {
   const { unitNumber } = props;
   const [unitAvailability, setUnitAvailability] = useState<string>("regular");
@@ -167,7 +170,29 @@ const UnitCard = (props: unitCardProps) => {
     setUnitAvailability(unit?.limited ? "limited" : "regular");
   }, [unit]);
 
-  const unitName = unit ? unit.name : `UNIT ${unitNumber + 1}`;
+  const renderUnitNameImage = useCallback(() => {
+    if (isLoading) {
+      return (
+        <div className="m-unitCard-unitImage--loading">
+          <CircularProgress className="unitCard-loading" />
+        </div>
+      );
+    }
+
+    if (unit) {
+      return (
+        <div>
+          <div className="m-unitCard-unitImage--container">
+            <img alt="unit" src={unit?.image} />
+          </div>
+          <h2 className="m-unitCard-unitName unit">{unit?.name}</h2>
+        </div>
+      );
+    }
+    return (
+      <h2 className="m-unitCard-unitName generic">UNIT {unitNumber + 1}</h2>
+    );
+  }, [isLoading, unit, unitNumber]);
 
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
   useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
@@ -179,23 +204,8 @@ const UnitCard = (props: unitCardProps) => {
       }`}
     >
       <div className="m-unitCard-inputs">
-        <div
-          className={`m-unitCard-container--coloredstripe ${unit?.element}`}
-        ></div>
-        {isLoading ? (
-          <div className="m-unitCard-unitImage--loading">
-            <CircularProgress className="unitCard-loading" />
-          </div>
-        ) : unit ? (
-          <div className="m-unitCard-unitImage--container">
-            <img alt="unit" src={unit?.image} />
-          </div>
-        ) : (
-          <></>
-        )}
-        <h2 className={`m-unitCard-unitName ${unit ? "unit" : "generic"}`}>
-          {unitName}
-        </h2>
+        <div className="m-unitCard-container--coloredstripe"></div>
+        {renderUnitNameImage()}
         <TextField
           className="unit-card-input"
           fullWidth
@@ -209,7 +219,9 @@ const UnitCard = (props: unitCardProps) => {
         <div className="m-unitCard-searchCall">
           <p>Have a specific unit in mind?</p>
           <Button
-            className={`unitCard-search ${unit?.element}`}
+            className={`unitCard-search ${
+              unit?.element ? formatUnitElementToClassName(unit?.element) : ""
+            }`}
             fullWidth
             onClick={() => setSearchOpen(true)}
             variant="contained"

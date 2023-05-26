@@ -42,7 +42,7 @@ const UnitPlanner = () => {
   return (
     <div className="p-unitPlanner-container">
       <div className="p-unitPlanner-currentDate">
-        <p>TODAYS DATE</p>
+        <p>TODAY'S DATE</p>
         <p>
           {todaysDate.map((datePart, idx) => (
             <span key={idx}>{datePart}&nbsp;</span>

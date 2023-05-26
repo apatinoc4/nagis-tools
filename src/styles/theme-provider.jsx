@@ -3,6 +3,16 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 const containerBlue = "#d5ebf5";
 const darkGray = "#292929";
 
+const tooltip = "#6c6c6c";
+
+const wotvFire = "#e06d38";
+const wotvIce = "#3a3bc4";
+const wotvWind = "#54b62f";
+const wotVEarth = "#d7a75b";
+const wotvThunder = "#a09a26";
+const wotvLight = "#a8a899";
+const wotvDark = "#612c9e";
+
 // const sunset1 = "#ffc300";
 const sunset2 = "#ff5733";
 const sunset3 = "#c70039";
@@ -78,7 +88,6 @@ const theme = createTheme({
             backgroundColor: sunset3,
             fontFamily: "Poppins, sans-serif",
             fontWeight: 800,
-            width: "100%",
           },
         },
       },
@@ -121,17 +130,34 @@ const theme = createTheme({
         },
       },
     },
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: {
+          "&.unitCard-loading": {
+            color: sunset3,
+          },
+        },
+      },
+    },
     MuiDialog: {
       styleOverrides: {
         root: {
           "&.unitCard-search": {
             ".MuiPaper-root": {
               padding: 30,
+
+              ".m-unitSearch-closeButton": {
+                ".MuiButtonBase-root > .MuiSvgIcon-root": {
+                  color: darkGray,
+                },
+              },
+
               ".MuiDialogTitle-root": {
                 color: darkGray,
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 800,
                 fontSize: 34,
+                paddingLeft: 0,
               },
 
               ".MuiList-root": {
@@ -213,6 +239,17 @@ const theme = createTheme({
             ".MuiButtonBase-root > .MuiSvgIcon-root": {
               color: darkGray,
             },
+          },
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          "&.helper-tooltip": {
+            color: tooltip,
+            height: 18,
+            marginLeft: 3,
           },
         },
       },

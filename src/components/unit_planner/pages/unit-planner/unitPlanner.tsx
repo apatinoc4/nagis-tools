@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import PersonRemoveAlt1Icon from "@mui/icons-material/PersonRemoveAlt1";
-import UnitCard from "../../molecules/unit-card/unit-card";
+import UnitCard from "../../molecules/unit-card/unitCard";
 
-import "./unit-planner.scss";
+import "./unitPlanner.scss";
 import { ViewportContext } from "../../../general/context/viewPortProvider";
 
 const currentDate = new Date();

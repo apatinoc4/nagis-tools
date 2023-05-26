@@ -1,8 +1,8 @@
 import { ChangeEvent, useState, useEffect } from "react";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import { debounce } from "lodash";
 
 interface SearchBarProps {
@@ -40,9 +40,9 @@ const SearchBar = (props: SearchBarProps) => {
       className="searchBar"
       value={value}
       onChange={handleChange}
-      startAdornment={
+      endAdornment={
         <InputAdornment position="end">
-          <IconButton edge="start" onClick={handleClear}>
+          <IconButton edge="end" onClick={handleClear}>
             <CloseIcon />
           </IconButton>
         </InputAdornment>

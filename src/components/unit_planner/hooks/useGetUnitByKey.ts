@@ -2,34 +2,50 @@ import { useCallback, useEffect, useState } from "react";
 
 const useGetUnitByKey = (unitKey: string) => {
   const [unit, setUnit] = useState<any | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchUnitData = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/wotv/units/unit?key=${unitKey}`
+        `${process.env.REACT_APP_NAGIS_API_URL}/api/wotv/units/unit?key=${unitKey}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const jsonResponse = await response.json();
 
-      // Update the image URL to use the correct server address and port
       const updatedUnit = {
         ...jsonResponse,
-        image: `http://localhost:3001${jsonResponse.image}`,
+        image: `${process.env.REACT_APP_NAGIS_API_URL}${jsonResponse.image}`,
       };
 
-      setUnit(updatedUnit);
+      const image = new Image();
+      image.src = updatedUnit.image;
+
+      image.onload = () => {
+        setUnit(updatedUnit);
+        setIsLoading(false);
+      };
+      image.onerror = () => {
+        console.log("Failed to load image");
+        setIsLoading(false);
+      };
     } catch (error) {
       console.log(`${error} failed to fetch`);
+      setIsLoading(false);
     }
   }, [unitKey]);
 
   useEffect(() => {
+    if (!unitKey) {
+      return;
+    }
+
     fetchUnitData();
   }, [fetchUnitData, unitKey]);
 
-  return unit;
+  return { unit, isLoading };
 };
 
 export default useGetUnitByKey;

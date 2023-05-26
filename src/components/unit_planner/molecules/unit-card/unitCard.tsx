@@ -7,11 +7,13 @@ import {
   useMemo,
 } from "react";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
+import HelpIcon from "@mui/icons-material/Help";
+import MilestoneCalendar from "../milestone-calendar/milestoneCalendar";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Tabs from "@mui/material/Tabs";
@@ -21,7 +23,8 @@ import UnitSearch from "../unit-search/unitSearch";
 import useGetUnitByKey from "../../hooks/useGetUnitByKey";
 import { ViewportContext } from "../../../general/context/viewPortProvider";
 
-import "./unit-card.scss";
+import "./unitCard.scss";
+import HelperTitle from "../../../general/atoms/helper-title/helperTitle";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -37,6 +40,17 @@ interface unitCardProps {
   unitNumber: number;
 }
 
+const MILESTONE_HELPER_TEXT = (
+  <span>
+    Shards needed for each milestone.
+    <br />
+    Level 99 = 600 shards,
+    <br />
+    Level 120 = 1000 shards,
+    <br />
+    Level 140 = 1140 shards
+  </span>
+);
 const MILESTONE_SHARDS = [
   {
     milestoneKey: "level99",
@@ -96,7 +110,7 @@ const UnitCard = (props: unitCardProps) => {
   const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
   const viewport = useContext(ViewportContext);
 
-  const unit = useGetUnitByKey(selectedUnitKey);
+  const { isLoading, unit } = useGetUnitByKey(selectedUnitKey);
 
   const isMobile = viewport === "mobile";
 
@@ -155,8 +169,6 @@ const UnitCard = (props: unitCardProps) => {
 
   const unitName = unit ? unit.name : `UNIT ${unitNumber + 1}`;
 
-  console.log(unit);
-
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
   useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
 
@@ -167,11 +179,19 @@ const UnitCard = (props: unitCardProps) => {
       }`}
     >
       <div className="m-unitCard-inputs">
-        <div className="m-unitCard-container--coloredstripe"></div>
-        {unit && (
-          <div className="m-unitCard-unitImage--container">
-            <img alt="unit" src={unit.image} />
+        <div
+          className={`m-unitCard-container--coloredstripe ${unit?.element}`}
+        ></div>
+        {isLoading ? (
+          <div className="m-unitCard-unitImage--loading">
+            <CircularProgress className="unitCard-loading" />
           </div>
+        ) : unit ? (
+          <div className="m-unitCard-unitImage--container">
+            <img alt="unit" src={unit?.image} />
+          </div>
+        ) : (
+          <></>
         )}
         <h2 className={`m-unitCard-unitName ${unit ? "unit" : "generic"}`}>
           {unitName}
@@ -189,19 +209,14 @@ const UnitCard = (props: unitCardProps) => {
         <div className="m-unitCard-searchCall">
           <p>Have a specific unit in mind?</p>
           <Button
-            className="unitCard-search"
+            className={`unitCard-search ${unit?.element}`}
+            fullWidth
             onClick={() => setSearchOpen(true)}
             variant="contained"
           >
             Unit Search
           </Button>
         </div>
-        <UnitSearch
-          isSearchOpen={isSearchOpen}
-          setSearchOpen={setSearchOpen}
-          selectedUnitKey={selectedUnitKey}
-          setSelectedUnitKey={setSelectedUnitKey}
-        />
         <FormControl disabled={!!unit ?? false} fullWidth>
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool
@@ -258,7 +273,15 @@ const UnitCard = (props: unitCardProps) => {
                 )}
               >
                 <div className="m-unitCard-milestones">
-                  {!isMobile && <h2>MILESTONES</h2>}
+                  {!isMobile && (
+                    <HelperTitle
+                      title="MILESTONES"
+                      tooltipArrow
+                      tooltipPlacement="right"
+                      tooltipTitle={MILESTONE_HELPER_TEXT}
+                      children={<HelpIcon />}
+                    />
+                  )}
                   {MILESTONE_SHARDS.map((milestone, idx) => (
                     <div key={idx}>
                       <div className="m-unitCard-milestoneName">
@@ -301,6 +324,12 @@ const UnitCard = (props: unitCardProps) => {
           </>
         </>
       )}
+      <UnitSearch
+        isSearchOpen={isSearchOpen}
+        setSearchOpen={setSearchOpen}
+        selectedUnitKey={selectedUnitKey}
+        setSelectedUnitKey={setSelectedUnitKey}
+      />
     </div>
   );
 };

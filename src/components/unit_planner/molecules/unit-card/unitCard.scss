@@ -1,6 +1,6 @@
 @import "../../../../styles/styles.scss";
 
-$collapsedCardWidth: 320px;
+$collapsedCardWidth: 360px;
 $cardHeight: 560px;
 $milestoneNamePosition: 15px;
 
@@ -30,7 +30,7 @@ $milestoneNamePosition: 15px;
     }
 
     &--coloredstripe {
-      background-color: $sunset4;
+      background-color: $sunset3;
       border-radius: 10px 0 0 10px;
       height: 100%;
       left: 0;
@@ -158,6 +158,12 @@ $milestoneNamePosition: 15px;
   }
 
   &-unitImage {
+    &--loading {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     &--container {
       align-items: center;
       display: flex;

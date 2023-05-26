@@ -1,13 +1,17 @@
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SearchBar from "../../../general/molecules/search-bar/searchBar";
 import useGetUnitsBySearchTerm from "../../hooks/useGetUnitsBySearchTerm";
+
+import "./unitSearch.scss";
 
 type UnitOptions = {
   key: string;
@@ -33,6 +37,11 @@ const UnitSearch = (props: UnitSearchProps) => {
       onClose={() => setSearchOpen(false)}
       open={isSearchOpen}
     >
+      <div className="m-unitSearch-closeButton">
+        <IconButton edge="end" onClick={() => setSearchOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </div>
       <DialogTitle>UNIT SEARCH</DialogTitle>
       <SearchBar setSearchTerm={setSearchTerm} />
       <List>

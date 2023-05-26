@@ -8,7 +8,7 @@ const useGetUnitsBySearchTerm = (searchTerm: string) => {
   const fetchUnitMatches = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/wotv/units/search?name=${querySearchTerm}`
+        `${process.env.REACT_APP_NAGIS_API_URL}/api/wotv/units/search?name=${querySearchTerm}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

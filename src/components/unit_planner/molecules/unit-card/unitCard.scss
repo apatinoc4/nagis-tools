@@ -1,7 +1,7 @@
 @import "../../../../styles/styles.scss";
 
-$collapsedCardWidth: 320px;
-$cardHeight: 540px;
+$collapsedCardWidth: 360px;
+$cardHeight: 560px;
 $milestoneNamePosition: 15px;
 
 .m-unitCard {
@@ -30,7 +30,7 @@ $milestoneNamePosition: 15px;
     }
 
     &--coloredstripe {
-      background-color: $sunset4;
+      background-color: $sunset3;
       border-radius: 10px 0 0 10px;
       height: 100%;
       left: 0;
@@ -62,10 +62,24 @@ $milestoneNamePosition: 15px;
       }
     }
 
-    .m-unitCard-unitNumber {
-      font-size: 36px;
+    .m-unitCard-searchCall {
       margin-bottom: 20px;
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    .m-unitCard-unitName {
+      margin: 20px 0;
       text-align: center;
+
+      &.generic {
+        font-size: 36px;
+      }
+
+      &.unit {
+        font-size: 26px;
+      }
     }
 
     //
@@ -80,6 +94,7 @@ $milestoneNamePosition: 15px;
     }
 
     h4 {
+      font-size: 20px;
       margin-top: 0px;
     }
 
@@ -108,12 +123,15 @@ $milestoneNamePosition: 15px;
 
     @include mobile {
       flex-direction: column;
-      width: $collapsedCardWidth;
+
+      &.collapsed {
+        width: 350px;
+      }
 
       &.expanded {
-        width: 320px;
-        height: 850px;
-        margin: 0 0 30px 0;
+        width: 350px;
+        height: 1100px;
+        margin: 30px 0 60px 0;
       }
     }
   }
@@ -129,13 +147,35 @@ $milestoneNamePosition: 15px;
     display: flex;
     flex-direction: column;
     margin-right: 50px;
-    padding-left: 15px;
-    min-width: 260px;
+    padding-left: 30px;
+    min-width: 300px;
   }
+
   &-tabsContainer {
     display: flex;
     align-items: center;
     min-height: 448px;
+  }
+
+  &-unitImage {
+    &--loading {
+      align-items: center;
+      display: flex;
+      height: 220px;
+      justify-content: center;
+      width: 300px;
+    }
+    &--container {
+      align-items: center;
+      display: flex;
+      height: 150px;
+      width: 300px;
+
+      img {
+        pointer-events: none;
+        width: 100%;
+      }
+    }
   }
 }
 

@@ -6,19 +6,25 @@ import {
   useState,
   useMemo,
 } from "react";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import HelpIcon from "@mui/icons-material/Help";
+import MilestoneCalendar from "../milestone-calendar/milestoneCalendar";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TextField from "@mui/material/TextField";
-import MilestoneCalendar from "../milestone-calendar/milestone-calendar";
-import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
-
-import "./unit-card.scss";
+import UnitSearch from "../unit-search/unitSearch";
+import useGetUnitByKey from "../../hooks/useGetUnitByKey";
 import { ViewportContext } from "../../../general/context/viewPortProvider";
+
+import "./unitCard.scss";
+import HelperTitle from "../../../general/atoms/helper-title/helperTitle";
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -34,6 +40,17 @@ interface unitCardProps {
   unitNumber: number;
 }
 
+const MILESTONE_HELPER_TEXT = (
+  <span>
+    Shards needed for each milestone.
+    <br />
+    Level 99 = 600 shards,
+    <br />
+    Level 120 = 1000 shards,
+    <br />
+    Level 140 = 1140 shards
+  </span>
+);
 const MILESTONE_SHARDS = [
   {
     milestoneKey: "level99",
@@ -80,6 +97,9 @@ function addHoursToDate(date: Date, hours: number) {
 
 const formatDatetoString = (date: Date) => date.toISOString().substring(0, 10);
 
+const formatUnitElementToClassName = (unitElement: string) =>
+  `wotv${unitElement.charAt(0).toUpperCase()}${unitElement.slice(1)}`;
+
 const UnitCard = (props: unitCardProps) => {
   const { unitNumber } = props;
   const [unitAvailability, setUnitAvailability] = useState<string>("regular");
@@ -89,7 +109,11 @@ const UnitCard = (props: unitCardProps) => {
   );
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
+  const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
   const viewport = useContext(ViewportContext);
+
+  const { isLoading, unit } = useGetUnitByKey(selectedUnitKey);
 
   const isMobile = viewport === "mobile";
 
@@ -142,7 +166,36 @@ const UnitCard = (props: unitCardProps) => {
     [hoursNeeded, startingShards]
   );
 
+  const getFetchedUnitAvailability = useCallback(() => {
+    setUnitAvailability(unit?.limited ? "limited" : "regular");
+  }, [unit]);
+
+  const renderUnitNameImage = useCallback(() => {
+    if (isLoading) {
+      return (
+        <div className="m-unitCard-unitImage--loading">
+          <CircularProgress className="unitCard-loading" />
+        </div>
+      );
+    }
+
+    if (unit) {
+      return (
+        <div>
+          <div className="m-unitCard-unitImage--container">
+            <img alt="unit" src={unit?.image} />
+          </div>
+          <h2 className="m-unitCard-unitName unit">{unit?.name}</h2>
+        </div>
+      );
+    }
+    return (
+      <h2 className="m-unitCard-unitName generic">UNIT {unitNumber + 1}</h2>
+    );
+  }, [isLoading, unit, unitNumber]);
+
   useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
+  useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
 
   return (
     <div
@@ -152,17 +205,31 @@ const UnitCard = (props: unitCardProps) => {
     >
       <div className="m-unitCard-inputs">
         <div className="m-unitCard-container--coloredstripe"></div>
-        <h2 className="m-unitCard-unitNumber">UNIT {unitNumber + 1}</h2>
+        {renderUnitNameImage()}
         <TextField
           className="unit-card-input"
           fullWidth
           id="starting-shards"
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           label="Starting Shards"
           onChange={handleChangeStartingShards}
-          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          size="small"
           value={startingShards || ""}
         />
-        <FormControl fullWidth>
+        <div className="m-unitCard-searchCall">
+          <p>Have a specific unit in mind?</p>
+          <Button
+            className={`unitCard-search ${
+              unit?.element ? formatUnitElementToClassName(unit?.element) : ""
+            }`}
+            fullWidth
+            onClick={() => setSearchOpen(true)}
+            variant="contained"
+          >
+            Unit Search
+          </Button>
+        </div>
+        <FormControl disabled={!!unit ?? false} fullWidth>
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool
           </FormLabel>
@@ -218,7 +285,15 @@ const UnitCard = (props: unitCardProps) => {
                 )}
               >
                 <div className="m-unitCard-milestones">
-                  {!isMobile && <h2>MILESTONES</h2>}
+                  {!isMobile && (
+                    <HelperTitle
+                      title="MILESTONES"
+                      tooltipArrow
+                      tooltipPlacement="right"
+                      tooltipTitle={MILESTONE_HELPER_TEXT}
+                      children={<HelpIcon />}
+                    />
+                  )}
                   {MILESTONE_SHARDS.map((milestone, idx) => (
                     <div key={idx}>
                       <div className="m-unitCard-milestoneName">
@@ -261,6 +336,12 @@ const UnitCard = (props: unitCardProps) => {
           </>
         </>
       )}
+      <UnitSearch
+        isSearchOpen={isSearchOpen}
+        setSearchOpen={setSearchOpen}
+        selectedUnitKey={selectedUnitKey}
+        setSelectedUnitKey={setSelectedUnitKey}
+      />
     </div>
   );
 };

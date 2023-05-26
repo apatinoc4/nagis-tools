@@ -3,11 +3,22 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 const containerBlue = "#d5ebf5";
 const darkGray = "#292929";
 
+const tooltip = "#6c6c6c";
+
+const wotvFire = "#e06d38";
+const wotvIce = "#3a3bc4";
+const wotvWind = "#54b62f";
+const wotVEarth = "#d7a75b";
+const wotvThunder = "#a09a26";
+const wotvLight = "#a8a899";
+const wotvDark = "#612c9e";
+
 // const sunset1 = "#ffc300";
 const sunset2 = "#ff5733";
 const sunset3 = "#c70039";
 const sunset4 = "#900c3f";
 // const sunset5 = "#581845";
+const fadedSunset = "#fff2f6";
 
 const theme = createTheme({
   components: {
@@ -44,21 +55,11 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          "&.unitPlanner-button": {
-            margin: "5px 0",
-            width: 180,
-
-            "&.add-unit:not(.Mui-disabled)": {
-              backgroundColor: sunset2,
-            },
-            "&.remove-unit:not(.Mui-disabled)": {
-              backgroundColor: sunset4,
-            },
-          },
           "&.report-tool-preview-button": {
             backgroundColor: darkGray,
             border: `3px solid ${containerBlue}`,
             color: "White",
+
             fontFamily: "Poppins, sans-serif",
             fontSize: 10,
             height: 60,
@@ -71,6 +72,22 @@ const theme = createTheme({
                 fontSize: 12,
               },
             },
+          },
+          "&.unitPlanner-button": {
+            margin: "5px 0",
+            width: 180,
+
+            "&.add-unit:not(.Mui-disabled)": {
+              backgroundColor: sunset2,
+            },
+            "&.remove-unit:not(.Mui-disabled)": {
+              backgroundColor: sunset4,
+            },
+          },
+          "&.unitCard-search": {
+            backgroundColor: sunset3,
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 800,
           },
         },
       },
@@ -113,17 +130,51 @@ const theme = createTheme({
         },
       },
     },
-    MuiDateCalendar: {
+    MuiCircularProgress: {
       styleOverrides: {
         root: {
-          ".MuiPickersCalendarHeader-root": {
-            ".MuiButtonBase-root > .MuiSvgIcon-root": {
-              color: darkGray,
+          "&.unitCard-loading": {
+            color: sunset3,
+          },
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          "&.unitCard-search": {
+            ".MuiPaper-root": {
+              padding: 30,
+
+              ".m-unitSearch-closeButton": {
+                ".MuiButtonBase-root > .MuiSvgIcon-root": {
+                  color: darkGray,
+                },
+              },
+
+              ".MuiDialogTitle-root": {
+                color: darkGray,
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 800,
+                fontSize: 34,
+                paddingLeft: 0,
+              },
+
+              ".MuiList-root": {
+                marginTop: 20,
+                maxHeight: 500,
+                overflow: "auto",
+
+                ".MuiListItemButton-root.Mui-selected": {
+                  backgroundColor: fadedSunset,
+                },
+              },
             },
           },
         },
       },
     },
+
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -139,6 +190,10 @@ const theme = createTheme({
           "&.unit-availability": {
             ".MuiRadio-root.Mui-checked": {
               color: sunset3,
+
+              "&.Mui-disabled": {
+                color: "gray",
+              },
             },
           },
         },
@@ -147,6 +202,10 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          "&.unit-availability": {
+            color: darkGray,
+            fontFamily: "Poppins, sans-serif",
+          },
           "&.Mui-focused": {
             color: darkGray,
           },
@@ -169,6 +228,28 @@ const theme = createTheme({
             ".tool-link": {
               transform: "scale(0.5),",
             },
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.searchBar": {
+            ".MuiButtonBase-root > .MuiSvgIcon-root": {
+              color: darkGray,
+            },
+          },
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          "&.helper-tooltip": {
+            color: tooltip,
+            height: 18,
+            marginLeft: 3,
           },
         },
       },

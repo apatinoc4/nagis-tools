@@ -7,6 +7,7 @@ import {
   useMemo,
 } from "react";
 import Button from "@mui/material/Button";
+import CircleIcon from "@mui/icons-material/Circle";
 import CircularProgress from "@mui/material/CircularProgress";
 import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -25,6 +26,10 @@ import { ViewportContext } from "../../../general/context/viewPortProvider";
 
 import "./unitCard.scss";
 import HelperTitle from "../../../general/atoms/helper-title/helperTitle";
+
+type ShardilisCount = {
+  [key in "green" | "blue" | "purple" | "yellow"]: number;
+};
 
 type MilestoneShards = {
   milestoneKey: string;
@@ -69,15 +74,33 @@ const MILESTONE_SHARDS = [
   },
 ];
 
+const hoursReducedByShardilis = (shardilisCount: ShardilisCount): number => {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+
+  const greenHoursSaved = shardilisCount.green > 0 ? 1 : 0;
+  const blueHoursSaved = shardilisCount.blue > 0 ? 2 : 0;
+  const purpleHoursSaved = shardilisCount.purple > 0 ? 8 : 0;
+  const yellowHoursSaved =
+    Math.min(shardilisCount.yellow, 23 - currentDate.getHours() + 1) * 12;
+
+  return greenHoursSaved + blueHoursSaved + purpleHoursSaved + yellowHoursSaved;
+};
 const calculateHoursNeeded = (
   startingShards: number,
   shardsPerHour: number,
-  milestoneShards: MilestoneShards[]
+  milestoneShards: MilestoneShards[],
+  shardilisCount: ShardilisCount
 ): hoursNeededMilestone => {
+  const reducedHours = hoursReducedByShardilis(shardilisCount);
+
   const hoursNeeded = milestoneShards.reduce(
     (acc, cur) => ({
       ...acc,
-      [cur.milestoneKey]: (cur.shardsNeeded - startingShards) / shardsPerHour,
+      [cur.milestoneKey]: Math.max(
+        (cur.shardsNeeded - startingShards) / shardsPerHour - reducedHours,
+        0
+      ),
     }),
     {}
   );
@@ -111,11 +134,21 @@ const UnitCard = (props: unitCardProps) => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
   const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
+  const [shardilisCount, setShardilisCount] = useState<ShardilisCount>({
+    green: 0,
+    blue: 0,
+    purple: 0,
+    yellow: 0,
+  });
   const viewport = useContext(ViewportContext);
 
   const { isLoading, unit } = useGetUnitByKey(selectedUnitKey);
 
   const isMobile = viewport === "mobile";
+
+  const shardilisKeys = Object.keys(shardilisCount) as Array<
+    keyof ShardilisCount
+  >;
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -133,10 +166,15 @@ const UnitCard = (props: unitCardProps) => {
   const displayHoursNeeded = useCallback(() => {
     if (startingShards) {
       setHoursNeeded(
-        calculateHoursNeeded(startingShards, shardsPerHour, MILESTONE_SHARDS)
+        calculateHoursNeeded(
+          startingShards,
+          shardsPerHour,
+          MILESTONE_SHARDS,
+          shardilisCount
+        )
       );
     }
-  }, [shardsPerHour, startingShards]);
+  }, [shardsPerHour, startingShards, shardilisCount]);
 
   const handleChangeStartingShards = (event: ChangeEvent<HTMLInputElement>) => {
     if (Number(event.target.value) <= 1120) {
@@ -194,8 +232,10 @@ const UnitCard = (props: unitCardProps) => {
     );
   }, [isLoading, unit, unitNumber]);
 
-  useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
+  useEffect(() => displayHoursNeeded(), [displayHoursNeeded, shardilisCount]);
   useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
+
+  console.log(shardilisCount, hoursNeeded);
 
   return (
     <div
@@ -254,6 +294,32 @@ const UnitCard = (props: unitCardProps) => {
               value="limited"
             />
           </RadioGroup>
+        </FormControl>
+        <FormControl fullWidth>
+          <FormLabel className="unit-availability" id="unit-availability">
+            Shardilis
+          </FormLabel>
+          <div className="m-unitCard-shardilisInputGroup">
+            {shardilisKeys.map((shardilis) => (
+              <div
+                className="m-unitCard-shardilisInputGroup--shardilisInput"
+                key={shardilis}
+              >
+                <CircleIcon className={`shardilis-${shardilis}`} />
+                <TextField
+                  id={`shardilis-${shardilis}`}
+                  onChange={(e) =>
+                    setShardilisCount({
+                      ...shardilisCount,
+                      [shardilis]: e.target.value,
+                    })
+                  }
+                  size="small"
+                  value={shardilisCount[shardilis]}
+                />
+              </div>
+            ))}
+          </div>
         </FormControl>
       </div>
 

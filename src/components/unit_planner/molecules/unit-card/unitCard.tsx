@@ -74,33 +74,15 @@ const MILESTONE_SHARDS = [
   },
 ];
 
-const hoursReducedByShardilis = (shardilisCount: ShardilisCount): number => {
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-
-  const greenHoursSaved = shardilisCount.green > 0 ? 1 : 0;
-  const blueHoursSaved = shardilisCount.blue > 0 ? 2 : 0;
-  const purpleHoursSaved = shardilisCount.purple > 0 ? 8 : 0;
-  const yellowHoursSaved =
-    Math.min(shardilisCount.yellow, 23 - currentDate.getHours() + 1) * 12;
-
-  return greenHoursSaved + blueHoursSaved + purpleHoursSaved + yellowHoursSaved;
-};
 const calculateHoursNeeded = (
   startingShards: number,
   shardsPerHour: number,
-  milestoneShards: MilestoneShards[],
-  shardilisCount: ShardilisCount
+  milestoneShards: MilestoneShards[]
 ): hoursNeededMilestone => {
-  const reducedHours = hoursReducedByShardilis(shardilisCount);
-
   const hoursNeeded = milestoneShards.reduce(
     (acc, cur) => ({
       ...acc,
-      [cur.milestoneKey]: Math.max(
-        (cur.shardsNeeded - startingShards) / shardsPerHour - reducedHours,
-        0
-      ),
+      [cur.milestoneKey]: (cur.shardsNeeded - startingShards) / shardsPerHour,
     }),
     {}
   );
@@ -166,15 +148,10 @@ const UnitCard = (props: unitCardProps) => {
   const displayHoursNeeded = useCallback(() => {
     if (startingShards) {
       setHoursNeeded(
-        calculateHoursNeeded(
-          startingShards,
-          shardsPerHour,
-          MILESTONE_SHARDS,
-          shardilisCount
-        )
+        calculateHoursNeeded(startingShards, shardsPerHour, MILESTONE_SHARDS)
       );
     }
-  }, [shardsPerHour, startingShards, shardilisCount]);
+  }, [shardsPerHour, startingShards]);
 
   const handleChangeStartingShards = (event: ChangeEvent<HTMLInputElement>) => {
     if (Number(event.target.value) <= 1120) {
@@ -232,10 +209,8 @@ const UnitCard = (props: unitCardProps) => {
     );
   }, [isLoading, unit, unitNumber]);
 
-  useEffect(() => displayHoursNeeded(), [displayHoursNeeded, shardilisCount]);
+  useEffect(() => displayHoursNeeded(), [displayHoursNeeded]);
   useEffect(() => getFetchedUnitAvailability(), [getFetchedUnitAvailability]);
-
-  console.log(shardilisCount, hoursNeeded);
 
   return (
     <div
@@ -305,7 +280,9 @@ const UnitCard = (props: unitCardProps) => {
                 className="m-unitCard-shardilisInputGroup--shardilisInput"
                 key={shardilis}
               >
-                <CircleIcon className={`shardilis-${shardilis}`} />
+                <CircleIcon
+                  className={`shardilis-icon shardilis-${shardilis}`}
+                />
                 <TextField
                   id={`shardilis-${shardilis}`}
                   onChange={(e) =>

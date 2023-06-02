@@ -22,11 +22,11 @@ $milestoneNamePosition: 15px;
     transition: width 0.3s ease-in-out;
 
     &.collapsed {
-      width: $collapsedCardWidth;
+      min-width: $collapsedCardWidth;
     }
 
     &.expanded {
-      width: 1050px;
+      min-width: 1050px;
     }
 
     &--coloredstripe {
@@ -129,17 +129,17 @@ $milestoneNamePosition: 15px;
       }
 
       &.expanded {
-        width: 350px;
         min-height: 1150px;
         margin: 30px 0 60px 0;
+        width: 350px;
       }
     }
   }
 
   &-inputs {
     box-sizing: border-box;
-    width: $collapsedCardWidth;
     padding: 0 20px;
+    width: $collapsedCardWidth;
   }
 
   &-milestones {
@@ -147,8 +147,8 @@ $milestoneNamePosition: 15px;
     display: flex;
     flex-direction: column;
     margin-right: 50px;
-    padding-left: 30px;
     min-width: 300px;
+    padding-left: 30px;
   }
 
   &-shardilisInputGroup {
@@ -168,8 +168,8 @@ $milestoneNamePosition: 15px;
   }
 
   &-tabsContainer {
-    display: flex;
     align-items: center;
+    display: flex;
     min-height: 448px;
   }
 

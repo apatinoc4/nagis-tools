@@ -1,7 +1,7 @@
 @import "../../../../styles/styles.scss";
 
 $collapsedCardWidth: 360px;
-$cardHeight: 560px;
+$cardHeight: 610px;
 $milestoneNamePosition: 15px;
 
 .m-unitCard {
@@ -13,7 +13,7 @@ $milestoneNamePosition: 15px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    height: $cardHeight;
+    min-height: $cardHeight;
     flex-direction: row;
     margin: 20px;
     min-width: $collapsedCardWidth;
@@ -130,7 +130,7 @@ $milestoneNamePosition: 15px;
 
       &.expanded {
         width: 350px;
-        height: 1100px;
+        min-height: 1150px;
         margin: 30px 0 60px 0;
       }
     }
@@ -149,6 +149,22 @@ $milestoneNamePosition: 15px;
     margin-right: 50px;
     padding-left: 30px;
     min-width: 300px;
+  }
+
+  &-shardilisInputGroup {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    width: 100%;
+
+    &--shardilisInput {
+      align-items: center;
+      box-sizing: border-box;
+      justify-content: center;
+      display: flex;
+      margin: 0 3px;
+      max-width: 35%;
+    }
   }
 
   &-tabsContainer {

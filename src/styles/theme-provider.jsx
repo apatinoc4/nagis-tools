@@ -5,13 +5,18 @@ const darkGray = "#292929";
 
 const tooltip = "#6c6c6c";
 
-const wotvFire = "#e06d38";
-const wotvIce = "#3a3bc4";
-const wotvWind = "#54b62f";
-const wotVEarth = "#d7a75b";
-const wotvThunder = "#a09a26";
-const wotvLight = "#a8a899";
-const wotvDark = "#612c9e";
+// const wotvFire = "#e06d38";
+// const wotvIce = "#3a3bc4";
+// const wotvWind = "#54b62f";
+// const wotVEarth = "#d7a75b";
+// const wotvThunder = "#a09a26";
+// const wotvLight = "#a8a899";
+// const wotvDark = "#612c9e";
+
+const shardilisBlue = "#baddef";
+const shardilisGreen = "#8ca35e";
+const shardilisPurple = "#75598f";
+const shardilisYellow = "#c9af2e";
 
 // const sunset1 = "#ffc300";
 const sunset2 = "#ff5733";
@@ -174,7 +179,15 @@ const theme = createTheme({
         },
       },
     },
-
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          "&.unitCard-inputsMobile": {
+            margin: "5px 0",
+          },
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -251,6 +264,22 @@ const theme = createTheme({
             height: 18,
             marginLeft: 3,
           },
+          "&.shardilis-icon": {
+            height: 18,
+            marginRight: 5,
+            "&.shardilis-green": {
+              color: shardilisGreen,
+            },
+            "&.shardilis-blue": {
+              color: shardilisBlue,
+            },
+            "&.shardilis-purple": {
+              color: shardilisPurple,
+            },
+            "&.shardilis-yellow": {
+              color: shardilisYellow,
+            },
+          },
         },
       },
     },
@@ -307,6 +336,9 @@ const theme = createTheme({
           },
           "&.unit-card-input": {
             marginBottom: 20,
+            "&.shardilis-input": {
+              marginBottom: 0,
+            },
             ".MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
                 borderColor: darkGray,

@@ -7,6 +7,7 @@ import {
   useMemo,
 } from "react";
 import Button from "@mui/material/Button";
+import CircleIcon from "@mui/icons-material/Circle";
 import CircularProgress from "@mui/material/CircularProgress";
 import ConditionalWrapper from "../../../general/molecules/conditional-wrapper/conditionalWrapper";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -26,6 +27,10 @@ import { ViewportContext } from "../../../general/context/viewPortProvider";
 import "./unitCard.scss";
 import HelperTitle from "../../../general/atoms/helper-title/helperTitle";
 
+type ShardilisData = {
+  [key in "green" | "blue" | "purple" | "yellow"]: number;
+};
+
 type MilestoneShards = {
   milestoneKey: string;
   milestoneName: string;
@@ -39,6 +44,13 @@ type hoursNeededMilestone = {
 interface unitCardProps {
   unitNumber: number;
 }
+
+const SHARDILIS_HOUR_REDUCTION = {
+  green: 1,
+  blue: 2,
+  purple: 8,
+  yellow: 12,
+};
 
 const MILESTONE_HELPER_TEXT = (
   <span>
@@ -69,28 +81,71 @@ const MILESTONE_SHARDS = [
   },
 ];
 
+const calculateShardilisHoursSaved = (
+  shardilisCount: ShardilisData,
+  shardilisHourReduction: ShardilisData,
+  currentDate: Date
+) => {
+  const {
+    green: greenCount,
+    blue: blueCount,
+    purple: purpleCount,
+    yellow: yellowCount,
+  } = shardilisCount;
+  const {
+    green: greenReduction,
+    blue: blueReduction,
+    purple: purpleReduction,
+    yellow: yellowReduction,
+  } = shardilisHourReduction;
+
+  const totalHoursSaved =
+    greenCount * greenReduction +
+    blueCount * blueReduction +
+    purpleCount * purpleReduction +
+    yellowCount * yellowReduction;
+
+  // calculation of only one of each per day
+  const daysElapsed = Math.floor(currentDate.getTime() / (24 * 60 * 60 * 1000));
+  const adjustedHoursSaved = Math.min(totalHoursSaved, daysElapsed);
+
+  return adjustedHoursSaved;
+};
+
 const calculateHoursNeeded = (
   startingShards: number,
   shardsPerHour: number,
-  milestoneShards: MilestoneShards[]
+  milestoneShards: MilestoneShards[],
+  shardilisCount: ShardilisData,
+  shardilisHourReduction: ShardilisData,
+  currentDate: Date
 ): hoursNeededMilestone => {
   const hoursNeeded = milestoneShards.reduce(
     (acc, cur) => ({
       ...acc,
-      [cur.milestoneKey]: (cur.shardsNeeded - startingShards) / shardsPerHour,
+      [cur.milestoneKey]:
+        (cur.shardsNeeded - startingShards) / shardsPerHour -
+        calculateShardilisHoursSaved(
+          shardilisCount,
+          shardilisHourReduction,
+          currentDate
+        ),
     }),
     {}
   );
 
   return hoursNeeded;
 };
-
 const currentDate = new Date();
 
 function addHoursToDate(date: Date, hours: number) {
   const dateCopy = new Date(date);
 
   dateCopy.setTime(dateCopy.getTime() + hours * 60 * 60 * 1000);
+
+  if (dateCopy < date) {
+    return date;
+  }
 
   return dateCopy;
 }
@@ -111,11 +166,21 @@ const UnitCard = (props: unitCardProps) => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [selectedUnitKey, setSelectedUnitKey] = useState<string>("");
   const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
+  const [shardilisCount, setShardilisCount] = useState<ShardilisData>({
+    green: 0,
+    blue: 0,
+    purple: 0,
+    yellow: 0,
+  });
   const viewport = useContext(ViewportContext);
 
   const { isLoading, unit } = useGetUnitByKey(selectedUnitKey);
 
   const isMobile = viewport === "mobile";
+
+  const shardilisKeys = Object.keys(shardilisCount) as Array<
+    keyof ShardilisData
+  >;
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -133,10 +198,17 @@ const UnitCard = (props: unitCardProps) => {
   const displayHoursNeeded = useCallback(() => {
     if (startingShards) {
       setHoursNeeded(
-        calculateHoursNeeded(startingShards, shardsPerHour, MILESTONE_SHARDS)
+        calculateHoursNeeded(
+          startingShards,
+          shardsPerHour,
+          MILESTONE_SHARDS,
+          shardilisCount,
+          SHARDILIS_HOUR_REDUCTION,
+          currentDate
+        )
       );
     }
-  }, [shardsPerHour, startingShards]);
+  }, [shardsPerHour, startingShards, shardilisCount]);
 
   const handleChangeStartingShards = (event: ChangeEvent<HTMLInputElement>) => {
     if (Number(event.target.value) <= 1120) {
@@ -154,13 +226,17 @@ const UnitCard = (props: unitCardProps) => {
       if (startingShards && hoursNeeded) {
         if (startingShards < 0) {
           return;
-        } else if (startingShards >= shardsNeeded) {
-          return `Congrats! can be reached already`;
-        } else {
-          return `Can be reached in ${
-            hoursNeeded[selectedMilestone.milestoneKey]
-          } hours`;
         }
+        if (
+          startingShards >= shardsNeeded ||
+          hoursNeeded[selectedMilestone.milestoneKey] < 0
+        ) {
+          return `Congrats! can be reached already`;
+        }
+
+        return `Can be reached in ${Math.max(
+          hoursNeeded[selectedMilestone.milestoneKey] / 24
+        )} days`;
       }
     },
     [hoursNeeded, startingShards]
@@ -214,6 +290,7 @@ const UnitCard = (props: unitCardProps) => {
           label="Starting Shards"
           onChange={handleChangeStartingShards}
           size="small"
+          type="number"
           value={startingShards || ""}
         />
         <div className="m-unitCard-searchCall">
@@ -229,7 +306,11 @@ const UnitCard = (props: unitCardProps) => {
             Unit Search
           </Button>
         </div>
-        <FormControl disabled={!!unit ?? false} fullWidth>
+        <FormControl
+          className="unitCard-inputsMobile"
+          disabled={!!unit ?? false}
+          fullWidth
+        >
           <FormLabel className="unit-availability" id="unit-availability">
             Unit Pool
           </FormLabel>
@@ -254,6 +335,37 @@ const UnitCard = (props: unitCardProps) => {
               value="limited"
             />
           </RadioGroup>
+        </FormControl>
+        <FormControl className="unitCard-inputsMobile" fullWidth>
+          <FormLabel className="unit-availability" id="unit-availability">
+            Shardilis
+          </FormLabel>
+          <div className="m-unitCard-shardilisInputGroup">
+            {shardilisKeys.map((shardilis) => (
+              <div
+                className="m-unitCard-shardilisInputGroup--shardilisInput"
+                key={shardilis}
+              >
+                <CircleIcon
+                  className={`shardilis-icon shardilis-${shardilis}`}
+                />
+                <TextField
+                  className="unit-card-input shardilis-input"
+                  id={`shardilis-${shardilis}`}
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  onChange={(e) =>
+                    setShardilisCount({
+                      ...shardilisCount,
+                      [shardilis]: e.target.value,
+                    })
+                  }
+                  size="small"
+                  type="number"
+                  value={shardilisCount[shardilis]}
+                />
+              </div>
+            ))}
+          </div>
         </FormControl>
       </div>
 

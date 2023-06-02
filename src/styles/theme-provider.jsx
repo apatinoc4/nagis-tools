@@ -179,7 +179,15 @@ const theme = createTheme({
         },
       },
     },
-
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          "&.unitCard-inputsMobile": {
+            margin: "5px 0",
+          },
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -258,7 +266,7 @@ const theme = createTheme({
           },
           "&.shardilis-icon": {
             height: 18,
-            marginLeft: 5,
+            marginRight: 5,
             "&.shardilis-green": {
               color: shardilisGreen,
             },
@@ -328,6 +336,9 @@ const theme = createTheme({
           },
           "&.unit-card-input": {
             marginBottom: 20,
+            "&.shardilis-input": {
+              marginBottom: 0,
+            },
             ".MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
                 borderColor: darkGray,

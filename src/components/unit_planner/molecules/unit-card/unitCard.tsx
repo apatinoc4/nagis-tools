@@ -234,7 +234,7 @@ const UnitCard = (props: unitCardProps) => {
           return `Congrats! can be reached already`;
         }
 
-        return `Can be reached in ${Math.max(
+        return `Can be reached in ${Math.ceil(
           hoursNeeded[selectedMilestone.milestoneKey] / 24
         )} days`;
       }
